@@ -3,10 +3,10 @@ import {connect} from 'react-redux';
 import StoryPreview from './story-preview.js';
 
 export class StoriesList extends React.Component {
-
     stories = this.props.previewStories.map((story) => {
         return (<StoryPreview
                 key={story.id}
+                id={story.id}
                 previewImage={story.previewImage}
                 title={story.title}
                 shortText={story.shortText}
@@ -18,9 +18,9 @@ export class StoriesList extends React.Component {
 
     render() {
         return (
-        	<main>
+        	<div className="listStories">
                 {this.stories}
-        	</main>
+        	</div>
         );
     }
 }
