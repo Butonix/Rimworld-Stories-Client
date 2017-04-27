@@ -1,9 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import './index.css';
+import {Provider} from 'react-redux';
+import store from './store';
+import './css/normalize.css';
+import './css/main.min.css';
+import './css/fa/css/font-awesome.min.css';
 
 ReactDOM.render(
-  <App />,
-  document.getElementById('root')
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('root')
 );
