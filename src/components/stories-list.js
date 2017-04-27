@@ -4,26 +4,22 @@ import StoryPreview from './story-preview.js';
 
 export class StoriesList extends React.Component {
 
-    mockData1 = {
-        previewImage: require('../images/story.jpg'),
-        title: 'How my colony got wiped out',
-        shortText: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod",
-        author: 'Johnny',
-        posted: '2 hours ago',
-        nbComments: 3
-    }
+    stories = this.props.previewStories.map((story) => {
+        return (<StoryPreview
+                key={story.id}
+                previewImage={story.previewImage}
+                title={story.title}
+                shortText={story.shortText}
+                author={story.author}
+                posted={story.posted}
+                nbComments={story.nbComments}
+             />)
+    });
 
     render() {
         return (
         	<main>
-                <StoryPreview
-                    previewImage={this.mockData1.previewImage}
-                    title={this.mockData1.title}
-                    shortText={this.mockData1.shortText}
-                    author={this.mockData1.author}
-                    posted={this.mockData1.posted}
-                    nbComments={this.mockData1.nbComments}
-                 />
+                {this.stories}
         	</main>
         );
     }
