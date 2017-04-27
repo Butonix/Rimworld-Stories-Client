@@ -1,4 +1,4 @@
-export const CREATE_ROOM = 'CREATE_ROOM';
-export const createRoom = () => ({
-    type: CREATE_ROOM
+export const POST_STORY = 'POST_STORY';
+export const postStory = () => ({
+    type: POST_STORY
 });
