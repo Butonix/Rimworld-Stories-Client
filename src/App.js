@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from './components/header.js';
 import StoriesList from './components/stories-list.js';
 import Story from './components/story.js';
-import {BrowserRouter as Router, Redirect, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 class App extends Component {
   render() {
