@@ -1,4 +1,4 @@
-export const POST_STORY = 'POST_STORY';
-export const postStory = () => ({
-    type: POST_STORY
+export const TOGGLE_BURGER = 'TOGGLE_BURGER';
+export const toggleBurger = () => ({
+    type: TOGGLE_BURGER
 });

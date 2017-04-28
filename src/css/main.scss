@@ -69,6 +69,20 @@ header {
     height: $header-height/4;
 }
 
+.burger-menu {
+    position: fixed;
+    top: $header-height;
+    width: 100%;
+    a {
+        text-decoration: none;
+    }
+}
+
+.burger-button {
+    background-color: #666;
+    color: white;
+}
+
 .fa-bars {
     height: $header-height/4;
     color: #7a7a7a;

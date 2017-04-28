@@ -1,7 +1,15 @@
-import {POST_STORY} from '../actions/';
+import {TOGGLE_BURGER} from '../actions/';
 
 // INITIALIZATION
 export const initialState = Object.assign({}, {
+    opts: {
+        burgerOpen: false
+    },
+    currentUser: {
+        id: 123456789,
+        userName: 'Nico',
+        email: 'nicoma63@gmail.com'
+    },
     previewStories: [
         {
             id: 12345,
@@ -27,8 +35,12 @@ export const initialState = Object.assign({}, {
 // ACTIONS
 export const appReducer = (state=initialState, action) => {
 
-    if(action.type === POST_STORY) {
-
+    if(action.type === TOGGLE_BURGER) {
+        return Object.assign({}, state, {
+            opts: {
+                burgerOpen: !state.opts.burgerOpen
+            }
+        });
     }
 
     return state;
