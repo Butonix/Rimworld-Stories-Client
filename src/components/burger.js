@@ -8,6 +8,8 @@ export class Burger extends React.Component {
                   <div className="burger-menu">
                         <a href="/"><div className="burger-button">Home</div></a>
                         <a href="/profile"><div className="burger-button">Profile</div></a>
+                        <a href="/new-story"><div className="burger-button">New Story</div></a>
+                        <a href="/login"><div className="burger-button">Log in</div></a>
                   </div>
             </div>
         );
