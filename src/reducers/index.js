@@ -1,8 +1,7 @@
-import {TOGGLE_BURGER, FETCH_USER_SUCCESS} from '../actions/';
+import {TOGGLE_BURGER, FETCH_USER_SUCCESS, RESET_MESSAGE} from '../actions/';
 
 // INITIALIZATION
 export const initialState = Object.assign({}, {
-    apiUrl: 'http://localhost:8080',
     opts: {
         burgerOpen: false
     },
@@ -11,7 +10,11 @@ export const initialState = Object.assign({}, {
         userName: null,
         email: null
     },
-    message: null,
+    alert: {
+        timer: 0,
+        message: null,
+        type: null
+    },
     previewStories: [
         {
             id: 12345,
@@ -41,6 +44,16 @@ export const appReducer = (state=initialState, action) => {
         return Object.assign({}, state, {
             opts: {
                 burgerOpen: !state.opts.burgerOpen
+            }
+        });
+    }
+
+    if(action.type === RESET_MESSAGE) {
+        return Object.assign({}, state, {
+            alert: {
+                message: null,
+                alertTimer: 0,
+                type: null
             }
         });
     }

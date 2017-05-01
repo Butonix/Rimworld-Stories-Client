@@ -1,6 +1,13 @@
+import {API_URL} from '../config.js';
+
 export const TOGGLE_BURGER = 'TOGGLE_BURGER';
 export const toggleBurger = () => ({
     type: TOGGLE_BURGER
+});
+
+export const RESET_MESSAGE = 'RESET_MESSAGE';
+export const resetMessage = () => ({
+    type: RESET_MESSAGE
 });
 
 export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
@@ -10,8 +17,9 @@ export const fetchUserSuccess = user => ({
 });
 
 export const fetchUser = () => dispatch => {
-    console.log('fetching user');
-    fetch('http://localhost:8080/auth/get-user').then(res => {
+    fetch(API_URL + '/auth/get-user', {
+        credentials: 'include'
+    }).then(res => {
         if (!res.ok) {
             return Promise.reject(res.statusText);
         }
@@ -20,6 +28,7 @@ export const fetchUser = () => dispatch => {
         dispatch(fetchUserSuccess(user));
     });
 };
+
 /*
 export const fetchBoard = () => dispatch => {
     dispatch(fetchBoardRequest());

@@ -1,11 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {API_URL} from '../config.js';
 
 export class Profile extends React.Component {
     render() {
         return (
             <div className="container col1">
-                <a href={this.props.apiUrl + '/auth/facebook'}>Log in with FB</a>
+                <a href={API_URL + '/auth/facebook'}>Log in with FB</a>
             </div>
         );
     }

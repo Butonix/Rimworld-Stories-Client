@@ -117,11 +117,16 @@ header {
 }
 
 .alert-container {
-    background-color: #6b64e9;
     border-radius: 3px;
     color: white;
     padding: 10px;
     position: fixed;
     bottom: 10px;
     right: 10px;
+    &.alert-message {
+        background-color: #6b64e9;
+    }
+    &.error-message {
+        background-color: #e96464;
+    }
 }

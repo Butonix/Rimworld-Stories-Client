@@ -17,12 +17,12 @@ class App extends Component {
     }
 
   render() {
-    console.log(this.props.message);
+    const message = this.props.alert.message ? <Alert alertMessage={this.props.alert.message} timer={this.props.alert.timer} /> : '';
     return (
     <Router>
           <div className="App">
             <Header />
-            <Alert alertMessage={this.props.message} />
+            {message}
             <main>
                 <Route exact path="/" component={StoriesList} />
                 <Route exact path="/story/:id" component={Story} />
