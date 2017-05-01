@@ -5,7 +5,7 @@ export class Profile extends React.Component {
     render() {
         return (
             <div className="container col1">
-                <a href="/">Log in with FB</a>
+                <a href={this.props.apiUrl + '/auth/facebook'}>Log in with FB</a>
             </div>
         );
     }

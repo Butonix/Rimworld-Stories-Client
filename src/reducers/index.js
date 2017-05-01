@@ -1,15 +1,17 @@
-import {TOGGLE_BURGER} from '../actions/';
+import {TOGGLE_BURGER, FETCH_USER_SUCCESS} from '../actions/';
 
 // INITIALIZATION
 export const initialState = Object.assign({}, {
+    apiUrl: 'http://localhost:8080',
     opts: {
         burgerOpen: false
     },
     currentUser: {
-        id: 123456789,
-        userName: 'Nico',
-        email: 'nicoma63@gmail.com'
+        id: null,
+        userName: null,
+        email: null
     },
+    message: null,
     previewStories: [
         {
             id: 12345,
@@ -41,6 +43,10 @@ export const appReducer = (state=initialState, action) => {
                 burgerOpen: !state.opts.burgerOpen
             }
         });
+    }
+
+    else if (action.type === FETCH_USER_SUCCESS) {
+        return Object.assign({}, state, action.user);
     }
 
     return state;

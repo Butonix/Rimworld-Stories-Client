@@ -7,7 +7,7 @@ export class Profile extends React.Component {
             <div className="container col1">
                 User name: {this.props.currentUser.userName} <br />
                 Email: {this.props.currentUser.email} <br />
-                <a href="/">Log out</a>
+                <a href={this.props.apiUrl + '/auth/logout'}>Log out</a>
             </div>
         );
     }

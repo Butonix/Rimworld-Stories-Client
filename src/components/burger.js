@@ -10,6 +10,7 @@ export class Burger extends React.Component {
                         <a href="/profile"><div className="burger-button">Profile</div></a>
                         <a href="/new-story"><div className="burger-button">New Story</div></a>
                         <a href="/login"><div className="burger-button">Log in</div></a>
+                        <a href={this.props.apiUrl + '/auth/logout'}><div className="burger-button">Log out</div></a>
                   </div>
             </div>
         );

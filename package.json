@@ -8,7 +8,8 @@
     "react-key-handler": "^0.3.0",
     "react-redux": "^5.0.4",
     "react-router-dom": "^4.1.1",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "enzyme": "^2.8.0",
