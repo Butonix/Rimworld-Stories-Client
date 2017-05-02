@@ -29,6 +29,25 @@ export const fetchUser = () => dispatch => {
     });
 };
 
+export const FETCH_PROFILE_SUCCESS = 'FETCH_PROFILE_SUCCESS';
+export const fetchProfileSuccess = userProfile => ({
+    type: FETCH_PROFILE_SUCCESS,
+    userProfile
+});
+
+export const fetchProfile = (userId) => dispatch => {
+    fetch(API_URL + '/profile/get/' + userId, {
+        credentials: 'include'
+    }).then(res => {
+        if (!res.ok) {
+            return Promise.reject(res.statusText);
+        }
+        return res.json();
+    }).then(userProfile => {
+        dispatch(fetchProfileSuccess(userProfile));
+    });
+};
+
 /*
 export const fetchBoard = () => dispatch => {
     dispatch(fetchBoardRequest());

@@ -1,4 +1,4 @@
-import {TOGGLE_BURGER, FETCH_USER_SUCCESS, RESET_MESSAGE} from '../actions/';
+import {TOGGLE_BURGER, FETCH_USER_SUCCESS, RESET_MESSAGE, FETCH_PROFILE_SUCCESS} from '../actions/';
 
 // INITIALIZATION
 export const initialState = Object.assign({}, {
@@ -60,6 +60,26 @@ export const appReducer = (state=initialState, action) => {
 
     else if (action.type === FETCH_USER_SUCCESS) {
         return Object.assign({}, state, action.user);
+    }
+
+    else if (action.type === FETCH_PROFILE_SUCCESS) {
+        // check if this is your profile or another one
+        if (state.currentUser.id === action.userProfile._id) {
+            return Object.assign({}, state, {
+                visitedProfile: {
+                    type: 'mine',
+                    username: action.userProfile.username,
+                    email: action.userProfile.email,
+                }
+            });
+        } else {
+            return Object.assign({}, state, {
+                visitedProfile: {
+                    type: 'other',
+                    username: action.userProfile.username
+                }
+            });
+        }
     }
 
     return state;

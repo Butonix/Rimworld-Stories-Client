@@ -6,7 +6,7 @@ import Profile from './components/profile.js';
 import NewStory from './components/new-story.js';
 import Login from './components/login.js';
 import Alert from './components/alert.js';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route, browserHistory} from 'react-router-dom';
 import {fetchUser} from './actions';
 import {connect} from 'react-redux';
 
@@ -19,7 +19,7 @@ class App extends Component {
   render() {
     const message = this.props.alert.message ? <Alert alertMessage={this.props.alert.message} timer={this.props.alert.timer} /> : '';
     return (
-    <Router>
+    <Router history={browserHistory}>
           <div className="App">
             <Header />
             {message}

@@ -1,13 +1,20 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {API_URL} from '../config.js';
+import {fetchProfile} from '../actions';
+import ProfileInfo from './profile-info';
 
 export class Profile extends React.Component {
+
+    componentDidMount() {
+        this.props.dispatch(fetchProfile(this.props.match.params.id));
+    }
+
     render() {
+        const profileInfo = this.props.visitedProfile ? <ProfileInfo info={this.props.visitedProfile} /> : '';
         return (
-            <div className="container col1">
-                User name: {this.props.currentUser.userName} <br />
-                Email: {this.props.currentUser.email} <br />
+            <div>
+                {profileInfo}
                 <a href={API_URL + '/auth/logout'}>Log out</a>
             </div>
         );
