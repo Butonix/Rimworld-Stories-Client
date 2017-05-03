@@ -56,13 +56,33 @@ export const fetchProfile = (userId) => dispatch => {
     fetchAPI('/profile/get/' + userId, cb, dispatch, '');
 };
 
+export const CHANGE_USERNAME_SUCCESS = 'CHANGE_USERNAME_SUCCESS';
+export const changeUsernameSuccess = response => ({
+    type: CHANGE_USERNAME_SUCCESS,
+    response
+});
+
+export const submitNewUsername = (username) => dispatch => {
+    const cb = (arg) => changeUsernameSuccess(arg);
+    fetchAPI('/profile/change-username', cb, dispatch, '', {
+        method: 'post',
+        body: JSON.stringify({
+            username
+        })
+    });
+};
+
 // blueprint function to fetch data from the API, just define the url, the callback function and the success message, if any
-function fetchAPI(url, cb, dispatch, message) {
-    console.log('fetching from: ' + url)
+function fetchAPI(url, cb, dispatch, message, options) {
+    console.log('Request to: ' + url)
     dispatch(displayLoading(true));
-    fetch(API_URL + url, {
+    fetch(API_URL + url, Object.assign({}, options, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
         credentials: 'include'
-    }).then(res => {
+    })).then(res => {
         if (!res.ok) {
             dispatch(setMessage('Error: ' + res.statusText, 'error-message'));
             return Promise.reject(res.statusText);
@@ -73,8 +93,10 @@ function fetchAPI(url, cb, dispatch, message) {
         if (message) {
             dispatch(setMessage(message, 'alert-message'));
         }
+        console.log(resultFromAPI);
         dispatch(cb(resultFromAPI));
     }).catch(err => {
+        console.log(err);
         dispatch(setMessage('Error: ' + err, 'error-message'));
     });
 }

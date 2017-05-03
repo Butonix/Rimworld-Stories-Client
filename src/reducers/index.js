@@ -1,4 +1,4 @@
-import {TOGGLE_BURGER, FETCH_USER_SUCCESS, SET_MESSAGE, FETCH_PROFILE_SUCCESS, DISPLAY_LOADING, TICK_DOWN_TIMER, LOG_OUT_SUCCESS} from '../actions/';
+import {TOGGLE_BURGER, FETCH_USER_SUCCESS, SET_MESSAGE, FETCH_PROFILE_SUCCESS, DISPLAY_LOADING, TICK_DOWN_TIMER, LOG_OUT_SUCCESS, CHANGE_USERNAME_SUCCESS} from '../actions/';
 
 // INITIALIZATION
 export const initialState = Object.assign({}, {
@@ -42,9 +42,8 @@ export const appReducer = (state=initialState, action) => {
     if(action.type === TICK_DOWN_TIMER) {
         return Object.assign({}, state, {
             alert: {
-                message: state.alert.message,
-                timer: state.alert.timer - 1,
-                type: state.alert.type
+                ...state.alert,
+                timer: state.alert.timer - 1
             }
         });
     }
@@ -56,9 +55,10 @@ export const appReducer = (state=initialState, action) => {
     }
 
     if(action.type === TOGGLE_BURGER) {
-        return Object.assign({}, state, {
+        return {
+            ...state,
             burgerOpen: !state.burgerOpen
-        });
+        };
     }
 
     if(action.type === LOG_OUT_SUCCESS) {
@@ -66,26 +66,25 @@ export const appReducer = (state=initialState, action) => {
     }
 
     if(action.type === SET_MESSAGE) {
-        let timer;
-        if (action.messType === 'alert-message') {
-            timer = 5;
-        } else if (action.messType === 'error-message') {
-            timer = 10;
-        } else {
-            timer = -1;
-        }
-        return Object.assign({}, state, {
-            alert: {
-                message: action.message,
-                timer,
-                type: action.messType
-            },
+        return {
+            ...state,
+            alert: setAlert(action.message, action.messType),
             loading: false
-        });
+        };
     }
 
     else if (action.type === FETCH_USER_SUCCESS) {
         return Object.assign({}, state, action.user);
+    }
+
+    else if (action.type === CHANGE_USERNAME_SUCCESS) {
+        return Object.assign({}, state, {
+            currentUser: {
+                ...state.currentUser,
+                userName: action.response.currentUser.userName
+            },
+            alert: setAlert('Username changed successfully', 'alert-message')
+        });
     }
 
     else if (action.type === FETCH_PROFILE_SUCCESS) {
@@ -110,3 +109,19 @@ export const appReducer = (state=initialState, action) => {
 
     return state;
 };
+
+function setAlert(message, type) {
+    let timer;
+    if (type === 'alert-message') {
+        timer = 5;
+    } else if (type === 'error-message') {
+        timer = 10;
+    } else {
+        timer = -1;
+    }
+    return {
+        message,
+        timer,
+        type
+    }
+}
