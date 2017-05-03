@@ -1,13 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-export class ProfileInfo extends React.Component {
+export class ProfileStoriesList extends React.Component {
     render() {
         return (
             <div className="container col1">
                 <div className="inside-cont">
-                    User name: {this.props.info.username} <br />
-                    Email: {this.props.info.email} <br />
+                    Stories list
                 </div>
             </div>
         );
@@ -15,4 +14,4 @@ export class ProfileInfo extends React.Component {
 }
 
 export const mapStateToProps = state => (state);
-export default connect(mapStateToProps)(ProfileInfo);
+export default connect(mapStateToProps)(ProfileStoriesList);

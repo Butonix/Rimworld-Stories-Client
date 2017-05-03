@@ -112,6 +112,17 @@ header {
     display: block;
 }
 
+// BUTTON
+
+.button {
+    display: inline-block;
+    background-color: #6089c2;
+    color: white;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 3px;
+}
+
 // STORY PAGE
 
 .story-info {
