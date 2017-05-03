@@ -1,4 +1,4 @@
-import {TOGGLE_BURGER, FETCH_USER_SUCCESS, SET_MESSAGE, FETCH_PROFILE_SUCCESS, DISPLAY_LOADING, TICK_DOWN_TIMER} from '../actions/';
+import {TOGGLE_BURGER, FETCH_USER_SUCCESS, SET_MESSAGE, FETCH_PROFILE_SUCCESS, DISPLAY_LOADING, TICK_DOWN_TIMER, LOG_OUT_SUCCESS} from '../actions/';
 
 // INITIALIZATION
 export const initialState = Object.assign({}, {
@@ -59,6 +59,10 @@ export const appReducer = (state=initialState, action) => {
         return Object.assign({}, state, {
             burgerOpen: !state.burgerOpen
         });
+    }
+
+    if(action.type === LOG_OUT_SUCCESS) {
+        return Object.assign({}, state, action.user);
     }
 
     if(action.type === SET_MESSAGE) {

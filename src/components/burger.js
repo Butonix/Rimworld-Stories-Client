@@ -1,8 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {API_URL} from '../config.js';
 import {Link} from 'react-router-dom';
-import {toggleBurger, setMessage} from '../actions';
+import {toggleBurger, setMessage, logOut} from '../actions';
 
 export class Burger extends React.Component {
     render() {
@@ -11,7 +10,7 @@ export class Burger extends React.Component {
             <Link to="/"><div className="burger-button">Home</div></Link>
             <Link to={'/profile/' + this.props.currentUser.id} ><div className="burger-button">Profile</div></Link>
             <Link to="/new-story"><div className="burger-button">New Story</div></Link>
-            <Link to={API_URL + '/auth/logout'}><div className="burger-button">Log out</div></Link>
+            <div className="burger-button" onClick={e => this.props.dispatch(logOut())}>Log out</div>
         </div>
         :
         <div>

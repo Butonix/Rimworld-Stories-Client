@@ -30,16 +30,19 @@ export const fetchUserSuccess = user => ({
 });
 
 export const fetchUser = () => dispatch => {
-    fetch(API_URL + '/auth/get-user', {
-        credentials: 'include'
-    }).then(res => {
-        if (!res.ok) {
-            return Promise.reject(res.statusText);
-        }
-        return res.json();
-    }).then(user => {
-        dispatch(fetchUserSuccess(user));
-    });
+    const cb = (arg) => fetchUserSuccess(arg);
+    fetchAPI('/auth/get-user', cb, dispatch);
+};
+
+export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
+export const logOutSuccess = (user) => ({
+    type: LOG_OUT_SUCCESS,
+    user
+});
+
+export const logOut = () => dispatch => {
+    const cb = (arg) => logOutSuccess(arg);
+    fetchAPI('/auth/log-out', cb, dispatch, 'You are now logged out');
 };
 
 export const FETCH_PROFILE_SUCCESS = 'FETCH_PROFILE_SUCCESS';
@@ -47,6 +50,35 @@ export const fetchProfileSuccess = userProfile => ({
     type: FETCH_PROFILE_SUCCESS,
     userProfile
 });
+
+export const fetchProfile = (userId) => dispatch => {
+    const cb = (arg) => fetchProfileSuccess(arg);
+    fetchAPI('/profile/get/' + userId, cb, dispatch, '');
+};
+
+// blueprint function to fetch data from the API, just define the url, the callback function and the success message, if any
+function fetchAPI(url, cb, dispatch, message) {
+    console.log('fetching from: ' + url)
+    dispatch(displayLoading(true));
+    fetch(API_URL + url, {
+        credentials: 'include'
+    }).then(res => {
+        if (!res.ok) {
+            dispatch(setMessage('Error: ' + res.statusText, 'error-message'));
+            return Promise.reject(res.statusText);
+        }
+        return res.json();
+    }).then(resultFromAPI => {
+        dispatch(displayLoading(false));
+        if (message) {
+            dispatch(setMessage(message, 'alert-message'));
+        }
+        dispatch(cb(resultFromAPI));
+    }).catch(err => {
+        dispatch(setMessage('Error: ' + err, 'error-message'));
+    });
+}
+
 /*
 export const fetchProfile = (userId) => dispatch => {
     dispatch(displayLoading(true));
@@ -66,27 +98,3 @@ export const fetchProfile = (userId) => dispatch => {
     });
 };
 */
-
-export const fetchProfile = (userId) => dispatch => {
-    const cb = (arg) => fetchProfileSuccess(arg);
-    fetchAPI('/profile/get/' + userId, cb, dispatch);
-};
-
-// blueprint function to fetch rom the API, just defin the url and the callback function
-function fetchAPI(url, cb, dispatch) {
-    dispatch(displayLoading(true));
-    fetch(API_URL + url, {
-        credentials: 'include'
-    }).then(res => {
-        if (!res.ok) {
-            dispatch(setMessage('Error: ' + res.statusText, 'error-message'));
-            return Promise.reject(res.statusText);
-        }
-        return res.json();
-    }).then(userProfile => {
-        dispatch(displayLoading(false));
-        dispatch(cb(userProfile));
-    }).catch(err => {
-        dispatch(setMessage('Error: ' + err, 'error-message'));
-    });
-}

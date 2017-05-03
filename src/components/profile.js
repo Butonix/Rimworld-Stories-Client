@@ -11,7 +11,7 @@ export class Profile extends React.Component {
     }
 
     render() {
-        const profileInfo = this.props.visitedProfile ? <ProfileInfo info={this.props.visitedProfile} /> : '';
+        const profileInfo = this.props.visitedProfile ? <ProfileInfo info={this.props.visitedProfile} currentUser={this.props.currentUser} /> : '';
         return (
             <div>
                 {profileInfo}
