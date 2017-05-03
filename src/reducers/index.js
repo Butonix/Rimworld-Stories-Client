@@ -1,4 +1,4 @@
-import {TOGGLE_BURGER, FETCH_USER_SUCCESS, SET_MESSAGE, FETCH_PROFILE_SUCCESS, DISPLAY_LOADING} from '../actions/';
+import {TOGGLE_BURGER, FETCH_USER_SUCCESS, SET_MESSAGE, FETCH_PROFILE_SUCCESS, DISPLAY_LOADING, TICK_DOWN_TIMER} from '../actions/';
 
 // INITIALIZATION
 export const initialState = Object.assign({}, {
@@ -39,6 +39,16 @@ export const initialState = Object.assign({}, {
 // ACTIONS
 export const appReducer = (state=initialState, action) => {
 
+    if(action.type === TICK_DOWN_TIMER) {
+        return Object.assign({}, state, {
+            alert: {
+                message: state.alert.message,
+                timer: state.alert.timer - 1,
+                type: state.alert.type
+            }
+        });
+    }
+
     if(action.type === DISPLAY_LOADING) {
         return Object.assign({}, state, {
             loading: action.param
@@ -52,14 +62,18 @@ export const appReducer = (state=initialState, action) => {
     }
 
     if(action.type === SET_MESSAGE) {
-        console.log('setting message to:');
-        console.log(action.messType);
-        console.log(action.message);
-        const time = action.messType === 'alert-message' ? 5 : 10;
+        let timer;
+        if (action.messType === 'alert-message') {
+            timer = 5;
+        } else if (action.messType === 'error-message') {
+            timer = 10;
+        } else {
+            timer = -1;
+        }
         return Object.assign({}, state, {
             alert: {
                 message: action.message,
-                timer: time,
+                timer,
                 type: action.messType
             },
             loading: false

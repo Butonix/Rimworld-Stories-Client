@@ -17,7 +17,7 @@ class App extends Component {
     }
 
   render() {
-    const message = this.props.alert.message ? <Alert alertMessage={this.props.alert.message} timer={this.props.alert.timer} type={this.props.alert.type} /> : '';
+    const message = this.props.alert.message ? <Alert /> : '';
     const loading = this.props.loading ? <Loading /> : '';
     return (
     <Router history={browserHistory}>

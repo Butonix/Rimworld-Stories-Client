@@ -1,22 +1,24 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {setMessage} from '../actions';
+import {setMessage, tickDownTimer} from '../actions';
 
 export class Alert extends React.Component {
 
     componentDidMount() {
-        console.log(this.props.timer)
         this.time = Number(this.props.timer);
         this.innerTimer = setInterval(() => { this.innerTimerTick() }, 1000);
     }
 
     innerTimerTick() {
-        console.log(this.props.alert)
-        this.time--;
-        if (this.time < 0 || !this.props.alert.message) {
+        this.props.dispatch(tickDownTimer());
+        if (this.props.alert.timer < 0 || !this.props.alert.message) {
             this.props.dispatch(setMessage(null, null));
             clearInterval(this.innerTimer);
         }
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.innerTimer);
     }
 
     render() {

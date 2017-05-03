@@ -11,6 +11,11 @@ export const toggleBurger = () => ({
     type: TOGGLE_BURGER
 });
 
+export const TICK_DOWN_TIMER = 'TICK_DOWN_TIMER';
+export const tickDownTimer = () => ({
+    type: TICK_DOWN_TIMER
+});
+
 export const SET_MESSAGE = 'SET_MESSAGE';
 export const setMessage = (message, messType) => ({
     type: SET_MESSAGE,
