@@ -6,23 +6,25 @@ import Profile from './components/profile.js';
 import NewStory from './components/new-story.js';
 import Login from './components/login.js';
 import Alert from './components/alert.js';
+import Loading from './components/loading.js';
 import {BrowserRouter as Router, Route, browserHistory} from 'react-router-dom';
 import {fetchUser} from './actions';
 import {connect} from 'react-redux';
 
 class App extends Component {
-
     componentDidMount() {
         this.props.dispatch(fetchUser());
     }
 
   render() {
-    const message = this.props.alert.message ? <Alert alertMessage={this.props.alert.message} timer={this.props.alert.timer} /> : '';
+    const message = this.props.alert.message ? <Alert alertMessage={this.props.alert.message} timer={this.props.alert.timer} type={this.props.alert.type} /> : '';
+    const loading = this.props.loading ? <Loading /> : '';
     return (
     <Router history={browserHistory}>
           <div className="App">
             <Header />
             {message}
+            {loading}
             <main>
                 <Route exact path="/" component={StoriesList} />
                 <Route exact path="/story/:id" component={Story} />

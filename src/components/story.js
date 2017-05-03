@@ -8,8 +8,8 @@ export class Story extends React.Component {
         return (
             <div className="container col1">
     			<div className="story-preview inside-cont">
-                <h2 className="story-preview-title">Story ID : {this.props.match.params.id}</h2>
-                <a href="/">Back</a>
+                    <h2 className="story-preview-title">Story ID : {this.props.match.params.id}</h2>
+                    <a href="/">Back</a>
     			</div>
                 <h2>COMMENTS</h2>
                 <NewComment />

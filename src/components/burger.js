@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {API_URL} from '../config.js';
 import {Link} from 'react-router-dom';
-import {toggleBurger} from '../actions';
+import {toggleBurger, setMessage} from '../actions';
 
 export class Burger extends React.Component {
     render() {
@@ -22,7 +22,7 @@ export class Burger extends React.Component {
 
         return (
             <div className="burger">
-                  <div className="burger-menu" onClick={e => this.props.dispatch(toggleBurger())}>
+                  <div className="burger-menu" onClick={(e) => {this.props.dispatch(toggleBurger()); this.props.dispatch(setMessage(null, null));}}>
                         {links}
                   </div>
             </div>

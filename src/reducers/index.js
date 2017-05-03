@@ -1,10 +1,9 @@
-import {TOGGLE_BURGER, FETCH_USER_SUCCESS, RESET_MESSAGE, FETCH_PROFILE_SUCCESS} from '../actions/';
+import {TOGGLE_BURGER, FETCH_USER_SUCCESS, SET_MESSAGE, FETCH_PROFILE_SUCCESS, DISPLAY_LOADING} from '../actions/';
 
 // INITIALIZATION
 export const initialState = Object.assign({}, {
-    opts: {
-        burgerOpen: false
-    },
+    burgerOpen: false,
+    loading: false,
     currentUser: {
         id: null,
         userName: null,
@@ -40,21 +39,30 @@ export const initialState = Object.assign({}, {
 // ACTIONS
 export const appReducer = (state=initialState, action) => {
 
-    if(action.type === TOGGLE_BURGER) {
+    if(action.type === DISPLAY_LOADING) {
         return Object.assign({}, state, {
-            opts: {
-                burgerOpen: !state.opts.burgerOpen
-            }
+            loading: action.param
         });
     }
 
-    if(action.type === RESET_MESSAGE) {
+    if(action.type === TOGGLE_BURGER) {
+        return Object.assign({}, state, {
+            burgerOpen: !state.burgerOpen
+        });
+    }
+
+    if(action.type === SET_MESSAGE) {
+        console.log('setting message to:');
+        console.log(action.messType);
+        console.log(action.message);
+        const time = action.messType === 'alert-message' ? 5 : 10;
         return Object.assign({}, state, {
             alert: {
-                message: null,
-                alertTimer: 0,
-                type: null
-            }
+                message: action.message,
+                timer: time,
+                type: action.messType
+            },
+            loading: false
         });
     }
 

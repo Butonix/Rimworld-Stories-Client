@@ -89,6 +89,11 @@ header {
     color: #7a7a7a;
 }
 
+.header-login {
+    float: right;
+    padding-right: 16px;
+}
+
 // STORIES PREVIEW ON FRONT PAGE
 .story-preview {
     text-align: justify;
@@ -129,4 +134,10 @@ header {
     &.error-message {
         background-color: #e96464;
     }
+}
+
+.loading-container {
+    position: fixed;
+    top: 5%;
+    right: 5%;
 }
