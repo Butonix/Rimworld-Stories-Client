@@ -63,14 +63,18 @@ header {
 
 .burger-container {
     position: absolute;
-    padding: $header-height*0.375;
+    padding-left: 24px;
+    padding-right: 24px;
     cursor: pointer;
-    line-height: $header-height/4;
-    height: $header-height/4;
+    line-height: $header-height;
+    vertical-align: middle;
+    &:hover {
+        background-color: #bdbdbd;
+    }
 }
 
 .burger-menu {
-    position: fixed;
+    position: absolute;
     top: $header-height;
     width: 100%;
     max-width: 800px;
@@ -152,4 +156,14 @@ header {
     position: fixed;
     top: 85px;
     right: 16px;
+}
+
+.profile-avatar {
+    max-width: 100px;
+    border-radius: 50%;
+    &.header-pic {
+        line-height: $header-height;
+        vertical-align: middle;
+        width: 30px;
+    }
 }

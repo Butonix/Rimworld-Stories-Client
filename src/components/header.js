@@ -9,7 +9,7 @@ export class Header extends React.Component {
         const burger = this.props.burgerOpen ? <Burger /> : '';
 
         const headerLogin = this.props.currentUser.id ?
-        <div className="header-login">{this.props.currentUser.userName}</div>
+        <div className="header-login"><img alt='' className="profile-avatar header-pic" src={this.props.currentUser.avatarUrl} /></div>
         :
         <div className="header-login"><a href={API_URL + '/auth/facebook'}>Log in with FB</a></div>
         ;

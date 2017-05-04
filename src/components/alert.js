@@ -24,7 +24,7 @@ export class Alert extends React.Component {
     render() {
         return (
           	<div className={'alert-container ' + this.props.alert.type}>
-                {this.props.alert.message}
+                {this.props.alert.timer} {this.props.alert.message}
             </div>
         );
     }

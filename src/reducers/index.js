@@ -94,13 +94,15 @@ export const appReducer = (state=initialState, action) => {
                     type: 'mine',
                     username: action.userProfile.username,
                     email: action.userProfile.email,
+                    avatarUrl: action.userProfile.avatarUrl
                 }
             });
         } else {
             return Object.assign({}, state, {
                 visitedProfile: {
                     type: 'other',
-                    username: action.userProfile.username
+                    username: action.userProfile.username,
+                    avatarUrl: action.userProfile.avatarUrl
                 }
             });
         }

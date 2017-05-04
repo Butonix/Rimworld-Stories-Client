@@ -6,7 +6,7 @@ export class ProfileInfo extends React.Component {
         return (
             <div className="container col1">
                 <div className="inside-cont">
-                    User name: {this.props.info.username} <br />
+                    User name: {this.props.info.userName} <br />
                     Email: {this.props.info.email} <br />
                 </div>
             </div>

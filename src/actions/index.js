@@ -90,11 +90,14 @@ function fetchAPI(url, cb, dispatch, options) {
         return res.json();
     }).then(resultFromAPI => {
         dispatch(displayLoading(false));
+        // check if message
         if (resultFromAPI.APImessage) {
             dispatch(setMessage(resultFromAPI.APImessage, 'alert-message'));
         }
+        // check i error
         if (resultFromAPI.APIerror) {
             dispatch(setMessage(resultFromAPI.APIerror, 'error-message'));
+        // if no error, dispatch callback
         } else {
             dispatch(cb(resultFromAPI));
         }

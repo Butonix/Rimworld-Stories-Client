@@ -6,6 +6,7 @@
     "deep-assign": "^2.0.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-dropzone": "^3.13.1",
     "react-key-handler": "^0.3.0",
     "react-redux": "^5.0.4",
     "react-router-dom": "^4.1.1",
