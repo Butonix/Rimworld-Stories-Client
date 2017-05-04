@@ -82,8 +82,7 @@ export const appReducer = (state=initialState, action) => {
             currentUser: {
                 ...state.currentUser,
                 userName: action.response.currentUser.userName
-            },
-            alert: setAlert('Username changed successfully', 'alert-message')
+            }
         });
     }
 

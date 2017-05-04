@@ -7,7 +7,7 @@ import NewStory from './components/new-story.js';
 import Login from './components/login.js';
 import Alert from './components/alert.js';
 import Loading from './components/loading.js';
-import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import {fetchUser} from './actions';
 import {connect} from 'react-redux';
 

@@ -42,7 +42,7 @@ export const logOutSuccess = (user) => ({
 
 export const logOut = () => dispatch => {
     const cb = (arg) => logOutSuccess(arg);
-    fetchAPI('/auth/log-out', cb, dispatch, 'You are now logged out');
+    fetchAPI('/auth/log-out', cb, dispatch);
 };
 
 export const FETCH_PROFILE_SUCCESS = 'FETCH_PROFILE_SUCCESS';
@@ -53,7 +53,7 @@ export const fetchProfileSuccess = userProfile => ({
 
 export const fetchProfile = (userId) => dispatch => {
     const cb = (arg) => fetchProfileSuccess(arg);
-    fetchAPI('/profile/get/' + userId, cb, dispatch, '');
+    fetchAPI('/profile/get/' + userId, cb, dispatch);
 };
 
 export const CHANGE_USERNAME_SUCCESS = 'CHANGE_USERNAME_SUCCESS';
@@ -64,7 +64,7 @@ export const changeUsernameSuccess = response => ({
 
 export const submitNewUsername = (username) => dispatch => {
     const cb = (arg) => changeUsernameSuccess(arg);
-    fetchAPI('/profile/change-username', cb, dispatch, '', {
+    fetchAPI('/profile/change-username', cb, dispatch, {
         method: 'post',
         body: JSON.stringify({
             username
@@ -73,7 +73,7 @@ export const submitNewUsername = (username) => dispatch => {
 };
 
 // blueprint function to fetch data from the API, just define the url, the callback function and the success message, if any
-function fetchAPI(url, cb, dispatch, message, options) {
+function fetchAPI(url, cb, dispatch, options) {
     console.log('Request to: ' + url)
     dispatch(displayLoading(true));
     fetch(API_URL + url, Object.assign({}, options, {
@@ -90,33 +90,15 @@ function fetchAPI(url, cb, dispatch, message, options) {
         return res.json();
     }).then(resultFromAPI => {
         dispatch(displayLoading(false));
-        if (message) {
-            dispatch(setMessage(message, 'alert-message'));
+        if (resultFromAPI.APImessage) {
+            dispatch(setMessage(resultFromAPI.APImessage, 'alert-message'));
         }
-        console.log(resultFromAPI);
-        dispatch(cb(resultFromAPI));
+        if (resultFromAPI.APIerror) {
+            dispatch(setMessage(resultFromAPI.APIerror, 'error-message'));
+        } else {
+            dispatch(cb(resultFromAPI));
+        }
     }).catch(err => {
-        console.log(err);
         dispatch(setMessage('Error: ' + err, 'error-message'));
     });
 }
-
-/*
-export const fetchProfile = (userId) => dispatch => {
-    dispatch(displayLoading(true));
-    fetch(API_URL + '/profile/get/' + userId, {
-        credentials: 'include'
-    }).then(res => {
-        if (!res.ok) {
-            dispatch(setMessage('Error: ' + res.statusText, 'error-message'));
-            return Promise.reject(res.statusText);
-        }
-        return res.json();
-    }).then(userProfile => {
-        dispatch(displayLoading(false));
-        dispatch(fetchProfileSuccess(userProfile));
-    }).catch(err => {
-        dispatch(setMessage('Error: ' + err, 'error-message'));
-    });
-};
-*/
