@@ -1,21 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Dropzone from 'react-dropzone'
-import {setMessage} from '../actions';
+import {setMessage, uploadImage} from '../actions';
 
 export class UploadProfilePicture extends React.Component {
 
-    submitEvent(e) {
-        e.preventDefault();
-        if (e.target.newAvatar.value) {
-            console.log(e.target.newUsername.value);
-        }
-    }
-
     onDrop(acceptedFiles, rejectedFiles) {
         if (acceptedFiles.length > 0) {
-            console.log(acceptedFiles[0]);
-            this.props.dispatch(setMessage('Valid', 'alert-message'));
+            let data = new FormData();
+            data.append('file', acceptedFiles[0]);
+            data.append('user', this.props.currentUser.id);
+            this.props.dispatch(uploadImage(data));
         } else {
             this.props.dispatch(setMessage('Invalid file format', 'error-message'));
         }
@@ -29,8 +24,8 @@ export class UploadProfilePicture extends React.Component {
                     <Dropzone
                         multiple={false}
                         onDrop={(a, r) => this.onDrop(a, r)}
-                        disablePreview={false}
-                        accept="image/*"
+                        disablePreview={true}
+                        accept="image/jpeg, image/png, image/jpg"
                     />
                 </div>
             </div>

@@ -1,4 +1,5 @@
-import {TOGGLE_BURGER, FETCH_USER_SUCCESS, SET_MESSAGE, FETCH_PROFILE_SUCCESS, DISPLAY_LOADING, TICK_DOWN_TIMER, LOG_OUT_SUCCESS, CHANGE_USERNAME_SUCCESS} from '../actions/';
+import {TOGGLE_BURGER, FETCH_USER_SUCCESS, SET_MESSAGE, FETCH_PROFILE_SUCCESS, DISPLAY_LOADING, TICK_DOWN_TIMER, LOG_OUT_SUCCESS,
+    CHANGE_USERNAME_SUCCESS, UPLOAD_IMAGE_SUCCESS} from '../actions/';
 
 // INITIALIZATION
 export const initialState = Object.assign({}, {
@@ -48,24 +49,33 @@ export const appReducer = (state=initialState, action) => {
         });
     }
 
-    if(action.type === DISPLAY_LOADING) {
+    else if(action.type === UPLOAD_IMAGE_SUCCESS) {
+        return Object.assign({}, state, {
+            currentUser: {
+                ...state.currentUser,
+                avatarUrl: action.response.currentUser.avatarUrl
+            }
+        });
+    }
+
+    else if(action.type === DISPLAY_LOADING) {
         return Object.assign({}, state, {
             loading: action.param
         });
     }
 
-    if(action.type === TOGGLE_BURGER) {
+    else if(action.type === TOGGLE_BURGER) {
         return {
             ...state,
             burgerOpen: !state.burgerOpen
         };
     }
 
-    if(action.type === LOG_OUT_SUCCESS) {
+    else if(action.type === LOG_OUT_SUCCESS) {
         return Object.assign({}, state, action.user);
     }
 
-    if(action.type === SET_MESSAGE) {
+    else if(action.type === SET_MESSAGE) {
         return {
             ...state,
             alert: setAlert(action.message, action.messType),

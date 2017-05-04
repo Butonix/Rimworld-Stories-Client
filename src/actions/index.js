@@ -1,4 +1,5 @@
 import {API_URL} from '../config.js';
+const request = require('superagent');
 
 export const DISPLAY_LOADING = 'DISPLAY_LOADING';
 export const displayLoading = param => ({
@@ -30,8 +31,7 @@ export const fetchUserSuccess = user => ({
 });
 
 export const fetchUser = () => dispatch => {
-    const cb = (arg) => fetchUserSuccess(arg);
-    fetchAPI('/auth/get-user', cb, dispatch);
+    fetchAPI('/auth/get-user', fetchUserSuccess, dispatch);
 };
 
 export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
@@ -41,8 +41,7 @@ export const logOutSuccess = (user) => ({
 });
 
 export const logOut = () => dispatch => {
-    const cb = (arg) => logOutSuccess(arg);
-    fetchAPI('/auth/log-out', cb, dispatch);
+    fetchAPI('/auth/log-out', logOutSuccess, dispatch);
 };
 
 export const FETCH_PROFILE_SUCCESS = 'FETCH_PROFILE_SUCCESS';
@@ -52,8 +51,7 @@ export const fetchProfileSuccess = userProfile => ({
 });
 
 export const fetchProfile = (userId) => dispatch => {
-    const cb = (arg) => fetchProfileSuccess(arg);
-    fetchAPI('/profile/get/' + userId, cb, dispatch);
+    fetchAPI('/profile/get/' + userId, fetchProfileSuccess, dispatch);
 };
 
 export const CHANGE_USERNAME_SUCCESS = 'CHANGE_USERNAME_SUCCESS';
@@ -63,8 +61,7 @@ export const changeUsernameSuccess = response => ({
 });
 
 export const submitNewUsername = (username) => dispatch => {
-    const cb = (arg) => changeUsernameSuccess(arg);
-    fetchAPI('/profile/change-username', cb, dispatch, {
+    fetchAPI('/profile/change-username', changeUsernameSuccess, dispatch, {
         method: 'post',
         body: JSON.stringify({
             username
@@ -72,14 +69,40 @@ export const submitNewUsername = (username) => dispatch => {
     });
 };
 
-// blueprint function to fetch data from the API, just define the url, the callback function and the success message, if any
-function fetchAPI(url, cb, dispatch, options) {
-    console.log('Request to: ' + url)
+export const UPLOAD_IMAGE_SUCCESS = 'UPLOAD_IMAGE_SUCCESS';
+export const uploadImageSuccess = response => ({
+    type: UPLOAD_IMAGE_SUCCESS,
+    response
+});
+
+
+export const uploadImage = (file) => dispatch => {
     dispatch(displayLoading(true));
-    fetch(API_URL + url, Object.assign({}, options, {
+    request.post(API_URL + '/profile/upload-avatar')
+      .send(file)
+      .end(function(err, resp) {
+        if (err) { dispatch(setMessage('Error: ' + err, 'error-message')); }
+        dispatch(displayLoading(false));
+        const apiResp = JSON.parse(resp.text);
+        if (apiResp.APImessage) {
+            dispatch(setMessage(apiResp.APImessage, 'alert-message'));
+        }
+        if (apiResp.APIerror) {
+            dispatch(setMessage(apiResp.APIerror, 'error-message'));
+        } else {
+            dispatch(uploadImageSuccess(apiResp));
+        }
+    });
+};
+
+// blueprint function to fetch data from the API, just define the url, the callback function, the dispatch and the options
+function fetchAPI(url, cb, dispatch, reqOptions) {
+    console.log('Request to: ' + API_URL + url)
+    dispatch(displayLoading(true));
+    fetch(API_URL + url, Object.assign({}, reqOptions, {
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
         },
         credentials: 'include'
     })).then(res => {
