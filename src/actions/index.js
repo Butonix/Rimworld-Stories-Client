@@ -84,14 +84,14 @@ function superAgentRequestAPI(url, file, cb, dispatch) {
     console.log('SuperAgent request to: ' + API_URL + url)
     dispatch(displayLoading(true));
     request.post(API_URL + url)
-      .withCredentials()
+      //.withCredentials()
       .send(file)
       .end(function(err, resp) {
         dispatch(displayLoading(false));
         if (err) {
             dispatch(setMessage('Error: ' + err, 'error-message'));
         } else {
-            const apiResp = JSON.parse(resp.text);            
+            const apiResp = JSON.parse(resp.text);
             if (apiResp.APImessage) {
                 dispatch(setMessage(apiResp.APImessage, 'alert-message'));
             }
