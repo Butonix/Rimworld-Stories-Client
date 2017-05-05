@@ -87,16 +87,19 @@ function superAgentRequestAPI(url, file, cb, dispatch) {
       .withCredentials()
       .send(file)
       .end(function(err, resp) {
-        if (err) { dispatch(setMessage('Error: ' + err, 'error-message')); }
         dispatch(displayLoading(false));
-        const apiResp = JSON.parse(resp.text);
-        if (apiResp.APImessage) {
-            dispatch(setMessage(apiResp.APImessage, 'alert-message'));
-        }
-        if (apiResp.APIerror) {
-            dispatch(setMessage(apiResp.APIerror, 'error-message'));
+        if (err) {
+            dispatch(setMessage('Error: ' + err, 'error-message'));
         } else {
-            dispatch(cb(apiResp));
+            const apiResp = JSON.parse(resp.text);            
+            if (apiResp.APImessage) {
+                dispatch(setMessage(apiResp.APImessage, 'alert-message'));
+            }
+            if (apiResp.APIerror) {
+                dispatch(setMessage(apiResp.APIerror, 'error-message'));
+            } else {
+                dispatch(cb(apiResp));
+            }
         }
     });
 }
