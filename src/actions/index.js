@@ -84,7 +84,7 @@ function superAgentRequestAPI(url, file, cb, dispatch) {
     console.log('SuperAgent request to: ' + API_URL + url)
     dispatch(displayLoading(true));
     request.post(API_URL + url)
-      .withCredentials()
+      //.withCredentials()
       .send(file)
       .end(function(err, resp) {
         dispatch(displayLoading(false));
