@@ -1,5 +1,7 @@
 import {API_URL} from '../config.js';
 const request = require('superagent');
+import { push } from 'react-router-redux';
+const arrify = require('arrify');
 
 export const DISPLAY_LOADING = 'DISPLAY_LOADING';
 export const displayLoading = param => ({
@@ -41,7 +43,7 @@ export const logOutSuccess = (user) => ({
 });
 
 export const logOut = () => dispatch => {
-    fetchAPI('/auth/log-out', logOutSuccess, dispatch);
+    fetchAPI('/auth/log-out', [() => push('/'), logOutSuccess], dispatch);
 };
 
 export const FETCH_PROFILE_SUCCESS = 'FETCH_PROFILE_SUCCESS';
@@ -105,7 +107,7 @@ function superAgentRequestAPI(url, file, cb, dispatch) {
 }
 
 // blueprint function to fetch data from the API, just define the url, the callback function, the dispatch and the options
-function fetchAPI(url, cb, dispatch, reqOptions) {
+function fetchAPI(url, actionCreator, dispatch, reqOptions) {
     console.log('Request to: ' + API_URL + url)
     dispatch(displayLoading(true));
     fetch(API_URL + url, Object.assign({}, reqOptions, {
@@ -122,16 +124,16 @@ function fetchAPI(url, cb, dispatch, reqOptions) {
         return res.json();
     }).then(resultFromAPI => {
         dispatch(displayLoading(false));
-        // check if message
         if (resultFromAPI.APImessage) {
             dispatch(setMessage(resultFromAPI.APImessage, 'alert-message'));
         }
-        // check i error
         if (resultFromAPI.APIerror) {
             dispatch(setMessage(resultFromAPI.APIerror, 'error-message'));
-        // if no error, dispatch callback
         } else {
-            dispatch(cb(resultFromAPI));
+            const actionCreators = arrify(actionCreator);
+            actionCreators.forEach((ac) => {
+                dispatch(ac(resultFromAPI));
+            })
         }
     }).catch(err => {
         dispatch(setMessage('Error: ' + err, 'error-message'));

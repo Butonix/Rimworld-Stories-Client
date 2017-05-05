@@ -7,9 +7,12 @@ import NewStory from './components/new-story.js';
 import Login from './components/login.js';
 import Alert from './components/alert.js';
 import Loading from './components/loading.js';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import { Route } from 'react-router'
 import {fetchUser} from './actions';
 import {connect} from 'react-redux';
+import {history} from './store';
+
+import { ConnectedRouter } from 'react-router-redux';
 
 class App extends Component {
     componentDidMount() {
@@ -20,7 +23,7 @@ class App extends Component {
     const message = this.props.alert.message ? <Alert /> : '';
     const loading = this.props.loading ? <Loading /> : '';
     return (
-    <Router>
+    <ConnectedRouter history={history}>
           <div className="App">
             <Header />
             {message}
@@ -33,12 +36,12 @@ class App extends Component {
                 <Route exact path="/login" component={Login} />
             </main>
           </div>
-    </Router>
+    </ConnectedRouter>
     );
   }
 }
 
-export const mapStateToProps = state => (state);
+export const mapStateToProps = state => (state.app);
 export default connect(mapStateToProps)(App);
 
 //    <Redirect to="/" />

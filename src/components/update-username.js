@@ -26,5 +26,5 @@ export class UpdateUsername extends React.Component {
     }
 }
 
-export const mapStateToProps = state => (state);
+export const mapStateToProps = state => (state.app);
 export default connect(mapStateToProps)(UpdateUsername);
