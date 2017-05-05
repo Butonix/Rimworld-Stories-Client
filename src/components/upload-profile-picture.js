@@ -19,15 +19,15 @@ export class UploadProfilePicture extends React.Component {
     render() {
         return (
             <div className="container col1">
-                <div className="inside-cont">
-                    Upload a new profile picture: <br />
                     <Dropzone
-                        multiple={false}
+                        className="dropzone"
                         onDrop={(a, r) => this.onDrop(a, r)}
                         disablePreview={true}
                         accept="image/jpeg, image/png, image/jpg"
-                    />
-                </div>
+                    >
+                        <img alt='' className="profile-avatar" id="profile-avatar" src={this.props.avatar} />
+                        <p className="small">Click here or drag a file to upload a new avatar. JPEG or PNG</p>
+                    </Dropzone>
             </div>
         );
     }

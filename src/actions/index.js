@@ -75,10 +75,16 @@ export const uploadImageSuccess = response => ({
     response
 });
 
-
 export const uploadImage = (file) => dispatch => {
+    superAgentRequestAPI('/profile/upload-avatar', file, uploadImageSuccess, dispatch)
+};
+
+// blueprint superagent function to request data from the API
+function superAgentRequestAPI(url, file, cb, dispatch) {
+    console.log('SuperAgent request to: ' + API_URL + url)
     dispatch(displayLoading(true));
-    request.post(API_URL + '/profile/upload-avatar')
+    request.post(API_URL + url)
+      .withCredentials()
       .send(file)
       .end(function(err, resp) {
         if (err) { dispatch(setMessage('Error: ' + err, 'error-message')); }
@@ -90,10 +96,10 @@ export const uploadImage = (file) => dispatch => {
         if (apiResp.APIerror) {
             dispatch(setMessage(apiResp.APIerror, 'error-message'));
         } else {
-            dispatch(uploadImageSuccess(apiResp));
+            dispatch(cb(apiResp));
         }
     });
-};
+}
 
 // blueprint function to fetch data from the API, just define the url, the callback function, the dispatch and the options
 function fetchAPI(url, cb, dispatch, reqOptions) {

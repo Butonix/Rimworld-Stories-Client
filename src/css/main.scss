@@ -43,7 +43,7 @@ main {
 .inside-cont {
     border: 1px solid #b9b9b9;
     padding: 8px;
-    background-color: #d4d4d4;
+    background-color: #dddddd;
 }
 
 // HEADER
@@ -168,4 +168,18 @@ header {
         width: 30px;
         height: 30px;
     }
+}
+
+.dropzone {
+    display: inline-block;
+    border: 1px solid #b8b8b8;
+    background-color: #dddddd;
+    max-width: 300px;
+    padding: 16px 16px 8px 16px;
+    cursor: pointer;
+}
+
+.small {
+    font-size: .8em;
+    margin: 8px;
 }
