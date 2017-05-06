@@ -1,8 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import StoryPreview from './story-preview.js';
+import {fetchUser} from '../actions';
 
 export class StoriesList extends React.Component {
+
+    componentDidMount() {
+        this.props.dispatch(fetchUser());
+    }
+
     stories = this.props.previewStories.map((story) => {
         return (<StoryPreview
                 key={story.id}

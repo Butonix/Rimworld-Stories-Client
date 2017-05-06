@@ -7,18 +7,13 @@ import NewStory from './components/new-story.js';
 import Login from './components/login.js';
 import Alert from './components/alert.js';
 import Loading from './components/loading.js';
-import { Route } from 'react-router'
-import {fetchUser} from './actions';
+import { Route } from 'react-router';
 import {connect} from 'react-redux';
 import {history} from './store';
 
 import { ConnectedRouter } from 'react-router-redux';
 
 class App extends Component {
-    componentDidMount() {
-        this.props.dispatch(fetchUser());
-    }
-
   render() {
     const message = this.props.alert.message ? <Alert /> : '';
     const loading = this.props.loading ? <Loading /> : '';

@@ -1,18 +1,33 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {ensureLogin, submitNewStory} from '../actions';
 
 export class NewStory extends React.Component {
+
+    componentDidMount() {
+        this.props.dispatch(ensureLogin());
+    }
+
+    submitEvent(e) {
+        e.preventDefault();
+        console.log(e.target)
+        if (e.target.newUsername.value) {
+            this.props.dispatch(submitNewStory(e.target.newUsername.value));
+        }
+    }
+    
     render() {
         return (
             <div className="container col1">
-                <form>
+                <form onSubmit={e => this.submitEvent(e)}>
                     <label>Title
-                        <input type="text"></input>
+                        <input type="text" id="title"></input>
                     </label>
                     <br />
                     <label>Story
-                        <textarea></textarea>
+                        <textarea id="content"></textarea>
                     </label>
+                    <button type="submit" className="button">Submit</button>
                 </form>
             </div>
         );

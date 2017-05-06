@@ -1,5 +1,5 @@
-import {TOGGLE_BURGER, FETCH_USER_SUCCESS, SET_MESSAGE, FETCH_PROFILE_SUCCESS, DISPLAY_LOADING, TICK_DOWN_TIMER, LOG_OUT_SUCCESS,
-    CHANGE_USERNAME_SUCCESS, UPLOAD_IMAGE_SUCCESS, RESET_PROFILE} from '../actions/';
+import {TOGGLE_BURGER, FETCH_USER_SUCCESS, SET_MESSAGE, FETCH_PROFILE_SUCCESS, DISPLAY_LOADING, TICK_DOWN_TIMER,
+    CHANGE_USERNAME_SUCCESS, UPLOAD_IMAGE_SUCCESS, RESET_PROFILE, RESET_USER} from '../actions/';
 
 // INITIALIZATION / DEFAULT STATE
 export const initialState = Object.assign({}, {
@@ -69,6 +69,12 @@ export const appReducer = (state=initialState, action, init=initialState) => {
         });
     }
 
+    else if(action.type === RESET_USER) {
+        return Object.assign({}, state, {
+            currentUser: init.currentUser
+        });
+    }
+
     else if(action.type === DISPLAY_LOADING) {
         return Object.assign({}, state, {
             loading: action.param
@@ -80,12 +86,6 @@ export const appReducer = (state=initialState, action, init=initialState) => {
             ...state,
             burgerOpen: !state.burgerOpen
         };
-    }
-
-    else if(action.type === LOG_OUT_SUCCESS) {
-        return Object.assign({}, state, {
-            currentUser: init.currentUser
-        });
     }
 
     else if(action.type === SET_MESSAGE) {

@@ -31,6 +31,11 @@ export const resetProfile = () => ({
     type: RESET_PROFILE
 });
 
+export const RESET_USER = 'RESET_USER';
+export const resetUser = () => ({
+    type: RESET_USER
+});
+
 export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
 export const fetchUserSuccess = response => ({
     type: FETCH_USER_SUCCESS,
@@ -41,13 +46,12 @@ export const fetchUser = () => dispatch => {
     fetchAPI('/auth/get-user', fetchUserSuccess, dispatch);
 };
 
-export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
-export const logOutSuccess = () => ({
-    type: LOG_OUT_SUCCESS
-});
+export const ensureLogin = () => dispatch => {
+    fetchAPI('/auth/ensure-login', fetchUserSuccess, dispatch);
+};
 
 export const logOut = () => dispatch => {
-    fetchAPI('/auth/log-out', [() => push('/'), logOutSuccess], dispatch);
+    fetchAPI('/auth/log-out', resetUser, dispatch);
 };
 
 export const FETCH_PROFILE_SUCCESS = 'FETCH_PROFILE_SUCCESS';
@@ -98,6 +102,9 @@ function superAgentRequestAPI(url, file, cb, dispatch) {
             dispatch(setMessage('Error: ' + err, 'error-message'));
         } else {
             const apiResp = JSON.parse(resp.text);
+            if (apiResp.redirect) {
+                dispatch(push(apiResp.redirect));
+            }
             if (apiResp.APImessage) {
                 dispatch(setMessage(apiResp.APImessage, 'alert-message'));
             }
@@ -128,6 +135,9 @@ function fetchAPI(url, actionCreator, dispatch, reqOptions) {
         return res.json();
     }).then(resultFromAPI => {
         dispatch(displayLoading(false));
+        if (resultFromAPI.redirect) {
+            dispatch(push(resultFromAPI.redirect));
+        }
         if (resultFromAPI.APImessage) {
             dispatch(setMessage(resultFromAPI.APImessage, 'alert-message'));
         }

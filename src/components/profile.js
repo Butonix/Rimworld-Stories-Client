@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchProfile, logOut, resetProfile} from '../actions';
+import {fetchProfile, logOut, resetProfile, fetchUser} from '../actions';
 import ProfileInfo from './profile-info';
 import ProfileStoriesList from './profile-stories-list';
 import UpdateUsername from './update-username';
@@ -8,9 +8,13 @@ import UploadProfilePicture from './upload-profile-picture';
 
 export class Profile extends React.Component {
 
-    componentDidMount() {
+    componentWillMount() {
         this.props.dispatch(resetProfile());
+    }
+
+    componentDidMount() {
         this.props.dispatch(fetchProfile(this.props.match.params.id));
+        this.props.dispatch(fetchUser());
     }
 
     render() {
