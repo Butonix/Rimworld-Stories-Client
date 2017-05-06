@@ -43,15 +43,15 @@ export const fetchUserSuccess = response => ({
 });
 
 export const fetchUser = () => dispatch => {
-    fetchAPI('/auth/get-user', fetchUserSuccess, dispatch);
+    SARequestAPI('get', '/auth/get-user', null, fetchUserSuccess, dispatch);
 };
 
 export const ensureLogin = () => dispatch => {
-    fetchAPI('/auth/ensure-login', fetchUserSuccess, dispatch);
+    SARequestAPI('get', '/auth/ensure-login', null, fetchUserSuccess, dispatch);
 };
 
 export const logOut = () => dispatch => {
-    fetchAPI('/auth/log-out', resetUser, dispatch);
+    SARequestAPI('get', '/auth/log-out', null, resetUser, dispatch);
 };
 
 export const FETCH_PROFILE_SUCCESS = 'FETCH_PROFILE_SUCCESS';
@@ -61,7 +61,7 @@ export const fetchProfileSuccess = userProfile => ({
 });
 
 export const fetchProfile = (userId) => dispatch => {
-    fetchAPI('/profile/get/' + userId, fetchProfileSuccess, dispatch);
+    SARequestAPI('get', '/profile/get/' + userId, null, fetchProfileSuccess, dispatch);
 };
 
 export const CHANGE_USERNAME_SUCCESS = 'CHANGE_USERNAME_SUCCESS';
@@ -71,12 +71,7 @@ export const changeUsernameSuccess = response => ({
 });
 
 export const submitNewUsername = (username) => dispatch => {
-    fetchAPI('/profile/change-username', changeUsernameSuccess, dispatch, {
-        method: 'post',
-        body: JSON.stringify({
-            username
-        })
-    });
+    SARequestAPI('post', '/profile/change-username', {username}, changeUsernameSuccess, dispatch);
 };
 
 export const UPLOAD_IMAGE_SUCCESS = 'UPLOAD_IMAGE_SUCCESS';
@@ -85,17 +80,17 @@ export const uploadImageSuccess = response => ({
     response
 });
 
-export const uploadImage = (file) => dispatch => {
-    superAgentRequestAPI('/profile/upload-avatar', file, uploadImageSuccess, dispatch)
+export const uploadImage = (data) => dispatch => {
+    SARequestAPI('post', '/profile/upload-avatar', data, uploadImageSuccess, dispatch);
 };
 
 // blueprint superagent function to request data from the API
-function superAgentRequestAPI(url, file, cb, dispatch) {
-    console.log('SuperAgent request to: ' + API_URL + url)
+function SARequestAPI(type, url, data, actionCreator, dispatch) {
+    console.log('SA request to: ' + API_URL + url)
     dispatch(displayLoading(true));
-    request.post(API_URL + url)
+    request(type, API_URL + url)
       .withCredentials()
-      .send(file)
+      .send(data)
       .end(function(err, resp) {
         dispatch(displayLoading(false));
         if (err) {
@@ -111,12 +106,15 @@ function superAgentRequestAPI(url, file, cb, dispatch) {
             if (apiResp.APIerror) {
                 dispatch(setMessage(apiResp.APIerror, 'error-message'));
             } else {
-                dispatch(cb(apiResp));
+                arrify(actionCreator).forEach((ac) => {
+                    dispatch(ac(apiResp));
+                })
             }
         }
     });
 }
 
+/*
 // blueprint function to fetch data from the API, just define the url, the callback function, the dispatch and the options
 function fetchAPI(url, actionCreator, dispatch, reqOptions) {
     console.log('Request to: ' + API_URL + url)
@@ -152,4 +150,4 @@ function fetchAPI(url, actionCreator, dispatch, reqOptions) {
     }).catch(err => {
         dispatch(setMessage('Error: ' + err, 'error-message'));
     });
-}
+}*/
