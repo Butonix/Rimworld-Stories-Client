@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchProfile, logOut} from '../actions';
+import {fetchProfile, logOut, resetProfile} from '../actions';
 import ProfileInfo from './profile-info';
 import ProfileStoriesList from './profile-stories-list';
 import UpdateUsername from './update-username';
@@ -9,6 +9,7 @@ import UploadProfilePicture from './upload-profile-picture';
 export class Profile extends React.Component {
 
     componentDidMount() {
+        this.props.dispatch(resetProfile());
         this.props.dispatch(fetchProfile(this.props.match.params.id));
     }
 
@@ -23,7 +24,7 @@ export class Profile extends React.Component {
         // when profile fetched AND if profile is mine
         if (this.props.visitedProfile && this.props.match.params.id === this.props.currentUser.id) {
             avatar = <UploadProfilePicture avatar={this.props.currentUser.avatarUrl} />;
-            profileTitle = <div className="container col1"><h3>{this.props.currentUser.userName}</h3></div>;
+            profileTitle = <div className="container col1"><h3>{this.props.currentUser.username}</h3></div>;
             profileInfo = <ProfileInfo info={this.props.currentUser} />;
             logoutButton = <div className="container col1"><div className="button" onClick={e => this.props.dispatch(logOut())}>Log out</div></div>;
             updateUsername = <UpdateUsername />;

@@ -26,10 +26,15 @@ export const setMessage = (message, messType) => ({
     messType
 });
 
+export const RESET_PROFILE = 'RESET_PROFILE';
+export const resetProfile = () => ({
+    type: RESET_PROFILE
+});
+
 export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
-export const fetchUserSuccess = user => ({
+export const fetchUserSuccess = response => ({
     type: FETCH_USER_SUCCESS,
-    user
+    response
 });
 
 export const fetchUser = () => dispatch => {
@@ -37,9 +42,8 @@ export const fetchUser = () => dispatch => {
 };
 
 export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
-export const logOutSuccess = (user) => ({
-    type: LOG_OUT_SUCCESS,
-    user
+export const logOutSuccess = () => ({
+    type: LOG_OUT_SUCCESS
 });
 
 export const logOut = () => dispatch => {

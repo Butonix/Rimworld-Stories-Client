@@ -1,19 +1,24 @@
 import {TOGGLE_BURGER, FETCH_USER_SUCCESS, SET_MESSAGE, FETCH_PROFILE_SUCCESS, DISPLAY_LOADING, TICK_DOWN_TIMER, LOG_OUT_SUCCESS,
-    CHANGE_USERNAME_SUCCESS, UPLOAD_IMAGE_SUCCESS} from '../actions/';
+    CHANGE_USERNAME_SUCCESS, UPLOAD_IMAGE_SUCCESS, RESET_PROFILE} from '../actions/';
 
-// INITIALIZATION
+// INITIALIZATION / DEFAULT STATE
 export const initialState = Object.assign({}, {
     burgerOpen: false,
     loading: false,
     currentUser: {
         id: null,
-        userName: null,
+        username: null,
         email: null
     },
     alert: {
         timer: 0,
         message: null,
         type: null
+    },
+    visitedProfile: {
+        username: null,
+        email: null,
+        avatarUrl: null
     },
     previewStories: [
         {
@@ -38,7 +43,7 @@ export const initialState = Object.assign({}, {
 });
 
 // ACTIONS
-export const appReducer = (state=initialState, action) => {
+export const appReducer = (state=initialState, action, init=initialState) => {
 
     if(action.type === TICK_DOWN_TIMER) {
         return Object.assign({}, state, {
@@ -58,6 +63,12 @@ export const appReducer = (state=initialState, action) => {
         });
     }
 
+    else if(action.type === RESET_PROFILE) {
+        return Object.assign({}, state, {
+            visitedProfile: init.visitedProfile
+        });
+    }
+
     else if(action.type === DISPLAY_LOADING) {
         return Object.assign({}, state, {
             loading: action.param
@@ -72,7 +83,9 @@ export const appReducer = (state=initialState, action) => {
     }
 
     else if(action.type === LOG_OUT_SUCCESS) {
-        return Object.assign({}, state, action.user);
+        return Object.assign({}, state, {
+            currentUser: init.currentUser
+        });
     }
 
     else if(action.type === SET_MESSAGE) {
@@ -84,38 +97,26 @@ export const appReducer = (state=initialState, action) => {
     }
 
     else if (action.type === FETCH_USER_SUCCESS) {
-        return Object.assign({}, state, action.user);
+        if (action.response.isLoggedIn) {
+            return Object.assign({}, state, {currentUser: action.response.currentUser});
+        } else {
+            return Object.assign({}, state, {currentUser: init.currentUser});
+        }
     }
 
     else if (action.type === CHANGE_USERNAME_SUCCESS) {
         return Object.assign({}, state, {
             currentUser: {
                 ...state.currentUser,
-                userName: action.response.currentUser.userName
+                username: action.response.currentUser.username
             }
         });
     }
 
     else if (action.type === FETCH_PROFILE_SUCCESS) {
-        // check if this is your profile or another one
-        if (state.currentUser.id === action.userProfile._id) {
-            return Object.assign({}, state, {
-                visitedProfile: {
-                    type: 'mine',
-                    username: action.userProfile.username,
-                    email: action.userProfile.email,
-                    avatarUrl: action.userProfile.avatarUrl
-                }
-            });
-        } else {
-            return Object.assign({}, state, {
-                visitedProfile: {
-                    type: 'other',
-                    username: action.userProfile.username,
-                    avatarUrl: action.userProfile.avatarUrl
-                }
-            });
-        }
+        return Object.assign({}, state, {
+            visitedProfile: action.userProfile
+        });
     }
 
     return state;
