@@ -9,7 +9,11 @@ export class UploadProfilePicture extends React.Component {
         if (acceptedFiles.length > 0) {
             let data = new FormData();
             data.append('file', acceptedFiles[0]);
-            data.append('user', this.props.currentUser.id);
+            data.append('folder', 'avatars');
+            data.append('transformation', JSON.stringify([
+              {width: 400, height: 400, gravity: "face", crop: "crop"},
+              {width: 200, crop: "scale"}
+            ]))
             this.props.dispatch(uploadImage(data));
         } else {
             this.props.dispatch(setMessage('Invalid file format', 'error-message'));
