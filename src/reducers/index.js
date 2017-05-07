@@ -1,14 +1,20 @@
 import {TOGGLE_BURGER, FETCH_USER_SUCCESS, SET_MESSAGE, FETCH_PROFILE_SUCCESS, DISPLAY_LOADING, TICK_DOWN_TIMER,
-    CHANGE_USERNAME_SUCCESS, UPLOAD_IMAGE_SUCCESS, RESET_PROFILE, RESET_USER} from '../actions/';
+    CHANGE_USERNAME_SUCCESS, UPLOAD_IMAGE_SUCCESS, RESET_PROFILE, RESET_USER, TOGGLE_AUTO_SAVE, CLEAR_CURRENT_DRAFT,
+    SAVE_DRAFT_SUCCESS, RESET_CURRENTLY_EDITED} from '../actions/';
 
 // INITIALIZATION / DEFAULT STATE
 export const initialState = Object.assign({}, {
     burgerOpen: false,
     loading: false,
+    autoSave: true,
+    autoSaveTime: 5000,
+    storyCurrentlyEdited: null,
     currentUser: {
         id: null,
         username: null,
-        email: null
+        email: null,
+        stories: null,
+        currentDraft: null
     },
     alert: {
         timer: 0,
@@ -20,26 +26,7 @@ export const initialState = Object.assign({}, {
         email: null,
         avatarUrl: null
     },
-    previewStories: [
-        {
-            id: 12345,
-            previewImage: require('../images/story.jpg'),
-            title: 'How my colony got wiped out',
-            shortText: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod",
-            author: 'Johnny',
-            posted: '2 hours ago',
-            nbComments: 3
-        },
-        {
-            id: 45678,
-            previewImage: require('../images/story2.jpg'),
-            title: 'The perfect base',
-            shortText: "sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum",
-            author: 'Nick',
-            posted: '3 days ago',
-            nbComments: 2
-        }
-    ]
+    previewStories: []
 });
 
 // ACTIONS
@@ -67,6 +54,36 @@ export const appReducer = (state=initialState, action, init=initialState) => {
         return Object.assign({}, state, {
             visitedProfile: init.visitedProfile
         });
+    }
+
+    else if(action.type === RESET_CURRENTLY_EDITED) {
+        return Object.assign({}, state, {
+            storyCurrentlyEdited: null
+        });
+    }
+
+    else if(action.type === TOGGLE_AUTO_SAVE) {
+        return Object.assign({}, state, {
+            autoSave: !state.autoSave
+        });
+    }
+
+    else if(action.type === CLEAR_CURRENT_DRAFT) {
+        return Object.assign({}, state, {
+            storyCurrentlyEdited: null,
+            currentUser : {
+                ...state.currentUser,
+                currentDraft: null
+            }
+        });
+    }
+
+    else if (action.type === SAVE_DRAFT_SUCCESS) {
+        if (action.response.storyID) {
+            return Object.assign({}, state, {
+                storyCurrentlyEdited : action.response.storyID
+            });
+        }
     }
 
     else if(action.type === RESET_USER) {

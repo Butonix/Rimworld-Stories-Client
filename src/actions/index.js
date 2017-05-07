@@ -42,6 +42,39 @@ export const fetchUserSuccess = response => ({
     response
 });
 
+export const TOGGLE_AUTO_SAVE = 'TOGGLE_AUTO_SAVE';
+export const toggleAutoSave = response => ({
+    type: TOGGLE_AUTO_SAVE
+});
+
+export const RESET_CURRENTLY_EDITED = 'RESET_CURRENTLY_EDITED';
+export const resetCurrentlyEdited = response => ({
+    type: RESET_CURRENTLY_EDITED
+});
+
+export const CLEAR_CURRENT_DRAFT = 'CLEAR_CURRENT_DRAFT';
+export const clearCurrentDraft = response => ({
+    type: CLEAR_CURRENT_DRAFT
+});
+
+export const submitNewStory = (data) => dispatch => {
+    SARequestAPI('post', '/story/new', data, null, dispatch);
+};
+
+export const updateStory = (data) => dispatch => {
+    SARequestAPI('put', '/story/update', data, null, dispatch);
+};
+
+export const SAVE_DRAFT_SUCCESS = 'SAVE_DRAFT_SUCCESS';
+export const saveDraftSuccess = response => ({
+    type: SAVE_DRAFT_SUCCESS,
+    response
+});
+
+export const saveDraft = (data) => dispatch => {
+    SARequestAPI('post', '/story/save-draft', data, saveDraftSuccess, dispatch);
+};
+
 export const fetchUser = () => dispatch => {
     SARequestAPI('get', '/auth/get-user', null, fetchUserSuccess, dispatch);
 };

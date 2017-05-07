@@ -11,9 +11,9 @@ export class UploadProfilePicture extends React.Component {
             data.append('file', acceptedFiles[0]);
             data.append('folder', 'avatars');
             data.append('transformation', JSON.stringify([
-              {width: 400, height: 400, gravity: "face", crop: "crop"},
-              {width: 200, crop: "scale"}
-            ]))
+                {width: 400, height: 400, gravity: "face", crop: "crop"},
+                {width: 200, crop: "scale"}
+            ]));
             this.props.dispatch(uploadImage(data));
         } else {
             this.props.dispatch(setMessage('Invalid file format', 'error-message'));
@@ -30,7 +30,7 @@ export class UploadProfilePicture extends React.Component {
                         accept="image/jpeg, image/png, image/jpg"
                     >
                         <img alt='' className="profile-avatar" id="profile-avatar" src={this.props.avatar} />
-                        <p className="small">Click here or drag a file to upload a new avatar. JPEG or PNG</p>
+                        <p className="small">Click here or drag a file to upload a new avatar (JPEG or PNG)</p>
                     </Dropzone>
             </div>
         );

@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {ensureLogin, submitNewStory} from '../actions';
+import {ensureLogin} from '../actions';
+import NewStoryForm from './new-story-form'
 
 export class NewStory extends React.Component {
 
@@ -8,34 +9,17 @@ export class NewStory extends React.Component {
         this.props.dispatch(ensureLogin());
     }
 
-    submitEvent(e) {
-        e.preventDefault();
-        console.log(e.target)
-        if (e.target.newUsername.value) {
-            this.props.dispatch(submitNewStory(e.target.newUsername.value));
-        }
-    }
-
     render() {
+        const title = this.props.currentUser.currentDraft ? this.props.currentUser.currentDraft.title : '';
+        const story = this.props.currentUser.currentDraft ? this.props.currentUser.currentDraft.story : '';
         return (
-            <div className="container col1">
-                <form onSubmit={e => this.submitEvent(e)}>
-
-                    <label>Title
-                        <input type="text" id="title"></input>
-                    </label>
-
-                    <br />
-
-                    <label>Story
-                        <textarea id="content"></textarea>
-                    </label>
-
-                    <br />
-
-                    <button type="submit" className="button">Submit</button>
-                    
-                </form>
+            <div>
+                <NewStoryForm
+                    draftTitle={title}
+                    draftStory={story}
+                    autoSave={this.props.autoSave}
+                    autoSaveTime={this.props.autoSaveTime}
+                />
             </div>
         );
     }
