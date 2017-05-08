@@ -81,6 +81,16 @@ export const fetchUser = () => dispatch => {
     SARequestAPI('get', '/auth/get-user', null, fetchUserSuccess, dispatch);
 };
 
+export const FETCH_LANDING_STORIES_SUCCESS = 'FETCH_LANDING_STORIES_SUCCESS';
+export const fetchLandingStoriesSuccess = response => ({
+    type: FETCH_LANDING_STORIES_SUCCESS,
+    response
+});
+
+export const fetchLandingStories = () => dispatch => {
+    SARequestAPI('get', '/story/get-list', null, fetchLandingStoriesSuccess, dispatch);
+};
+
 export const ensureLogin = () => dispatch => {
     SARequestAPI('get', '/auth/ensure-login', null, fetchUserSuccess, dispatch);
 };

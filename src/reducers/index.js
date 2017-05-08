@@ -1,14 +1,19 @@
 import {TOGGLE_BURGER, FETCH_USER_SUCCESS, SET_MESSAGE, FETCH_PROFILE_SUCCESS, DISPLAY_LOADING, TICK_DOWN_TIMER,
     CHANGE_USERNAME_SUCCESS, UPLOAD_IMAGE_SUCCESS, RESET_PROFILE, RESET_USER, TOGGLE_AUTO_SAVE, CLEAR_CURRENT_DRAFT,
-    SAVE_DRAFT_SUCCESS, SAVE_DRAFT_FIELDS_IN_STATE} from '../actions/';
+    SAVE_DRAFT_SUCCESS, SAVE_DRAFT_FIELDS_IN_STATE, FETCH_LANDING_STORIES_SUCCESS} from '../actions/';
 
 // INITIALIZATION / DEFAULT STATE
 export const initialState = Object.assign({}, {
     burgerOpen: false,
     loading: false,
     autoSave: true,
-    autoSaveTime: 5000,
+    autoSaveTime: 10 * 1000,
     storyCurrentlyEdited: null,
+    landingList: {
+        list: [],
+        page: 1,
+        perPage: 5
+    },
     currentDraft: {
         _id: null,
         story: '',
@@ -29,8 +34,7 @@ export const initialState = Object.assign({}, {
         username: null,
         email: null,
         avatarUrl: null
-    },
-    previewStories: []
+    }
 });
 
 // ACTIONS
@@ -146,6 +150,15 @@ export const appReducer = (state=initialState, action, init=initialState) => {
     else if (action.type === FETCH_PROFILE_SUCCESS) {
         return Object.assign({}, state, {
             visitedProfile: action.userProfile
+        });
+    }
+
+    else if (action.type === FETCH_LANDING_STORIES_SUCCESS) {
+        return Object.assign({}, state, {
+            landingList: {
+                ...state.landingList,
+                list: action.response.stories
+            }
         });
     }
 

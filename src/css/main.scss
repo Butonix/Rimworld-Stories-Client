@@ -2,11 +2,12 @@ $header-height: 64px;
 $site-width: 800px;
 $smallest-site-width: 300px;
 $min-container-height: 300px;
+$text-color: #3e3e3e;
 
 html {
     font-family: helvetica;
     box-sizing: border-box;
-    color: #444;
+    color: $text-color;
 }
 
 *, *:before, *:after {
@@ -137,6 +138,7 @@ header {
     text-align: left;
 }
 
+// ALERT
 .alert-container {
     border-radius: 3px;
     color: white;
@@ -152,6 +154,7 @@ header {
     }
 }
 
+// SPINNER
 .loading-container {
     position: fixed;
     top: 85px;
@@ -168,6 +171,11 @@ header {
         width: 30px;
         height: 30px;
     }
+    &.small-thumb {
+        vertical-align: middle;
+        width: 17px;
+        height: 17px;
+    }
 }
 
 .dropzone {
@@ -182,4 +190,18 @@ header {
 .small {
     font-size: .8em;
     margin: 8px;
+}
+
+// FORM
+.form-element {
+    color: $text-color;
+    font-size: 1.1em;
+    width: 80%;
+    border-radius: 3px;
+    border: 1px solid #c7c7c7;
+    padding: 5px;
+}
+.story-textarea {
+    min-height: 300px;
+    resize: vertical;
 }

@@ -71,19 +71,18 @@ export class NewStoryForm extends React.Component {
         const createNewButton = !this.props.currentDraft._id ? '' : <div className='button create-new-story' onClick={ () => { this.props.dispatch(clearCurrentDraft()); this.clearForm() } }>Create New</div>;
         return (
             <div className="container col1">
+            <h3>New Story</h3>
                 <form name="newstoryform" onSubmit={e => this.submitStory(e)}>
 
-                    <label key={this.props.draftTitle + '-title'}>Title
-                        <input required='true' autoComplete='off' type="text" id="title" defaultValue={this.props.draftTitle} />
-                    </label>
-                    <br />
+                    <div key={this.props.draftTitle + '-title'}>
+                        <input className="form-element title-input" required='true' autoComplete='off' type="text" id="title" defaultValue={this.props.draftTitle} placeholder="Title" />
+                    </div>
                     <br />
 
-                    <label key={this.props.draftTitle + '-story'}>Story
-                        <textarea required='true' id="story" defaultValue={this.props.draftStory} />
-                    </label>
+                    <div key={this.props.draftTitle + '-story'}>
+                        <textarea className='form-element story-textarea' required='true' id="story" defaultValue={this.props.draftStory} placeholder="Type your story here..." />
+                    </div>
 
-                    <br />
                     <br />
 
                     <button type="submit" className="button">Submit</button>

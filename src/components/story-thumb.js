@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {displayDate} from '../utils.js';
 
-export class StoryPreview extends React.Component {
+export class StoryThumb extends React.Component {
     render() {
         return (
             <div className="container col1">
@@ -13,14 +14,14 @@ export class StoryPreview extends React.Component {
                         </a>
                     </div>
                     <p className="story-preview">{this.props.shortText}</p>
-                    <div className="story-preview-date">
-                        <i className="fa fa-user" aria-hidden="true"></i>
+                    <div className="story-preview-info">
+                        <img alt='' src={this.props.avatarUrl} className='profile-avatar small-thumb'/>
                         <span className="info-separator"> </span>
                         {this.props.author}
                         <span className="info-separator"> | </span>
                         <i className="fa fa-clock-o" aria-hidden="true"></i>
                         <span className="info-separator"> </span>
-                        {this.props.posted}
+                        {displayDate(this.props.posted)}
                         <span className="info-separator"> | </span>
                         {this.props.nbComments} comments
                     </div>
@@ -31,4 +32,4 @@ export class StoryPreview extends React.Component {
 }
 
 export const mapStateToProps = state => (state.app);
-export default connect(mapStateToProps)(StoryPreview);
+export default connect(mapStateToProps)(StoryThumb);
