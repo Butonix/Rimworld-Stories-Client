@@ -47,14 +47,16 @@ export const toggleAutoSave = response => ({
     type: TOGGLE_AUTO_SAVE
 });
 
-export const RESET_CURRENTLY_EDITED = 'RESET_CURRENTLY_EDITED';
-export const resetCurrentlyEdited = response => ({
-    type: RESET_CURRENTLY_EDITED
-});
-
 export const CLEAR_CURRENT_DRAFT = 'CLEAR_CURRENT_DRAFT';
 export const clearCurrentDraft = response => ({
     type: CLEAR_CURRENT_DRAFT
+});
+
+export const SAVE_DRAFT_FIELDS_IN_STATE = 'SAVE_DRAFT_FIELDS_IN_STATE';
+export const saveDraftFieldsInState = (title, story) => ({
+    type: SAVE_DRAFT_FIELDS_IN_STATE,
+    title,
+    story
 });
 
 export const submitNewStory = (data) => dispatch => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {ensureLogin, submitNewStory, updateStory, saveDraft, toggleAutoSave, clearCurrentDraft, resetCurrentlyEdited} from '../actions';
+import {ensureLogin, submitNewStory, updateStory, saveDraft, toggleAutoSave, clearCurrentDraft, saveDraftFieldsInState} from '../actions';
 
 export class NewStoryForm extends React.Component {
 
@@ -35,15 +35,13 @@ export class NewStoryForm extends React.Component {
     }
 
     saveDraft() {
-        console.log(document.newstoryform.title.value)
+        this.props.dispatch(saveDraftFieldsInState(document.newstoryform.title.value, document.newstoryform.story.value));
         let data = new FormData();
         data.append('title', document.newstoryform.title.value);
         data.append('story', document.newstoryform.story.value);
         data.append('status', 'draft');
-        if (this.props.storyCurrentlyEdited) {
-            data.append('id', this.props.storyCurrentlyEdited);
-        } else if (this.props.currentUser.currentDraft) {
-            data.append('id', this.props.currentUser.currentDraft._id);
+        if (this.props.currentDraft._id) {
+            data.append('id', this.props.currentDraft._id);
         } else {
             data.append('id', null);
         }
@@ -52,18 +50,14 @@ export class NewStoryForm extends React.Component {
 
     submitStory(e) {
         clearInterval(this.autoSaveTimer);
-        this.props.dispatch(resetCurrentlyEdited());
+        this.props.dispatch(clearCurrentDraft());
         e.preventDefault();
         let data = new FormData();
         data.append('title', e.target.title.value);
         data.append('story', e.target.story.value);
-        if (this.props.currentUser.currentDraft || this.props.storyCurrentlyEdited) {
+        if (this.props.currentDraft._id) {
             console.log('updating')
-            if (this.props.storyCurrentlyEdited) {
-                data.append('id', this.props.storyCurrentlyEdited);
-            } else if (this.props.currentUser.currentDraft) {
-                data.append('id', this.props.currentUser.currentDraft._id);
-            }
+            data.append('id', this.props.currentDraft._id);
             data.append('status', 'published');
             this.props.dispatch(updateStory(data));
         } else {
@@ -74,7 +68,7 @@ export class NewStoryForm extends React.Component {
 
     render() {
         const autoSaveToggleButtonText = this.props.autoSave ? 'Disable auto save' : 'Enable auto save';
-        const createNewButton = this.props.currentDraft ? '' : <div className='button create-new-story' onClick={ () => { this.props.dispatch(clearCurrentDraft()); this.clearForm() } }>Create New</div>;
+        const createNewButton = !this.props.currentDraft._id ? '' : <div className='button create-new-story' onClick={ () => { this.props.dispatch(clearCurrentDraft()); this.clearForm() } }>Create New</div>;
         return (
             <div className="container col1">
                 <form name="newstoryform" onSubmit={e => this.submitStory(e)}>

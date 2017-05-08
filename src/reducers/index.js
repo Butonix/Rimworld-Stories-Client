@@ -1,6 +1,6 @@
 import {TOGGLE_BURGER, FETCH_USER_SUCCESS, SET_MESSAGE, FETCH_PROFILE_SUCCESS, DISPLAY_LOADING, TICK_DOWN_TIMER,
     CHANGE_USERNAME_SUCCESS, UPLOAD_IMAGE_SUCCESS, RESET_PROFILE, RESET_USER, TOGGLE_AUTO_SAVE, CLEAR_CURRENT_DRAFT,
-    SAVE_DRAFT_SUCCESS, RESET_CURRENTLY_EDITED} from '../actions/';
+    SAVE_DRAFT_SUCCESS, SAVE_DRAFT_FIELDS_IN_STATE} from '../actions/';
 
 // INITIALIZATION / DEFAULT STATE
 export const initialState = Object.assign({}, {
@@ -9,12 +9,16 @@ export const initialState = Object.assign({}, {
     autoSave: true,
     autoSaveTime: 5000,
     storyCurrentlyEdited: null,
+    currentDraft: {
+        _id: null,
+        story: '',
+        title: ''
+    },
     currentUser: {
         id: null,
         username: null,
         email: null,
-        stories: null,
-        currentDraft: null
+        stories: null
     },
     alert: {
         timer: 0,
@@ -56,12 +60,6 @@ export const appReducer = (state=initialState, action, init=initialState) => {
         });
     }
 
-    else if(action.type === RESET_CURRENTLY_EDITED) {
-        return Object.assign({}, state, {
-            storyCurrentlyEdited: null
-        });
-    }
-
     else if(action.type === TOGGLE_AUTO_SAVE) {
         return Object.assign({}, state, {
             autoSave: !state.autoSave
@@ -70,10 +68,16 @@ export const appReducer = (state=initialState, action, init=initialState) => {
 
     else if(action.type === CLEAR_CURRENT_DRAFT) {
         return Object.assign({}, state, {
-            storyCurrentlyEdited: null,
-            currentUser : {
-                ...state.currentUser,
-                currentDraft: null
+            currentDraft: init.currentDraft
+        });
+    }
+
+    else if(action.type === SAVE_DRAFT_FIELDS_IN_STATE) {
+        return Object.assign({}, state, {
+            currentDraft: {
+                ...state.currentDraft,
+                title: action.title,
+                story: action.story
             }
         });
     }
@@ -81,7 +85,10 @@ export const appReducer = (state=initialState, action, init=initialState) => {
     else if (action.type === SAVE_DRAFT_SUCCESS) {
         if (action.response.storyID) {
             return Object.assign({}, state, {
-                storyCurrentlyEdited : action.response.storyID
+                currentDraft: {
+                    ...state.currentDraft,
+                    _id: action.response.storyID
+                }
             });
         }
     }
@@ -115,9 +122,15 @@ export const appReducer = (state=initialState, action, init=initialState) => {
 
     else if (action.type === FETCH_USER_SUCCESS) {
         if (action.response.isLoggedIn) {
-            return Object.assign({}, state, {currentUser: action.response.currentUser});
+            return Object.assign({}, state, {
+                currentUser: action.response.currentUser,
+                currentDraft: action.response.currentDraft || init.currentDraft
+            });
         } else {
-            return Object.assign({}, state, {currentUser: init.currentUser});
+            return Object.assign({}, state, {
+                currentUser: init.currentUser,
+                currentDraft: init.currentDraft
+            });
         }
     }
 

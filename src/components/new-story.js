@@ -10,13 +10,11 @@ export class NewStory extends React.Component {
     }
 
     render() {
-        const title = this.props.currentUser.currentDraft ? this.props.currentUser.currentDraft.title : '';
-        const story = this.props.currentUser.currentDraft ? this.props.currentUser.currentDraft.story : '';
         return (
             <div>
                 <NewStoryForm
-                    draftTitle={title}
-                    draftStory={story}
+                    draftTitle={this.props.currentDraft.title }
+                    draftStory={this.props.currentDraft.story}
                     autoSave={this.props.autoSave}
                     autoSaveTime={this.props.autoSaveTime}
                 />
