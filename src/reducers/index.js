@@ -1,6 +1,7 @@
 import {TOGGLE_BURGER, FETCH_USER_SUCCESS, SET_MESSAGE, FETCH_PROFILE_SUCCESS, DISPLAY_LOADING, TICK_DOWN_TIMER,
-    CHANGE_USERNAME_SUCCESS, UPLOAD_IMAGE_SUCCESS, RESET_PROFILE, RESET_USER, TOGGLE_AUTO_SAVE, CLEAR_CURRENT_DRAFT,
-    SAVE_DRAFT_SUCCESS, SAVE_DRAFT_FIELDS_IN_STATE, FETCH_LANDING_STORIES_SUCCESS, RESET_CURRENT_STORY, FETCH_STORY_SUCCESS} from '../actions/';
+    CHANGE_USERNAME_SUCCESS, UPLOAD_IMAGE_SUCCESS, RESET_PROFILE, RESET_USER, TOGGLE_AUTO_SAVE, GET_DRAFT_SUCCESS,
+    SAVE_DRAFT_SUCCESS, SAVE_DRAFT_FIELDS_IN_STATE, FETCH_LANDING_STORIES_SUCCESS, RESET_CURRENT_STORY, FETCH_STORY_SUCCESS,
+    RESET_CURRENT_DRAFT} from '../actions/';
 
 // INITIALIZATION / DEFAULT STATE
 export const initialState = Object.assign({}, {
@@ -86,15 +87,20 @@ export const appReducer = (state=initialState, action, init=initialState) => {
         });
     }
 
-    else if(action.type === TOGGLE_AUTO_SAVE) {
+    else if(action.type === RESET_CURRENT_DRAFT) {
         return Object.assign({}, state, {
-            autoSave: !state.autoSave
+            currentDraft: init.currentDraft
         });
     }
 
-    else if(action.type === CLEAR_CURRENT_DRAFT) {
+    else if(action.type === GET_DRAFT_SUCCESS) {
+        console.log(action.response);
+        return Object.assign({}, state, action.response);
+    }
+
+    else if(action.type === TOGGLE_AUTO_SAVE) {
         return Object.assign({}, state, {
-            currentDraft: init.currentDraft
+            autoSave: !state.autoSave
         });
     }
 

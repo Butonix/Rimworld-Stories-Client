@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {setStoryToLatestDraft} from '../actions';
+import {Link} from 'react-router-dom';
 
 export class MyDrafts extends React.Component {
 
@@ -8,7 +8,7 @@ export class MyDrafts extends React.Component {
         const stories = this.props.stories.map((story) => {
             if (story.status === 'draft') {
                 return (<div key={story._id} className="list-item">
-                    <span className="fake-link" onClick={() => this.props.dispatch(setStoryToLatestDraft(story._id))} >{story.title || story._id}</span>
+                    <Link to={'/write-story/' + story._id}><span className="fake-link">{story.title || story._id}</span></Link>
                     </div>
                 )
              }

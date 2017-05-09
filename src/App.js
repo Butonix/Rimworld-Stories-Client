@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Header from './components/ui-header.js';
 import StoriesList from './components/story-home-list.js';
 import Story from './components/story.js';
@@ -26,7 +26,7 @@ import { ConnectedRouter } from 'react-router-redux';
                 <Route exact path="/" component={StoriesList} />
                 <Route exact path="/story/:id" component={Story} />
                 <Route exact path="/profile/:id" component={Profile} />
-                <Route exact path="/new-story" component={NewStory} />
+                <Route exact path="/write-story/:id" component={NewStory} />
                 <Route exact path="/login" component={Login} />
             </main>
           </div>

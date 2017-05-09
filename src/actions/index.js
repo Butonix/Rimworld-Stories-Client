@@ -41,6 +41,11 @@ export const resetCurrentStory = () => ({
     type: RESET_CURRENT_STORY
 });
 
+export const RESET_CURRENT_DRAFT = 'RESET_CURRENT_DRAFT';
+export const resetCurrentDraft = () => ({
+    type: RESET_CURRENT_DRAFT
+});
+
 export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
 export const fetchUserSuccess = response => ({
     type: FETCH_USER_SUCCESS,
@@ -66,11 +71,6 @@ export const toggleAutoSave = response => ({
     type: TOGGLE_AUTO_SAVE
 });
 
-export const CLEAR_CURRENT_DRAFT = 'CLEAR_CURRENT_DRAFT';
-export const clearCurrentDraft = response => ({
-    type: CLEAR_CURRENT_DRAFT
-});
-
 export const SAVE_DRAFT_FIELDS_IN_STATE = 'SAVE_DRAFT_FIELDS_IN_STATE';
 export const saveDraftFieldsInState = (title, story) => ({
     type: SAVE_DRAFT_FIELDS_IN_STATE,
@@ -78,16 +78,18 @@ export const saveDraftFieldsInState = (title, story) => ({
     story
 });
 
-export const submitNewStory = (data) => dispatch => {
-    SARequestAPI('post', '/story/new', data, null, dispatch);
+export const GET_DRAFT_SUCCESS = 'GET_DRAFT_SUCCESS';
+export const getDraftSuccess = response => ({
+    type: GET_DRAFT_SUCCESS,
+    response
+});
+
+export const getDraft = (storyID) => dispatch => {
+    SARequestAPI('get', '/story/get-draft/' + storyID, null, getDraftSuccess, dispatch);
 };
 
 export const updateStory = (data) => dispatch => {
     SARequestAPI('put', '/story/update', data, null, dispatch);
-};
-
-export const setStoryToLatestDraft = (id) => dispatch => {
-    SARequestAPI('put', '/story/set-to-latest-draft', {id}, null, dispatch);
 };
 
 export const SAVE_DRAFT_SUCCESS = 'SAVE_DRAFT_SUCCESS';

@@ -9,7 +9,7 @@ export class Burger extends React.Component {
         <div>
             <Link to="/"><div className="burger-button">Home</div></Link>
             <Link to={'/profile/' + this.props.currentUser.id} ><div className="burger-button">Profile</div></Link>
-            <Link to="/new-story"><div className="burger-button">New Story</div></Link>
+            <Link to="/write-story/new"><div className="burger-button">New Story</div></Link>
             <div className="burger-button" onClick={e => this.props.dispatch(logOut())}>Log out</div>
         </div>
         :
