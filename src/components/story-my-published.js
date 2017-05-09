@@ -1,12 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 export class MyPublishedStores extends React.Component {
     render() {
         const stories = this.props.stories.map((story) => {
             if (story.status === 'published') {
                 return (<div key={story._id} className="list-item">
-                    {story._id}
+                    <Link to={'/story/' + story._id} className="fake-link">{story.title}</Link>
                     </div>
                 )
              }

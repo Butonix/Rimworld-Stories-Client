@@ -1,10 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {ensureLogin, submitNewStory, updateStory, saveDraft, toggleAutoSave, clearCurrentDraft, saveDraftFieldsInState} from '../actions';
+import {ensureLogin, submitNewStory, updateStory, saveDraft, toggleAutoSave, clearCurrentDraft, saveDraftFieldsInState, resetUser} from '../actions';
 import {buttonDisableOnLoading, buttonContent, defaultScreenshot} from '../utils';
 import UploadImage from './misc-upload-image.js'
 
 export class NewStoryForm extends React.Component {
+
+    componentWillMount() {
+        this.props.dispatch(resetUser());
+    }
 
     componentDidMount() {
         this.props.dispatch(ensureLogin());
@@ -81,6 +85,7 @@ export class NewStoryForm extends React.Component {
                     <div key={this.props.currentUser.id + 'draft-title'}>
                         <input className="form-element title-input" required='true' autoComplete='off' type="text" id="title" defaultValue={this.props.draftTitle} placeholder="Title" />
                     </div>
+                    
                     <br />
 
                     <div key={this.props.currentUser.id + 'draft-story'}>

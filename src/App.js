@@ -13,10 +13,9 @@ import {history} from './store';
 
 import { ConnectedRouter } from 'react-router-redux';
 
-class App extends Component {
-  render() {
-    const message = this.props.alert.message ? <Alert /> : '';
-    const loading = this.props.loading ? <Loading /> : '';
+  function App(props) {
+    const message = props.alert.message ? <Alert /> : '';
+    const loading = props.loading ? <Loading /> : '';
     return (
     <ConnectedRouter history={history}>
           <div className="App">
@@ -34,7 +33,6 @@ class App extends Component {
     </ConnectedRouter>
     );
   }
-}
 
 export const mapStateToProps = state => (state.app);
 export default connect(mapStateToProps)(App);

@@ -8,7 +8,7 @@ export class MyDrafts extends React.Component {
         const stories = this.props.stories.map((story) => {
             if (story.status === 'draft') {
                 return (<div key={story._id} className="list-item">
-                    <span className="fake-link" onClick={() => this.props.dispatch(setStoryToLatestDraft(story._id))} >{story._id}</span>
+                    <span className="fake-link" onClick={() => this.props.dispatch(setStoryToLatestDraft(story._id))} >{story.title || story._id}</span>
                     </div>
                 )
              }
