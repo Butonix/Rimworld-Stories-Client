@@ -1,6 +1,6 @@
 import {TOGGLE_BURGER, FETCH_USER_SUCCESS, SET_MESSAGE, FETCH_PROFILE_SUCCESS, DISPLAY_LOADING, TICK_DOWN_TIMER,
     CHANGE_USERNAME_SUCCESS, UPLOAD_IMAGE_SUCCESS, RESET_PROFILE, RESET_USER, TOGGLE_AUTO_SAVE, CLEAR_CURRENT_DRAFT,
-    SAVE_DRAFT_SUCCESS, SAVE_DRAFT_FIELDS_IN_STATE, FETCH_LANDING_STORIES_SUCCESS} from '../actions/';
+    SAVE_DRAFT_SUCCESS, SAVE_DRAFT_FIELDS_IN_STATE, FETCH_LANDING_STORIES_SUCCESS, RESET_CURRENT_STORY, FETCH_STORY_SUCCESS} from '../actions/';
 
 // INITIALIZATION / DEFAULT STATE
 export const initialState = Object.assign({}, {
@@ -15,6 +15,12 @@ export const initialState = Object.assign({}, {
         perPage: 5
     },
     currentDraft: {
+        _id: null,
+        story: '',
+        title: '',
+        screenshot: ''
+    },
+    currentStory: {
         _id: null,
         story: '',
         title: '',
@@ -71,6 +77,12 @@ export const appReducer = (state=initialState, action, init=initialState) => {
     else if(action.type === RESET_PROFILE) {
         return Object.assign({}, state, {
             visitedProfile: init.visitedProfile
+        });
+    }
+
+    else if(action.type === RESET_CURRENT_STORY) {
+        return Object.assign({}, state, {
+            currentStory: init.currentStory
         });
     }
 
@@ -161,6 +173,10 @@ export const appReducer = (state=initialState, action, init=initialState) => {
         return Object.assign({}, state, {
             visitedProfile: action.userProfile
         });
+    }
+
+    else if (action.type === FETCH_STORY_SUCCESS) {
+        return Object.assign({}, state, action.response);
     }
 
     else if (action.type === FETCH_LANDING_STORIES_SUCCESS) {

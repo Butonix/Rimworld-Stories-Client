@@ -1,9 +1,20 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import NewComment from './new-comment.js';
-import Comment from './comment.js'
+import NewComment from './story-new-comment.js';
+import Comment from './story-comment.js';
+import {resetCurrentStory, fetchUser, fetchStory} from '../actions';
 
 export class Story extends React.Component {
+
+    componentWillMount() {
+        this.props.dispatch(resetCurrentStory());
+    }
+
+    componentDidMount() {
+        this.props.dispatch(fetchStory(this.props.match.params.id));
+        this.props.dispatch(fetchUser());
+    }
+
     render() {
         return (
             <div className="container col1">

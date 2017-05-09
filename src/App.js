@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Header from './components/header.js';
-import StoriesList from './components/stories-list.js';
+import Header from './components/ui-header.js';
+import StoriesList from './components/story-home-list.js';
 import Story from './components/story.js';
 import Profile from './components/profile.js';
-import NewStory from './components/new-story.js';
-import Login from './components/login.js';
-import Alert from './components/alert.js';
-import Loading from './components/loading.js';
+import NewStory from './components/story-new-story.js';
+import Login from './components/misc-login.js';
+import Alert from './components/ui-alert.js';
+import Loading from './components/ui-loading.js';
 import { Route } from 'react-router';
 import {connect} from 'react-redux';
 import {history} from './store';

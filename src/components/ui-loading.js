@@ -1,0 +1,11 @@
+import React from 'react';
+
+const Loading = () => {
+    return (
+        <div className="loading-container">
+            <img src={require('../images/loading.gif')} alt="loading" width="20px" />
+        </div>
+    );
+}
+
+export default Loading;

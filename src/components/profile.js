@@ -2,10 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {fetchProfile, logOut, resetProfile, fetchUser} from '../actions';
 import ProfileInfo from './profile-info';
-import MyPublishedStores from './my-published-stories';
-import UpdateUsername from './update-username';
-import UploadImage from './upload-image';
-import MyDrafts from './my-drafts';
+import MyPublishedStores from './story-my-published';
+import UpdateUsername from './profile-update-username';
+import UploadImage from './misc-upload-image.js';
+import MyDrafts from './story-my-drafts';
 import {buttonDisableOnLoading, buttonContent} from '../utils';
 
 export class Profile extends React.Component {

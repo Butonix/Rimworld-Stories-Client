@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import Burger from './burger.js';
+import Burger from './ui-burger.js';
 import {toggleBurger} from '../actions';
 import {API_URL} from '../config.js';
 

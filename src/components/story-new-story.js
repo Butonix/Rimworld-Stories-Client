@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {ensureLogin} from '../actions';
-import NewStoryForm from './new-story-form'
+import NewStoryForm from './story-form-new'
 
 export class NewStory extends React.Component {
 

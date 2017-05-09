@@ -8,10 +8,7 @@ export class Profile extends React.Component {
     componentWillMount() {
         this.props.dispatch(fetchUser());
     }
-
-    componentDidMount() {
-    }
-
+    
     render() {
         return (
             <div className="container col1">

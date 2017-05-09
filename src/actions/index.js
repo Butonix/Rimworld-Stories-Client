@@ -36,11 +36,30 @@ export const resetUser = () => ({
     type: RESET_USER
 });
 
+export const RESET_CURRENT_STORY = 'RESET_CURRENT_STORY';
+export const resetCurrentStory = () => ({
+    type: RESET_CURRENT_STORY
+});
+
 export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
 export const fetchUserSuccess = response => ({
     type: FETCH_USER_SUCCESS,
     response
 });
+
+export const fetchUser = () => dispatch => {
+    SARequestAPI('get', '/auth/get-user', null, fetchUserSuccess, dispatch);
+};
+
+export const FETCH_STORY_SUCCESS = 'FETCH_STORY_SUCCESS';
+export const fetchStorySuccess = response => ({
+    type: FETCH_STORY_SUCCESS,
+    response
+});
+
+export const fetchStory = (storyID) => dispatch => {
+    SARequestAPI('get', '/story/get/' + storyID, null, fetchStorySuccess, dispatch);
+};
 
 export const TOGGLE_AUTO_SAVE = 'TOGGLE_AUTO_SAVE';
 export const toggleAutoSave = response => ({
@@ -79,10 +98,6 @@ export const saveDraftSuccess = response => ({
 
 export const saveDraft = (data) => dispatch => {
     SARequestAPI('post', '/story/save-draft', data, saveDraftSuccess, dispatch);
-};
-
-export const fetchUser = () => dispatch => {
-    SARequestAPI('get', '/auth/get-user', null, fetchUserSuccess, dispatch);
 };
 
 export const FETCH_LANDING_STORIES_SUCCESS = 'FETCH_LANDING_STORIES_SUCCESS';

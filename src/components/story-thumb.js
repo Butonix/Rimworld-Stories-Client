@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {displayDate} from '../utils.js';
+import {Link} from 'react-router-dom';
 
 export class StoryThumb extends React.Component {
     render() {
@@ -9,9 +10,9 @@ export class StoryThumb extends React.Component {
     			<div className="story-preview inside-cont">
                 <h2 className="story-preview-title">{this.props.title}</h2>
                     <div className="story-thumbnail-container">
-                        <a href={'/story/' + this.props.id}>
+                        <Link to={'/story/' + this.props.id}>
                             <img className="story-thumbnail" src={this.props.previewImage} alt="Thumbnail" width="100%" />
-                        </a>
+                        </Link>
                     </div>
                     <p className="story-preview">{this.props.shortText}</p>
                     <div className="story-preview-info">

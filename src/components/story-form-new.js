@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {ensureLogin, submitNewStory, updateStory, saveDraft, toggleAutoSave, clearCurrentDraft, saveDraftFieldsInState} from '../actions';
 import {buttonDisableOnLoading, buttonContent, defaultScreenshot} from '../utils';
-import UploadImage from './upload-image'
+import UploadImage from './misc-upload-image.js'
 
 export class NewStoryForm extends React.Component {
 
