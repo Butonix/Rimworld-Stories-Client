@@ -4,6 +4,7 @@ $smallest-site-width: 300px;
 $min-container-height: 300px;
 $text-color: #3e3e3e;
 $link-text-color: #5654bf;
+$burger-buttons-bk: #666666;
 
 html {
     font-family: helvetica;
@@ -62,6 +63,7 @@ h1 {
     margin: 0;
     padding: 0;
     line-height: $header-height;
+    font-size: 1.5em;
 }
 
 header {
@@ -79,15 +81,12 @@ header {
     cursor: pointer;
     line-height: $header-height;
     vertical-align: middle;
-    &:hover {
-        background-color: #bdbdbd;
-    }
 }
 
 .burger-menu {
     position: absolute;
     top: $header-height;
-    width: 100%;
+    width: 250px;
     max-width: 800px;
     a {
         text-decoration: none;
@@ -95,9 +94,12 @@ header {
 }
 
 .burger-button {
-    background-color: #666;
+    background-color: $burger-buttons-bk;
     color: white;
     cursor: pointer;
+    &:hover {
+        background-color: darken($burger-buttons-bk, 5%)
+    }
 }
 
 .fa-bars {
@@ -214,7 +216,7 @@ header {
 .form-element {
     color: $text-color;
     font-size: 1.1em;
-    width: 80%;
+    width: 90%;
     border-radius: 3px;
     border: 1px solid #c7c7c7;
     padding: 5px;
@@ -222,4 +224,8 @@ header {
 .story-textarea {
     min-height: 300px;
     resize: vertical;
+}
+
+.screenshot-preview {
+    width: 100%;
 }

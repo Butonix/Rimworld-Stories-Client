@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import StoryThumb from './story-thumb.js';
 import {fetchUser, fetchLandingStories} from '../actions';
+import {defaultScreenshot} from '../utils.js'
 
 export class StoriesList extends React.Component {
 
@@ -16,7 +17,7 @@ export class StoriesList extends React.Component {
                 return (<StoryThumb
                         key={story._id}
                         id={story._id}
-                        previewImage={story.previewImage || 'http://cdn.edgecast.steamstatic.com/steam/apps/294100/header.jpg'}
+                        previewImage={story.screenshot || defaultScreenshot}
                         title={story.title}
                         shortText={story.story}
                         author={story.author.username}

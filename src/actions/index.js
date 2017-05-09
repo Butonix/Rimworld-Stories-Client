@@ -130,7 +130,14 @@ export const uploadImageSuccess = response => ({
 });
 
 export const uploadImage = (data) => dispatch => {
-    SARequestAPI('post', '/profile/upload-avatar', data, uploadImageSuccess, dispatch);
+    // loop through formData entries to detect folder
+    for (var pair of data.entries()) {
+        if (pair[0] === 'folder' && pair[1] === 'avatars') {
+            SARequestAPI('post', '/profile/upload-avatar', data, uploadImageSuccess, dispatch);
+        } else if (pair[0] === 'folder' && pair[1] === 'screenshots') {
+            SARequestAPI('post', '/story/upload-screenshot', data, uploadImageSuccess, dispatch);
+        }
+    }
 };
 
 // blueprint superagent function to request data from the API

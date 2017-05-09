@@ -4,7 +4,7 @@ import {fetchProfile, logOut, resetProfile, fetchUser} from '../actions';
 import ProfileInfo from './profile-info';
 import MyPublishedStores from './my-published-stories';
 import UpdateUsername from './update-username';
-import UploadProfilePicture from './upload-profile-picture';
+import UploadImage from './upload-image';
 import MyDrafts from './my-drafts';
 import {buttonDisableOnLoading, buttonContent} from '../utils';
 
@@ -36,7 +36,7 @@ export class Profile extends React.Component {
         }
         // when profile fetched AND if profile is mine
         if (this.props.visitedProfile && this.props.match.params.id === this.props.currentUser.id) {
-            avatar = <UploadProfilePicture avatar={this.props.currentUser.avatarUrl} />;
+            avatar = <UploadImage image={this.props.currentUser.avatarUrl} folder='avatars' />;
             profileTitle = <div className="container col1"><h3>{this.props.currentUser.username}</h3></div>;
             profileInfo = <ProfileInfo info={this.props.currentUser} />;
             logoutButton = <div className="container col1">

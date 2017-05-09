@@ -17,7 +17,8 @@ export const initialState = Object.assign({}, {
     currentDraft: {
         _id: null,
         story: '',
-        title: ''
+        title: '',
+        screenshot: ''
     },
     currentUser: {
         id: null,
@@ -50,12 +51,21 @@ export const appReducer = (state=initialState, action, init=initialState) => {
     }
 
     else if(action.type === UPLOAD_IMAGE_SUCCESS) {
-        return Object.assign({}, state, {
-            currentUser: {
-                ...state.currentUser,
-                avatarUrl: action.response.currentUser.avatarUrl
-            }
-        });
+        if (action.response.type === 'avatar') {
+            return Object.assign({}, state, {
+                currentUser: {
+                    ...state.currentUser,
+                    avatarUrl: action.response.currentUser.avatarUrl
+                }
+            });
+        } else if (action.response.type === 'screenshot') {
+            return Object.assign({}, state, {
+                currentDraft: {
+                    ...state.currentDraft,
+                    screenshot: action.response.imgUrl
+                }
+            });
+        }
     }
 
     else if(action.type === RESET_PROFILE) {
