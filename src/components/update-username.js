@@ -1,12 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {submitNewUsername} from '../actions';
+import {buttonDisableOnLoading, buttonContent} from '../utils';
 
 export class UpdateUsername extends React.Component {
 
     submitEvent(e) {
         e.preventDefault();
-        if (e.target.newUsername.value) {
+        if (e.target.newUsername.value && !this.props.loading) {
             this.props.dispatch(submitNewUsername(e.target.newUsername.value));
         }
     }
@@ -18,7 +19,9 @@ export class UpdateUsername extends React.Component {
                     You can change your username here: <br />
                     <form onSubmit={e => this.submitEvent(e)}>
                         <input type="text" id="newUsername" /><br />
-                        <button type="submit" className="button">Submit</button>
+                        <button type="submit" className={'button ' + buttonDisableOnLoading(this.props.loading)}>
+                            {buttonContent('Submit', this.props.loading)}
+                        </button>
                     </form>
                 </div>
             </div>

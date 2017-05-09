@@ -6,6 +6,7 @@ import MyPublishedStores from './my-published-stories';
 import UpdateUsername from './update-username';
 import UploadProfilePicture from './upload-profile-picture';
 import MyDrafts from './my-drafts';
+import {buttonDisableOnLoading, buttonContent} from '../utils';
 
 export class Profile extends React.Component {
 
@@ -16,6 +17,12 @@ export class Profile extends React.Component {
     componentDidMount() {
         this.props.dispatch(fetchProfile(this.props.match.params.id));
         this.props.dispatch(fetchUser());
+    }
+
+    logOut() {
+        if (!this.props.loading) {
+            this.props.dispatch(logOut())
+        }
     }
 
     render() {
@@ -32,7 +39,11 @@ export class Profile extends React.Component {
             avatar = <UploadProfilePicture avatar={this.props.currentUser.avatarUrl} />;
             profileTitle = <div className="container col1"><h3>{this.props.currentUser.username}</h3></div>;
             profileInfo = <ProfileInfo info={this.props.currentUser} />;
-            logoutButton = <div className="container col1"><div className="button" onClick={e => this.props.dispatch(logOut())}>Log out</div></div>;
+            logoutButton = <div className="container col1">
+                    <div className={'button ' + buttonDisableOnLoading(this.props.loading)} onClick={e => this.logOut()}>
+                        {buttonContent('Log out', this.props.loading)}
+                    </div>
+                </div>;
             updateUsername = <UpdateUsername />;
             myDrafts = <MyDrafts stories={this.props.currentUser.stories} />;
         }

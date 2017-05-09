@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {ensureLogin, submitNewStory, updateStory, saveDraft, toggleAutoSave, clearCurrentDraft, saveDraftFieldsInState} from '../actions';
+import {buttonDisableOnLoading, buttonContent} from '../utils';
 
 export class NewStoryForm extends React.Component {
 
@@ -68,28 +69,32 @@ export class NewStoryForm extends React.Component {
 
     render() {
         const autoSaveToggleButtonText = this.props.autoSave ? 'Disable auto save' : 'Enable auto save';
-        const createNewButton = !this.props.currentDraft._id ? '' : <div className='button create-new-story' onClick={ () => { this.props.dispatch(clearCurrentDraft()); this.clearForm() } }>Create New</div>;
+        const createNewButton = !this.props.currentDraft._id ? '' : <div className={'button create-new-story ' + buttonDisableOnLoading(this.props.loading)} onClick={ () => { if (!this.props.loading) {this.props.dispatch(clearCurrentDraft()); this.clearForm()} } }>
+                {buttonContent('Create new', this.props.loading)}
+            </div>;
         return (
             <div className="container col1">
-            <h3>New Story</h3>
-                <form name="newstoryform" onSubmit={e => this.submitStory(e)}>
+            <h3>Write a Story</h3>
+                <form name="newstoryform" onSubmit={(e) => {if (!this.props.loading) {this.submitStory(e)}}}>
 
-                    <div key={this.props.draftTitle + '-title'}>
+                    <div key={this.props.currentUser.id + 'draft-title'}>
                         <input className="form-element title-input" required='true' autoComplete='off' type="text" id="title" defaultValue={this.props.draftTitle} placeholder="Title" />
                     </div>
                     <br />
 
-                    <div key={this.props.draftTitle + '-story'}>
+                    <div key={this.props.currentUser.id + 'draft-story'}>
                         <textarea className='form-element story-textarea' required='true' id="story" defaultValue={this.props.draftStory} placeholder="Type your story here..." />
                     </div>
 
                     <br />
 
-                    <button type="submit" className="button">Submit</button>
+                    <button type="submit" className={'button ' + buttonDisableOnLoading(this.props.loading)}>
+                        {buttonContent('Submit', this.props.loading)}
+                    </button>
 
                 </form>
                 <br />
-                <div className='button toggle-auto-save' onClick={ () => { this.props.dispatch(toggleAutoSave());  this.toggleAS() } }>{autoSaveToggleButtonText}</div>
+                <div className='button toggle-auto-save' onClick={ () => { this.props.dispatch(toggleAutoSave());  this.toggleAS(); } }>{autoSaveToggleButtonText}</div>
                 <br />
                 <br />
                 {createNewButton}

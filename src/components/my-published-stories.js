@@ -5,7 +5,7 @@ export class MyPublishedStores extends React.Component {
     render() {
         const stories = this.props.stories.map((story) => {
             if (story.status === 'published') {
-                return (<div key={story._id}>
+                return (<div key={story._id} className="list-item">
                     {story._id}
                     </div>
                 )

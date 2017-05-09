@@ -1,3 +1,5 @@
+import React from 'react';
+
 function displayDate(date) {
 	if (!date) {
 		return false;
@@ -11,4 +13,18 @@ function displayDate(date) {
 	return day + '/' + month + '/' + d.getFullYear() + ' at ' + hour + ':' + minute;
 }
 
-export {displayDate};
+function buttonContent(text, loading) {
+	if (!loading) {
+		return text
+	}
+	return (<i className="fa fa fa-spinner fa-spin" aria-hidden="true" />)
+}
+
+function buttonDisableOnLoading(loading) {
+	if (!loading) {
+		return ''
+	}
+	return 'disabled'
+}
+
+export {displayDate, buttonContent, buttonDisableOnLoading};

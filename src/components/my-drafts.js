@@ -1,12 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {setStoryToLatestDraft} from '../actions';
 
 export class MyDrafts extends React.Component {
+
     render() {
         const stories = this.props.stories.map((story) => {
             if (story.status === 'draft') {
-                return (<div key={story._id}>
-                    {story._id}
+                return (<div key={story._id} className="list-item">
+                    <span className="fake-link" onClick={() => this.props.dispatch(setStoryToLatestDraft(story._id))} >{story._id}</span>
                     </div>
                 )
              }

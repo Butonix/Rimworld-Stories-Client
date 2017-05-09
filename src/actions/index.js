@@ -67,6 +67,10 @@ export const updateStory = (data) => dispatch => {
     SARequestAPI('put', '/story/update', data, null, dispatch);
 };
 
+export const setStoryToLatestDraft = (id) => dispatch => {
+    SARequestAPI('put', '/story/set-to-latest-draft', {id}, null, dispatch);
+};
+
 export const SAVE_DRAFT_SUCCESS = 'SAVE_DRAFT_SUCCESS';
 export const saveDraftSuccess = response => ({
     type: SAVE_DRAFT_SUCCESS,
