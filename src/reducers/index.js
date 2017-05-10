@@ -1,7 +1,7 @@
 import {TOGGLE_BURGER, FETCH_USER_SUCCESS, SET_MESSAGE, FETCH_PROFILE_SUCCESS, DISPLAY_LOADING, TICK_DOWN_TIMER,
     CHANGE_USERNAME_SUCCESS, UPLOAD_IMAGE_SUCCESS, RESET_PROFILE, RESET_USER, TOGGLE_AUTO_SAVE, GET_DRAFT_SUCCESS,
     SAVE_DRAFT_SUCCESS, SAVE_DRAFT_FIELDS_IN_STATE, FETCH_LANDING_STORIES_SUCCESS, RESET_CURRENT_STORY, FETCH_STORY_SUCCESS,
-    RESET_CURRENT_DRAFT} from '../actions/';
+    RESET_CURRENT_DRAFT, NEW_COMMENT_SUCCESS, TOGGLE_CONFIRM_DELETE_STORY} from '../actions/';
 
 // INITIALIZATION / DEFAULT STATE
 export const initialState = Object.assign({}, {
@@ -19,13 +19,15 @@ export const initialState = Object.assign({}, {
         _id: null,
         story: '',
         title: '',
-        screenshot: ''
+        screenshot: '',
+        confirmDelete: false
     },
     currentStory: {
         _id: null,
         story: '',
         title: '',
-        screenshot: ''
+        screenshot: '',
+        confirmDelete: false
     },
     currentUser: {
         id: null,
@@ -93,9 +95,27 @@ export const appReducer = (state=initialState, action, init=initialState) => {
         });
     }
 
+    else if(action.type === TOGGLE_CONFIRM_DELETE_STORY) {
+        return Object.assign({}, state, {
+            currentStory: {
+                ...state.currentStory,
+                confirmDelete: !state.currentStory.confirmDelete
+            }
+        });
+    }
+
     else if(action.type === GET_DRAFT_SUCCESS) {
-        console.log(action.response);
         return Object.assign({}, state, action.response);
+    }
+
+    else if(action.type === NEW_COMMENT_SUCCESS) {
+        console.log(action.response);
+        return Object.assign({}, state, {
+            currentStory: {
+                ...state.currentStory,
+                comments: action.response.comments
+            }
+        });
     }
 
     else if(action.type === TOGGLE_AUTO_SAVE) {

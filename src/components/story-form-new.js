@@ -12,7 +12,8 @@ export class NewStoryForm extends React.Component {
         data.append('title', e.target.title.value);
         data.append('story', e.target.story.value);
         data.append('id', this.props.currentDraft._id);
-        data.append('status', 'published');
+        data.append('status', this.props.currentDraft.status);
+        data.append('datePosted', this.props.currentDraft.datePosted);
         this.props.dispatch(updateStory(data));
     }
 

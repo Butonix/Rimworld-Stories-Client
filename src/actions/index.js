@@ -31,6 +31,11 @@ export const resetProfile = () => ({
     type: RESET_PROFILE
 });
 
+export const TOGGLE_CONFIRM_DELETE_STORY = 'TOGGLE_CONFIRM_DELETE_STORY';
+export const toggleConfirmDeleteStory = () => ({
+    type: TOGGLE_CONFIRM_DELETE_STORY
+});
+
 export const RESET_USER = 'RESET_USER';
 export const resetUser = () => ({
     type: RESET_USER
@@ -54,6 +59,10 @@ export const fetchUserSuccess = response => ({
 
 export const fetchUser = () => dispatch => {
     SARequestAPI('get', '/auth/get-user', null, fetchUserSuccess, dispatch);
+};
+
+export const deleteStory = (storyID) => dispatch => {
+    SARequestAPI('delete', '/story/' + storyID, null, null, dispatch);
 };
 
 export const FETCH_STORY_SUCCESS = 'FETCH_STORY_SUCCESS';

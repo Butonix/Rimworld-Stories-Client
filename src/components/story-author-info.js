@@ -4,10 +4,9 @@ import {displayDate} from '../utils.js';
 
 function StoryAuthorInfo(props) {
     function nbComments(nb) {
-        console.log(nb)
         if (nb && nb > 0) {
             return  (
-                <span className="info-separator"> | {nb} comments</span> 
+                <span className="info-separator"> | {nb} comments</span>
             )
         }
     }
