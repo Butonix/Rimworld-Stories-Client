@@ -66,6 +66,16 @@ export const fetchStory = (storyID) => dispatch => {
     SARequestAPI('get', '/story/get/' + storyID, null, fetchStorySuccess, dispatch);
 };
 
+export const NEW_COMMENT_SUCCESS = 'NEW_COMMENT_SUCCESS';
+export const newCommentSuccess = response => ({
+    type: NEW_COMMENT_SUCCESS,
+    response
+});
+
+export const postNewComment = (data) => dispatch => {
+    SARequestAPI('post', '/comment/new-comment', data, newCommentSuccess, dispatch);
+};
+
 export const TOGGLE_AUTO_SAVE = 'TOGGLE_AUTO_SAVE';
 export const toggleAutoSave = response => ({
     type: TOGGLE_AUTO_SAVE

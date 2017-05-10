@@ -18,13 +18,15 @@ export class Story extends React.Component {
 
     story() {
         if (this.props.currentStory._id) {
+            const comments = this.props.currentStory.comments.map((comment) => {
+                return (<Comment key={comment._id} comm={comment} />)
+            })
             return (
                 <div className="container col1">
         			<StoryLayout story={this.props.currentStory} />
                     <h3>COMMENTS</h3>
+                    {comments}
                     <NewComment />
-                    <Comment user="Nick" comment="blahblahablah" />
-                    <Comment user="Roger" comment="It's cool" />
                 </div>
             )
         }
