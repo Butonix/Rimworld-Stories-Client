@@ -2,8 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import NewComment from './story-new-comment.js';
 import Comment from './story-comment.js';
+import StoryLayout from './story-layout.js'
 import {resetCurrentStory, fetchUser, fetchStory} from '../actions';
-import {defaultScreenshot} from '../utils.js'
 
 export class Story extends React.Component {
 
@@ -20,10 +20,7 @@ export class Story extends React.Component {
         if (this.props.currentStory._id) {
             return (
                 <div className="container col1">
-        			<div className="story-preview inside-cont">
-                        <h2 className="story-preview-title">{this.props.currentStory.title}</h2>
-                        <div><img className='story-screenshot' alt='' src={this.props.currentStory.screenshot || defaultScreenshot} /></div>
-        			</div>
+        			<StoryLayout story={this.props.currentStory} />
                     <h3>COMMENTS</h3>
                     <NewComment />
                     <Comment user="Nick" comment="blahblahablah" />
@@ -31,6 +28,7 @@ export class Story extends React.Component {
                 </div>
             )
         }
+        return ''
     }
 
     render() {

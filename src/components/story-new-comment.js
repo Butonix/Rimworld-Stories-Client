@@ -7,8 +7,7 @@ export class NewComment extends React.Component {
             <div className="container col1">
                 <form className="inside-cont">
                     <h3>Post a new comment</h3>
-                    <br />
-                        <textarea placeholder="Post a comment"></textarea>
+                    <textarea className="new-comment-textarea" placeholder="Post a comment"></textarea>
                 </form>
             </div>
         );

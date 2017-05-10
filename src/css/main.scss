@@ -233,3 +233,9 @@ header {
 .screenshot-preview {
     width: 100%;
 }
+
+.new-comment-textarea {
+    width: 90%;
+    min-height: 100px;
+    resize: vertical;
+}

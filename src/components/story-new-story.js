@@ -57,6 +57,12 @@ export class NewStory extends React.Component {
                     onClick={ () => { if (!this.props.loading) {this.props.dispatch(getDraft('forceNew')); this.startAutoSaveTimer()} } }>
                     {buttonContent('New draft', this.props.loading)}
                 </div>;
+            const saveDraftButton =
+                <div
+                    className={'button save-draft ' + buttonDisableOnLoading(this.props.loading)}
+                    onClick={ () => { if (!this.props.loading) {this.saveDraft()} } }>
+                    {buttonContent('Save draft', this.props.loading)}
+                </div>;
 
             return (<div className="container col1">
                 <NewStoryForm
@@ -70,6 +76,9 @@ export class NewStory extends React.Component {
                 <br />
                 <br />
                 {createNewButton}
+                <br />
+                <br />
+                {saveDraftButton}
                 <UploadImage image={this.props.currentDraft.screenshot || defaultScreenshot} folder='screenshots' />
                 </div>
             )}
