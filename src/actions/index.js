@@ -80,6 +80,10 @@ export const postNewComment = (data) => dispatch => {
     SARequestAPI('post', '/comment/new-comment', data, newCommentSuccess, dispatch);
 };
 
+export const deleteComment = (commentID, storyID) => dispatch => {
+    SARequestAPI('delete', '/comment/' + commentID, {storyID}, newCommentSuccess, dispatch);
+};
+
 export const TOGGLE_AUTO_SAVE = 'TOGGLE_AUTO_SAVE';
 export const toggleAutoSave = response => ({
     type: TOGGLE_AUTO_SAVE

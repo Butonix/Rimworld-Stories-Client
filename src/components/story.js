@@ -19,7 +19,7 @@ export class Story extends React.Component {
     }
 
     newCommentBlock() {
-        if (this.props.currentUser.id) {
+        if (this.props.currentUser.id && this.props.currentStory._id) {
             return (<NewComment />)
         }
         return ''

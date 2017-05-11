@@ -27,10 +27,10 @@ function buttonDisableOnLoading(loading) {
 	return 'disabled'
 }
 
-function setupModalBox() {
-    const modal = document.getElementById('myModal');
-    const btn = document.getElementById("myBtn");
-    const span = document.getElementsByClassName("close")[0];
+function setupModalBox(id) {
+    const modal = document.getElementById('myModal' + id);
+    const btn = document.getElementById("myBtn" + id);
+    const span = document.getElementsByClassName("close" + id)[0];
     btn.onclick = function() {
         modal.style.display = "block";
     }

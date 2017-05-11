@@ -6,7 +6,6 @@ import {postNewComment} from '../actions';
 export class NewComment extends React.Component {
 
     submitNewComment(e) {
-        console.log();
         e.preventDefault();
         let data = new FormData();
         data.append('comment', e.target.content.value);

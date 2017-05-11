@@ -6,7 +6,7 @@ import StoryConfirmDelete from './story-confirm-delete.js';
 
 export class StoryOptions extends React.Component {
     componentDidMount() {
-        setupModalBox();
+        setupModalBox(this.props.currentStory._id);
     }
 
     render() {
@@ -14,10 +14,10 @@ export class StoryOptions extends React.Component {
             <div className="container col1">
                 <div className="inside-cont">
 
-                    <button className={'button ' + buttonDisableOnLoading(this.props.loading)} id="myBtn">Delete</button>
-                    <div id="myModal" className="modal">
-                        <div className="modal-content">
-                            <StoryConfirmDelete />
+                    <button className={'button ' + buttonDisableOnLoading(this.props.loading)} id={"myBtn" + this.props.currentStory._id}>Delete</button>
+                    <div id={"myModal" + this.props.currentStory._id} className={"modal modal" + this.props.currentStory._id}>
+                        <div className={"modal-content modal-content" + this.props.currentStory._id}>
+                            <StoryConfirmDelete id={this.props.currentStory._id} />
                         </div>
                     </div>
 

@@ -8,7 +8,7 @@ function StoryLayout(props) {
         <div className="story-preview inside-cont">
             <h2 className="story-preview-title">{props.story.title}</h2>
             <div><img className='story-screenshot' alt='' src={props.story.screenshot || defaultScreenshot} /></div>
-            <div>{props.story.story}</div>
+            <p>{props.story.story}</p>
             <StoryAuthorInfo
                 author={props.story.author}
                 datePosted={props.story.datePosted}

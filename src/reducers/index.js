@@ -98,7 +98,6 @@ export const appReducer = (state=initialState, action, init=initialState) => {
     }
 
     else if(action.type === NEW_COMMENT_SUCCESS) {
-        console.log(action.response);
         return Object.assign({}, state, {
             currentStory: {
                 ...state.currentStory,
