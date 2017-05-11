@@ -4,6 +4,19 @@ import {Link} from 'react-router-dom';
 import {toggleBurger, setMessage, logOut} from '../actions';
 
 export class Burger extends React.Component {
+
+    componentDidMount() {
+        const dispatch = this.props.dispatch;
+        const burgerContainer = document.getElementsByClassName('burger-container')[0];
+        const burger = document.getElementsByClassName('burger')[0];
+        const faBars = document.getElementsByClassName('fa-bars')[0];
+        window.onclick = (event) => {
+            if (event.target !== burger && event.target !== burgerContainer && event.target !== faBars) {
+                dispatch(toggleBurger('close'))
+            }
+        }
+    }
+
     render() {
         const links = this.props.currentUser.id ?
         <div>
@@ -21,7 +34,7 @@ export class Burger extends React.Component {
 
         return (
             <div className="burger">
-                  <div className="burger-menu" onClick={(e) => {this.props.dispatch(toggleBurger()); this.props.dispatch(setMessage(null, null));}}>
+                  <div className="burger-menu" onClick={(e) => {this.props.dispatch(toggleBurger('close')); this.props.dispatch(setMessage(null, null));}}>
                         {links}
                   </div>
             </div>

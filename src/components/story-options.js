@@ -14,7 +14,9 @@ export class StoryOptions extends React.Component {
             <div className="container col1">
                 <div className="inside-cont">
 
-                    <button className={'button ' + buttonDisableOnLoading(this.props.loading)} id={"myBtn" + this.props.currentStory._id}>Delete</button>
+                    <button className={'button ' + buttonDisableOnLoading(this.props.loading)} id={"myBtn" + this.props.currentStory._id}>
+                        {buttonContent('Delete', this.props.loading)}
+                    </button>
                     <div id={"myModal" + this.props.currentStory._id} className={"modal modal" + this.props.currentStory._id}>
                         <div className={"modal-content modal-content" + this.props.currentStory._id}>
                             <StoryConfirmDelete id={this.props.currentStory._id} />

@@ -10,8 +10,9 @@ export const displayLoading = param => ({
 });
 
 export const TOGGLE_BURGER = 'TOGGLE_BURGER';
-export const toggleBurger = () => ({
-    type: TOGGLE_BURGER
+export const toggleBurger = (arg) => ({
+    type: TOGGLE_BURGER,
+    arg: arg || ''
 });
 
 export const TICK_DOWN_TIMER = 'TICK_DOWN_TIMER';

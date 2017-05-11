@@ -152,6 +152,17 @@ export const appReducer = (state=initialState, action, init=initialState) => {
     }
 
     else if(action.type === TOGGLE_BURGER) {
+        if (action.arg === 'close') {
+            return {
+                ...state,
+                burgerOpen: false
+            };
+        } else if (action.arg === 'open') {
+            return {
+                ...state,
+                burgerOpen: true
+            };
+        }
         return {
             ...state,
             burgerOpen: !state.burgerOpen
