@@ -27,6 +27,23 @@ function buttonDisableOnLoading(loading) {
 	return 'disabled'
 }
 
+function setupModalBox() {
+    const modal = document.getElementById('myModal');
+    const btn = document.getElementById("myBtn");
+    const span = document.getElementsByClassName("close")[0];
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    }
+}
+
 const defaultScreenshot = 'https://res.cloudinary.com/zeropointtwo/image/upload/v1494319409/default-screenshot_fvcgca.jpg';
 
-export {displayDate, buttonContent, buttonDisableOnLoading, defaultScreenshot};
+export {displayDate, buttonContent, buttonDisableOnLoading, defaultScreenshot, setupModalBox};

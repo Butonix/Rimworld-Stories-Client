@@ -31,11 +31,6 @@ export const resetProfile = () => ({
     type: RESET_PROFILE
 });
 
-export const TOGGLE_CONFIRM_DELETE_STORY = 'TOGGLE_CONFIRM_DELETE_STORY';
-export const toggleConfirmDeleteStory = () => ({
-    type: TOGGLE_CONFIRM_DELETE_STORY
-});
-
 export const RESET_USER = 'RESET_USER';
 export const resetUser = () => ({
     type: RESET_USER

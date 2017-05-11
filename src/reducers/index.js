@@ -1,7 +1,7 @@
 import {TOGGLE_BURGER, FETCH_USER_SUCCESS, SET_MESSAGE, FETCH_PROFILE_SUCCESS, DISPLAY_LOADING, TICK_DOWN_TIMER,
     CHANGE_USERNAME_SUCCESS, UPLOAD_IMAGE_SUCCESS, RESET_PROFILE, RESET_USER, TOGGLE_AUTO_SAVE, GET_DRAFT_SUCCESS,
     SAVE_DRAFT_SUCCESS, SAVE_DRAFT_FIELDS_IN_STATE, FETCH_LANDING_STORIES_SUCCESS, RESET_CURRENT_STORY, FETCH_STORY_SUCCESS,
-    RESET_CURRENT_DRAFT, NEW_COMMENT_SUCCESS, TOGGLE_CONFIRM_DELETE_STORY} from '../actions/';
+    RESET_CURRENT_DRAFT, NEW_COMMENT_SUCCESS} from '../actions/';
 
 // INITIALIZATION / DEFAULT STATE
 export const initialState = Object.assign({}, {
@@ -19,15 +19,13 @@ export const initialState = Object.assign({}, {
         _id: null,
         story: '',
         title: '',
-        screenshot: '',
-        confirmDelete: false
+        screenshot: ''
     },
     currentStory: {
         _id: null,
         story: '',
         title: '',
-        screenshot: '',
-        confirmDelete: false
+        screenshot: ''
     },
     currentUser: {
         id: null,
@@ -92,15 +90,6 @@ export const appReducer = (state=initialState, action, init=initialState) => {
     else if(action.type === RESET_CURRENT_DRAFT) {
         return Object.assign({}, state, {
             currentDraft: init.currentDraft
-        });
-    }
-
-    else if(action.type === TOGGLE_CONFIRM_DELETE_STORY) {
-        return Object.assign({}, state, {
-            currentStory: {
-                ...state.currentStory,
-                confirmDelete: !state.currentStory.confirmDelete
-            }
         });
     }
 

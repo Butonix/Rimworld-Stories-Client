@@ -6,6 +6,38 @@ $text-color: #3e3e3e;
 $link-text-color: #5654bf;
 $burger-buttons-bk: #666666;
 
+@mixin animation($animate...) {
+    $max: length($animate);
+    $animations: '';
+
+    @for $i from 1 through $max {
+        $animations: #{$animations + nth($animate, $i)};
+
+        @if $i < $max {
+            $animations: #{$animations + ", "};
+        }
+    }
+    -webkit-animation: $animations;
+    -moz-animation:    $animations;
+    -o-animation:      $animations;
+    animation:         $animations;
+}
+
+@mixin keyframes($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
+
 html {
     font-family: helvetica;
     box-sizing: border-box;
@@ -148,8 +180,11 @@ header {
     }
 }
 
-// STORY PAGE
+select, input, button {
+    border-width: 0px;
+}
 
+// STORY PAGE
 .story-info {
     text-align: left;
 }
@@ -238,4 +273,40 @@ header {
     width: 90%;
     min-height: 100px;
     resize: vertical;
+}
+
+// MODAL BOX
+/* The Modal (background) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+/* Add Animation */
+@include keyframes(animatetop) {
+  0%   { top: -300px; opacity: 0 }
+  50%  { top: -300px; opacity: 0 }
+  100% { top: 0; opacity: 1 }
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
 }
