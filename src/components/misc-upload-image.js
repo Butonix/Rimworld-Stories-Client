@@ -17,7 +17,7 @@ export class UploadImage extends React.Component {
                 ]));
             } else if (this.props.folder === 'screenshots') {
                 data.append('transformation', JSON.stringify([
-                    {width: 500, crop: "scale"}
+                    {width: 1000, crop: "scale"}
                 ]));
                 data.append('storyID', this.props.currentDraft._id);
             }

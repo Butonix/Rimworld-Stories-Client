@@ -27,6 +27,6 @@ function buttonDisableOnLoading(loading) {
 	return 'disabled'
 }
 
-const defaultScreenshot = 'http://res.cloudinary.com/zeropointtwo/image/upload/v1494319409/default-screenshot_fvcgca.jpg';
+const defaultScreenshot = 'https://res.cloudinary.com/zeropointtwo/image/upload/v1494319409/default-screenshot_fvcgca.jpg';
 
 export {displayDate, buttonContent, buttonDisableOnLoading, defaultScreenshot};
