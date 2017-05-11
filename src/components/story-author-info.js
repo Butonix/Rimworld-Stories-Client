@@ -22,7 +22,7 @@ function StoryAuthorInfo(props) {
             <div className="story-preview-info">
                 <img alt='' src={props.author.avatarUrl} className='profile-avatar small-thumb'/>
                 <span className="info-separator"> </span>
-                <Link to={'/profile/' + props.author._id}>{props.author.username}</Link>
+                <Link to={'/profile/' + props.author._id} className="fake-link">{props.author.username}</Link>
                 <span className="info-separator"> | </span>
                 <i className="fa fa-clock-o" aria-hidden="true"></i>
                 <span className="info-separator"> </span>

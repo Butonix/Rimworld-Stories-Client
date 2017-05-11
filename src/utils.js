@@ -14,10 +14,22 @@ function displayDate(date) {
 }
 
 function buttonContent(text, loading) {
-	if (!loading) {
-		return text
+	let icon = '';
+	if (text === 'Delete') {
+		icon = <i className="fa fa-trash-o" />;
+	} else if (text === 'Edit') {
+		icon = <i className="fa fa-pencil-square-o" />;
+	} else if (text === 'Submit' || text === 'Publish') {
+		icon = <i className="fa fa-check" />;
+	} else if (text === 'Save draft') {
+		icon = <i className="fa fa-floppy-o" />;
+	} else if (text === 'New draft') {
+		icon = <i className="fa fa-file-text-o" />;
 	}
-	return (<i className="fa fa fa-spinner fa-spin" aria-hidden="true" />)
+	if (!loading) {
+		return (<span className="button-text">{icon} {text}</span>)
+	}
+	return (<i className="fa fa-spinner fa-spin" aria-hidden="true" />)
 }
 
 function buttonDisableOnLoading(loading) {

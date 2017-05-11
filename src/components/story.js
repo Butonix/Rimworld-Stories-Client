@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import NewComment from './story-new-comment.js';
-import Comment from './story-comment.js';
+import NewComment from './comment-new.js';
+import Comment from './comment.js';
 import StoryLayout from './story-layout.js';
 import StoryOptions from './story-options.js';
 import StoryConfirmDelete from './story-confirm-delete.js';
@@ -51,15 +51,15 @@ export class Story extends React.Component {
             function countText(nb) {
                 if (nb === 0) {
                     return 'No comment posted yet'
-                } else if (nb === 1) {
-                    return '1 comment'
                 } else {
-                    return nb + ' comments'
+                    return 'Comments (' + nb + ')'
                 }
             }
             return (
                 <div className="container col1">
-                    <h3>{countText(this.props.currentStory.comments.length)}</h3>
+                    <div className="inside-cont">
+                        <h3>{countText(this.props.currentStory.comments.length)}</h3>
+                    </div>
                 </div>
             )
         }
@@ -81,9 +81,9 @@ export class Story extends React.Component {
     render() {
         return (
             <div>
-                {this.storyAuthorOptions()}
                 {this.storyConfirmDelete()}
                 {this.story()}
+                {this.storyAuthorOptions()}
                 {this.commentHeader()}
                 {this.comments()}
                 {this.newCommentBlock()}

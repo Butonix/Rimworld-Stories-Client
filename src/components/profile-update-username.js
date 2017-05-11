@@ -16,12 +16,16 @@ export class UpdateUsername extends React.Component {
         return (
             <div className="container col1">
                 <div className="inside-cont">
-                    You can change your username here: <br />
+                    <h4>Modify username</h4>
                     <form onSubmit={e => this.submitEvent(e)}>
-                        <input type="text" id="newUsername" /><br />
-                        <button type="submit" className={'button ' + buttonDisableOnLoading(this.props.loading)}>
-                            {buttonContent('Submit', this.props.loading)}
-                        </button>
+                        <p>
+                            <input className="form-element change-username" type="text" id="newUsername" /><br />
+                        </p>
+                        <p>
+                            <button type="submit" className={'button ' + buttonDisableOnLoading(this.props.loading)}>
+                                {buttonContent('Submit', this.props.loading)}
+                            </button>
+                        </p>
                     </form>
                 </div>
             </div>

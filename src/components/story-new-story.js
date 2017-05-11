@@ -55,28 +55,27 @@ export class NewStory extends React.Component {
         if (this.props.currentDraft._id) {
             const autoSaveToggleButtonText = this.props.autoSave ? 'Disable auto save' : 'Enable auto save';
 
-            const createNewButton = this.props.currentDraft.status === 'draft' ?
-                <div
-                    className={'button create-new-story ' + buttonDisableOnLoading(this.props.loading)}
-                    onClick={ () => { if (!this.props.loading) {this.props.dispatch(getDraft('forceNew')); this.startAutoSaveTimer()} } }>
-                    {buttonContent('New draft', this.props.loading)}
-                </div> : '';
+            const draftOptions = this.props.currentDraft.status === 'draft' ?
+                <div className="container col1">
+                    <div
+                        className={'button create-new-story ' + buttonDisableOnLoading(this.props.loading)}
+                        onClick={ () => { if (!this.props.loading) {this.props.dispatch(getDraft('forceNew')); this.startAutoSaveTimer()} } }>
+                        {buttonContent('New draft', this.props.loading)}
+                    </div>
+                    <div
+                        className={'button save-draft ' + buttonDisableOnLoading(this.props.loading)}
+                        onClick={ () => { if (!this.props.loading) {this.saveDraft()} } }>
+                        {buttonContent('Save draft', this.props.loading)}
+                    </div>
+                    <div
+                        className='button toggle-auto-save'
+                        onClick={ () => { this.props.dispatch(toggleAutoSave());  this.toggleAS(); } }>
+                        {autoSaveToggleButtonText}
+                    </div>
+                </div>
+                : '';
 
-            const saveDraftButton = this.props.currentDraft.status === 'draft' ?
-                <div
-                    className={'button save-draft ' + buttonDisableOnLoading(this.props.loading)}
-                    onClick={ () => { if (!this.props.loading) {this.saveDraft()} } }>
-                    {buttonContent('Save draft', this.props.loading)}
-                </div> : '';
-
-            const toggleAutoSaveButon = this.props.currentDraft.status === 'draft' ?
-                <div
-                    className='button toggle-auto-save'
-                    onClick={ () => { this.props.dispatch(toggleAutoSave());  this.toggleAS(); } }>
-                    {autoSaveToggleButtonText}
-                </div> : '';
-
-            return (<div className="container col1">
+            return (<div>
                 <NewStoryForm
                     draftTitle={this.props.currentDraft.title}
                     draftStory={this.props.currentDraft.story}
@@ -84,13 +83,7 @@ export class NewStory extends React.Component {
                     autoSaveTime={this.props.autoSaveTime}
                 />
                 <br />
-                {toggleAutoSaveButon}
-                <br />
-                <br />
-                {createNewButton}
-                <br />
-                <br />
-                {saveDraftButton}
+                {draftOptions}
                 <UploadImage image={this.props.currentDraft.screenshot || defaultScreenshot} folder='screenshots' />
                 </div>
             )}

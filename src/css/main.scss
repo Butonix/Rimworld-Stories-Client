@@ -19,7 +19,6 @@ $burger-buttons-bk: #666666;
     }
     -webkit-animation: $animations;
     -moz-animation:    $animations;
-    -o-animation:      $animations;
     animation:         $animations;
 }
 
@@ -28,9 +27,6 @@ $burger-buttons-bk: #666666;
         @content;
     }
     @-moz-keyframes #{$animationName} {
-        @content;
-    }
-    @-o-keyframes #{$animationName} {
         @content;
     }
     @keyframes #{$animationName} {
@@ -48,6 +44,11 @@ html {
     box-sizing: inherit;
 }
 
+p {
+    padding: 8px;
+    margin: 0;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -62,9 +63,22 @@ main {
     background-color: #dbdbdb;
 }
 
+.confirm-delete {
+    text-align: center;
+}
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
+
 .fake-link {
     color: $link-text-color;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .list-item {
@@ -169,6 +183,7 @@ header {
     color: white;
     cursor: pointer;
     padding: 8px;
+    margin: 0 8px 0 8px;
     border-radius: 3px;
     border: none;
     min-width: 104px;
@@ -178,6 +193,17 @@ header {
         filter: alpha(opacity=70);
         z-index: -100;
     }
+    &.delete {
+        background-color: #c26060;
+    }
+    &.submit {
+        background-color: #56a44f;
+    }
+}
+
+.button-text {
+    display: inline-block;
+    vertical-align: center;
 }
 
 select, input, button {
@@ -235,6 +261,10 @@ select, input, button {
         width: 17px;
         height: 17px;
     }
+    &.comment {
+        width: 50px;
+        height: 50px;
+    }
 }
 
 .dropzone {
@@ -259,20 +289,63 @@ select, input, button {
     border-radius: 3px;
     border: 1px solid #c7c7c7;
     padding: 5px;
+    &.change-username {
+        max-width: 300px;
+    }
 }
 .story-textarea {
     min-height: 300px;
     resize: vertical;
+    padding: 0;
+    margin: 0;
 }
 
 .screenshot-preview {
     width: 100%;
 }
 
+// COMMENT
 .new-comment-textarea {
     width: 90%;
     min-height: 100px;
     resize: vertical;
+}
+
+.comment {
+    text-align: left;
+    overflow: hidden;
+}
+
+.comment-author {
+    float: left;
+    width: 100px;
+    text-align: center;
+}
+
+.comment-right-box {
+    padding: 8px;
+    overflow: hidden;
+    text-align: justify;
+}
+
+.comment-top-bar {
+    padding: 8px;
+    overflow: hidden;
+    text-align: right;
+}
+
+.comment-options {
+    text-align: right;
+    padding: 8px;
+}
+
+.author {
+    font-weight: bold;
+}
+
+.date {
+    color: #818181;
+    font-size: .9em;
 }
 
 // MODAL BOX
@@ -292,9 +365,8 @@ select, input, button {
 
 /* Add Animation */
 @include keyframes(animatetop) {
-  0%   { top: -300px; opacity: 0 }
-  50%  { top: -300px; opacity: 0 }
-  100% { top: 0; opacity: 1 }
+    0%   { margin: -15% auto;}
+    100% { margin: 15% auto; }
 }
 
 /* Modal Content/Box */
@@ -306,7 +378,7 @@ select, input, button {
     max-width: 500px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
+    -webkit-animation-duration: 0.5s;
     animation-name: animatetop;
-    animation-duration: 0.4s
+    animation-duration: 0.5s
 }

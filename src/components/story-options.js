@@ -13,19 +13,19 @@ export class StoryOptions extends React.Component {
         return (
             <div className="container col1">
                 <div className="inside-cont">
+                    <Link to={'/write-story/' + this.props.currentStory._id}><div className={'button ' + buttonDisableOnLoading(this.props.loading)}>
+                        {buttonContent('Edit', this.props.loading)}
+                    </div></Link>
 
-                    <button className={'button ' + buttonDisableOnLoading(this.props.loading)} id={"myBtn" + this.props.currentStory._id}>
+                    <button className={'delete button ' + buttonDisableOnLoading(this.props.loading)} id={"myBtn" + this.props.currentStory._id}>
                         {buttonContent('Delete', this.props.loading)}
                     </button>
+
                     <div id={"myModal" + this.props.currentStory._id} className={"modal modal" + this.props.currentStory._id}>
                         <div className={"modal-content modal-content" + this.props.currentStory._id}>
                             <StoryConfirmDelete id={this.props.currentStory._id} />
                         </div>
                     </div>
-
-                    <Link to={'/write-story/' + this.props.currentStory._id}><div className={'button ' + buttonDisableOnLoading(this.props.loading)}>
-                        {buttonContent('Edit', this.props.loading)}
-                    </div></Link>
                 </div>
             </div>
         );

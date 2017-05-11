@@ -16,13 +16,17 @@ export class NewComment extends React.Component {
     render() {
         return (
             <div className="container col1">
-                <form className="inside-cont" onSubmit={(e) => {if (!this.props.loading) {this.submitNewComment(e)}}}>
-                    <h3>Post a new comment</h3>
-                    <textarea name="content" className="new-comment-textarea" placeholder="Post a comment"></textarea>
-                    <button type="submit" className={'button ' + buttonDisableOnLoading(this.props.loading)}>
-                        {buttonContent('Submit', this.props.loading)}
-                    </button>
-                </form>
+                <div className="inside-cont">
+                    <form onSubmit={(e) => {if (!this.props.loading) {this.submitNewComment(e)}}}>
+                        <h4>Post a new comment</h4>
+                        <textarea name="content" className="new-comment-textarea form-element" placeholder="Post a comment"></textarea>
+                        <p>
+                            <button type="submit" className={'submit button ' + buttonDisableOnLoading(this.props.loading)}>
+                                {buttonContent('Submit', this.props.loading)}
+                            </button>
+                        </p>
+                    </form>
+                </div>
             </div>
         );
     }

@@ -6,8 +6,9 @@ export class ProfileInfo extends React.Component {
         return (
             <div className="container col1">
                 <div className="inside-cont">
-                    User name: {this.props.info.username} <br />
-                    Email: {this.props.info.email} <br />
+                    <h4>User info</h4>
+                    <p>User name: {this.props.info.username}</p>
+                    <p>Email: {this.props.info.email}</p>
                 </div>
             </div>
         );

@@ -5,19 +5,22 @@ import {Link} from 'react-router-dom';
 export class MyDrafts extends React.Component {
 
     render() {
-        const stories = this.props.stories.map((story) => {
+        let stories = this.props.stories.map((story) => {
             if (story.status === 'draft') {
                 return (<div key={story._id} className="list-item">
-                    <Link to={'/write-story/' + story._id}><span className="fake-link">{story.title || story._id}</span></Link>
+                    <Link to={'/write-story/' + story._id} className="fake-link"><span>{story.title || story._id}</span></Link>
                     </div>
                 )
              }
              return ''
         });
+        if (stories.length === 0) {
+            stories = 'No draft currently saved'
+        }
         return (
             <div className="container col1">
                 <div className="inside-cont">
-                    My drafts
+                    <h4>My drafts</h4>
                     {stories}
                 </div>
             </div>

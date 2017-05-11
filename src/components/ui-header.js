@@ -3,13 +3,16 @@ import {connect} from 'react-redux';
 import Burger from './ui-burger.js';
 import {toggleBurger} from '../actions';
 import {API_URL} from '../config.js';
+import {Link} from 'react-router-dom';
 
 export class Header extends React.Component {
     render() {
         const burger = this.props.burgerOpen ? <Burger /> : '';
 
         const headerLogin = this.props.currentUser.id ?
-        <div className="header-login"><img alt='' className="profile-avatar header-pic" src={this.props.currentUser.avatarUrl} /></div>
+        <Link to={'/profile/' + this.props.currentUser.id}>
+            <div className="header-login"><img alt='' className="profile-avatar header-pic" src={this.props.currentUser.avatarUrl} /></div>
+        </Link>
         :
         <div className="header-login"><a href={API_URL + '/auth/facebook'}>Log in with FB</a></div>
         ;
