@@ -13,6 +13,7 @@ function StoryLayout(props) {
                 author={props.story.author}
                 datePosted={props.story.datePosted}
                 nbComments={props.story.comments.length}
+                nbViews={props.story.views}
             />
         </div>
     );

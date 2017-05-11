@@ -46,6 +46,11 @@ export const resetCurrentDraft = () => ({
     type: RESET_CURRENT_DRAFT
 });
 
+export const RESET_STORY_LANDING_LIST = 'RESET_STORY_LANDING_LIST';
+export const resetStoryLandingList = () => ({
+    type: RESET_STORY_LANDING_LIST
+});
+
 export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
 export const fetchUserSuccess = response => ({
     type: FETCH_USER_SUCCESS,

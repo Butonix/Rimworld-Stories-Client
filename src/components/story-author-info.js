@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {displayDate} from '../utils.js';
+import {Link} from 'react-router-dom';
 
 function StoryAuthorInfo(props) {
     function nbComments(nb) {
@@ -10,16 +11,24 @@ function StoryAuthorInfo(props) {
             )
         }
     }
+    function nbViews(nb) {
+        if (nb) {
+            return  (
+                <span className="info-separator"> | <i className="fa fa-eye" aria-hidden="true"></i> {nb}</span>
+            )
+        }
+    }
     return (
             <div className="story-preview-info">
                 <img alt='' src={props.author.avatarUrl} className='profile-avatar small-thumb'/>
                 <span className="info-separator"> </span>
-                {props.author.username}
+                <Link to={'/profile/' + props.author._id}>{props.author.username}</Link>
                 <span className="info-separator"> | </span>
                 <i className="fa fa-clock-o" aria-hidden="true"></i>
                 <span className="info-separator"> </span>
                 {displayDate(props.datePosted)}
                 {nbComments(props.nbComments)}
+                {nbViews(props.nbViews)}
             </div>
     );
 }

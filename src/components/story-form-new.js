@@ -20,12 +20,11 @@ export class NewStoryForm extends React.Component {
     render() {
         return (
             <div className="container col1">
-            <h3>{this.props.currentDraft._id}</h3>
             <h3>Write a Story</h3>
                 <form key={this.props.currentDraft._id} name="newstoryform" onSubmit={(e) => {if (!this.props.loading) {this.submitStory(e)}}}>
-                    <input className="form-element title-input" required='true' autoComplete='off' type="text" id="title" defaultValue={this.props.draftTitle} placeholder="Title" />
+                    <input className="form-element title-input" autoComplete='off' type="text" id="title" defaultValue={this.props.draftTitle} placeholder="Title" />
                     <br />
-                    <textarea className='form-element story-textarea' required='true' id="story" defaultValue={this.props.draftStory} placeholder="Type your story here..." />
+                    <textarea className='form-element story-textarea' id="story" defaultValue={this.props.draftStory} placeholder="Type your story here..." />
                     <br />
                     <button type="submit" className={'button ' + buttonDisableOnLoading(this.props.loading)}>
                         {buttonContent('Submit', this.props.loading)}

@@ -20,6 +20,7 @@ export class StoryThumb extends React.Component {
                         author={this.props.story.author}
                         datePosted={this.props.story.datePosted}
                         nbComments={this.props.story.comments.length}
+                        nbViews={this.props.story.views}
                     />
     			</div>
             </div>
