@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {defaultScreenshot} from '../utils.js';
-import StoryAuthorInfo from './story-author-info.js';
+import StoryAuthorInfoBig from './story-author-info-big.js';
 
 function StoryLayout(props) {
     return (
@@ -9,11 +9,12 @@ function StoryLayout(props) {
             <h2 className="story-preview-title">{props.story.title}</h2>
             <div><img className='story-screenshot' alt='' src={props.story.screenshot || defaultScreenshot} /></div>
             <p>{props.story.story}</p>
-            <StoryAuthorInfo
+            <StoryAuthorInfoBig
                 author={props.story.author}
                 datePosted={props.story.datePosted}
                 nbComments={props.story.comments.length}
                 nbViews={props.story.views}
+                nbStars={props.story.stars.length}
             />
         </div>
     );

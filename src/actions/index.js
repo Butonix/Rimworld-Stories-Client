@@ -62,6 +62,16 @@ export const fetchUser = () => dispatch => {
     SARequestAPI('get', '/auth/get-user', null, fetchUserSuccess, dispatch);
 };
 
+export const STAR_STORY_SUCCESS = 'STAR_STORY_SUCCESS';
+export const starStorySuccess = response => ({
+    type: STAR_STORY_SUCCESS,
+    response
+});
+
+export const starStory = (storyID, type) => dispatch => {
+    SARequestAPI('post', '/story/star/' + storyID, {type}, starStorySuccess, dispatch);
+};
+
 export const deleteStory = (storyID) => dispatch => {
     SARequestAPI('delete', '/story/' + storyID, null, null, dispatch);
 };
@@ -132,8 +142,8 @@ export const fetchLandingStoriesSuccess = response => ({
     response
 });
 
-export const fetchLandingStories = () => dispatch => {
-    SARequestAPI('get', '/story/get-list', null, fetchLandingStoriesSuccess, dispatch);
+export const fetchLandingStories = (filters) => dispatch => {
+    SARequestAPI('post', '/story/get-list', {filters: filters}, fetchLandingStoriesSuccess, dispatch);
 };
 
 export const ensureLogin = () => dispatch => {
@@ -183,7 +193,7 @@ export const uploadImage = (data) => dispatch => {
 
 // blueprint superagent function to request data from the API
 function SARequestAPI(type, url, data, actionCreator, dispatch) {
-    console.log('SA request to: ' + API_URL + url)
+    console.log('SA request to: ' + API_URL + url);
     dispatch(displayLoading(true));
     request(type, API_URL + url)
       .withCredentials()

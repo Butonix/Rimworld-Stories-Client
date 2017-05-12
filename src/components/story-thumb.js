@@ -21,6 +21,7 @@ export class StoryThumb extends React.Component {
                         datePosted={this.props.story.datePosted}
                         nbComments={this.props.story.comments.length}
                         nbViews={this.props.story.views}
+                        nbStars={this.props.story.stars.length}
                     />
     			</div>
             </div>

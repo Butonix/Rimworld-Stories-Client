@@ -63,6 +63,12 @@ main {
     background-color: #dbdbdb;
 }
 
+.filter {
+    width: 33%;
+    display: inline-block;
+    text-align: center;
+}
+
 .confirm-delete {
     text-align: center;
 }
@@ -223,6 +229,15 @@ select, input, button {
     width: 100%;
 }
 
+.fa-star, .fa-star-o {
+    cursor: pointer;
+    color: #edbc2a;
+}
+
+.story-preview-info {
+    padding: 8px;
+}
+
 // ALERT
 .alert-container {
     border-radius: 3px;
@@ -262,6 +277,10 @@ select, input, button {
         height: 17px;
     }
     &.comment {
+        width: 50px;
+        height: 50px;
+    }
+    &.story-avatar {
         width: 50px;
         height: 50px;
     }

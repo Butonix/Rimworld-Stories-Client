@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import StoryThumb from './story-thumb.js';
 import StoryNoneFound from './story-none-found.js';
 import {fetchUser, fetchLandingStories, resetStoryLandingList} from '../actions';
+import Filters from './misc-filters';
 
 export class StoriesList extends React.Component {
 
@@ -12,7 +13,7 @@ export class StoriesList extends React.Component {
 
     componentDidMount() {
         this.props.dispatch(fetchUser());
-        this.props.dispatch(fetchLandingStories());
+        this.props.dispatch(fetchLandingStories(this.props.filters));
     }
 
     listStories() {
@@ -28,6 +29,7 @@ export class StoriesList extends React.Component {
     render() {
         return (
         	<div className="listStories">
+                <Filters />
                 {this.listStories()}
         	</div>
         );

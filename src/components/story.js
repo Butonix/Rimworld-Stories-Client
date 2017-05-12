@@ -6,6 +6,7 @@ import StoryLayout from './story-layout.js';
 import StoryOptions from './story-options.js';
 import StoryConfirmDelete from './story-confirm-delete.js';
 import {resetCurrentStory, fetchUser, fetchStory} from '../actions';
+import StoryStar from './story-star.js';
 
 export class Story extends React.Component {
 
@@ -78,12 +79,20 @@ export class Story extends React.Component {
         }
     }
 
+    displayStarStory() {
+        if (this.props.currentUser.id && this.props.currentStory._id) {
+            return (<StoryStar />)
+        }
+        return ''
+    }
+
     render() {
         return (
             <div>
                 {this.storyConfirmDelete()}
                 {this.story()}
                 {this.storyAuthorOptions()}
+                {this.displayStarStory()}
                 {this.commentHeader()}
                 {this.comments()}
                 {this.newCommentBlock()}

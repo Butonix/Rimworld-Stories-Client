@@ -1,7 +1,7 @@
 import {TOGGLE_BURGER, FETCH_USER_SUCCESS, SET_MESSAGE, FETCH_PROFILE_SUCCESS, DISPLAY_LOADING, TICK_DOWN_TIMER,
     CHANGE_USERNAME_SUCCESS, UPLOAD_IMAGE_SUCCESS, RESET_PROFILE, RESET_USER, TOGGLE_AUTO_SAVE, GET_DRAFT_SUCCESS,
     SAVE_DRAFT_SUCCESS, SAVE_DRAFT_FIELDS_IN_STATE, FETCH_LANDING_STORIES_SUCCESS, RESET_CURRENT_STORY, FETCH_STORY_SUCCESS,
-    RESET_CURRENT_DRAFT, NEW_COMMENT_SUCCESS, RESET_STORY_LANDING_LIST} from '../actions/';
+    RESET_CURRENT_DRAFT, NEW_COMMENT_SUCCESS, RESET_STORY_LANDING_LIST, STAR_STORY_SUCCESS} from '../actions/';
 
 // INITIALIZATION / DEFAULT STATE
 export const initialState = Object.assign({}, {
@@ -14,6 +14,9 @@ export const initialState = Object.assign({}, {
         list: [],
         page: 1,
         perPage: 5
+    },
+    filters: {
+        type: 'Most recent'
     },
     currentDraft: {
         _id: null,
@@ -90,6 +93,15 @@ export const appReducer = (state=initialState, action, init=initialState) => {
     else if(action.type === RESET_STORY_LANDING_LIST) {
         return Object.assign({}, state, {
             landingList: init.landingList
+        });
+    }
+
+    else if(action.type === STAR_STORY_SUCCESS) {
+        return Object.assign({}, state, {
+            currentStory: {
+                ...state.currentStory,
+                stars: action.response.story.stars
+            }
         });
     }
 
@@ -215,6 +227,10 @@ export const appReducer = (state=initialState, action, init=initialState) => {
             landingList: {
                 ...state.landingList,
                 list: action.response.stories
+            },
+            filters: {
+                ...state.filters,
+                type: action.response.filters.type
             }
         });
     }

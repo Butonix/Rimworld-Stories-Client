@@ -18,6 +18,13 @@ function StoryAuthorInfo(props) {
             )
         }
     }
+    function nbStars(nb) {
+        if (nb) {
+            return  (
+                <span className="info-separator"> | <i className="fa fa-star" aria-hidden="true"></i> {nb}</span>
+            )
+        }
+    }
     return (
             <div className="story-preview-info">
                 <img alt='' src={props.author.avatarUrl} className='profile-avatar small-thumb'/>
@@ -29,6 +36,7 @@ function StoryAuthorInfo(props) {
                 {displayDate(props.datePosted)}
                 {nbComments(props.nbComments)}
                 {nbViews(props.nbViews)}
+                {nbStars(props.nbStars)}
             </div>
     );
 }
