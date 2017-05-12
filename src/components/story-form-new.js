@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {updateStory} from '../actions';
 import {buttonDisableOnLoading, buttonContent} from '../utils';
+import RichTextEditor from './story-rich-text-editor.js';
 
 export class NewStoryForm extends React.Component {
 
@@ -26,9 +27,16 @@ export class NewStoryForm extends React.Component {
                         <div className="container col1">
                             <input className="form-element title-input" autoComplete='off' type="text" id="title" defaultValue={this.props.draftTitle} placeholder="Title" />
                         </div>
+
                         <div className="container col1">
                             <textarea className='form-element story-textarea' id="story" defaultValue={this.props.draftStory} placeholder="Type your story here..." />
                         </div>
+
+
+                        <div className="container col1 story-editor">
+                            <RichTextEditor />
+                        </div>
+
                         <div className="container col1">
                             <button type="submit" className={'submit button ' + buttonDisableOnLoading(this.props.loading)}>
                                 {buttonContent('Publish', this.props.loading)}
@@ -40,5 +48,5 @@ export class NewStoryForm extends React.Component {
     }
 }
 
-export const mapStateToProps = state => (state.app);
+export const mapStateToProps = (state) => (state.app);
 export default connect(mapStateToProps)(NewStoryForm);
