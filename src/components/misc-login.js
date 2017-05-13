@@ -10,14 +10,14 @@ export class Profile extends React.Component {
         this.props.dispatch(fetchUser());
     }
 
-    componentDidUpdate() {
-        /*
+    toggleDisplay() {
         if (document.loginform) {
             document.loginform.reset();
         }
         if (document.signupform) {
             document.signupform.reset();
-        }*/
+        }
+        this.props.dispatch(toggleDisplayLogin());
     }
 
     submitLogin(e) {
@@ -56,7 +56,7 @@ export class Profile extends React.Component {
                             <p><a href={API_URL + '/auth/facebook'}>
                                 <span className="button facebook"><i className="fa fa-facebook-official" aria-hidden="true"/> Sign in with facebook</span>
                             </a></p>
-                            <p>Don't have an account yet? <span onClick={e => this.props.dispatch(toggleDisplayLogin())} className="fake-link"><strong>Create a new one</strong></span>.</p>
+                            <p>Don't have an account yet? <span onClick={e => this.toggleDisplay()} className="fake-link"><strong>Create a new one</strong></span>.</p>
                         </form>
                     </div>
                 </div>
@@ -79,7 +79,7 @@ export class Profile extends React.Component {
                             <p><a href={API_URL + '/auth/facebook'}>
                                 <span className="button facebook"><i className="fa fa-facebook-official" aria-hidden="true"/> Sign up with facebook</span>
                             </a></p>
-                            <p>Already have an account? <span onClick={e => this.props.dispatch(toggleDisplayLogin())} className="fake-link"><strong>Sign in</strong></span>.</p>
+                            <p>Already have an account? <span onClick={e => this.toggleDisplay()} className="fake-link"><strong>Sign in</strong></span>.</p>
                         </form>
                     </div>
                 </div>
