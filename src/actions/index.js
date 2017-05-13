@@ -20,6 +20,31 @@ export const tickDownTimer = () => ({
     type: TICK_DOWN_TIMER
 });
 
+export const TOGGLE_DISPLAY_LOGIN = 'TOGGLE_DISPLAY_LOGIN';
+export const toggleDisplayLogin = () => ({
+    type: TOGGLE_DISPLAY_LOGIN
+});
+
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const logginSuccess = (response) => ({
+    type: LOGIN_SUCCESS,
+    response
+});
+
+export const logIn = (data) => dispatch => {
+    SARequestAPI('post', '/auth/login', data, logginSuccess, dispatch);
+};
+
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
+export const signUpSuccess = (response) => ({
+    type: SIGNUP_SUCCESS,
+    response
+});
+
+export const signUp = (data) => dispatch => {
+    SARequestAPI('post', '/auth/signup', data, signUpSuccess, dispatch);
+};
+
 export const SET_MESSAGE = 'SET_MESSAGE';
 export const setMessage = (message, messType) => ({
     type: SET_MESSAGE,

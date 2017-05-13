@@ -7,7 +7,7 @@ export class Filters extends React.Component {
     render() {
         return (
             <div className="container col1">
-    			<div className="story-preview inside-cont">
+    			<div className="inside-cont">
                     <div className="fake-link filter" onClick={(e) => this.props.dispatch(fetchLandingStories({type: 'Most recent'}))}>
                         Most recent
                     </div>

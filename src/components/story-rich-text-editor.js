@@ -1,21 +1,22 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Editor, EditorState, RichUtils} from 'draft-js';
+import {Editor, EditorState, RichUtils, convertToRaw} from 'draft-js';
 
 export class RichTextEditor extends React.Component {
 
     onChange = (editorState) => {
-        console.log(editorState.getCurrentInlineStyle());
+        console.log(convertToRaw(this.state.editorState.getCurrentContent()));
         this.setState({editorState});
     };
 
     constructor(props) {
         super(props);
-        this.focus = () => this.refs.editor.focus();
         this.state = {editorState: EditorState.createEmpty()};
+        this.focus = () => this.refs.editor.focus();
     };
 
     onBold(e) {
+        this.focus();
         this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, 'BOLD'));
     };
 
@@ -23,18 +24,19 @@ export class RichTextEditor extends React.Component {
         return (
             <div>
                 <div className="button" onClick={this.onBold.bind(this)}>Bold</div>
-                <Editor
-                    editorState={this.state.editorState}
-                    onChange={this.onChange}
-                    ref="editor"
-                />
+                <div onClick={this.focus}>
+                    <Editor
+                        editorState={this.state.editorState}
+                        onChange={this.onChange}
+                        ref="editor"
+                    />
+                </div>
             </div>
         );
     }
 }
 
 export const mapStateToProps = (state) => ({
-    ...state.app,
-    editorState: EditorState.createEmpty()
+    ...state.app
 });
 export default connect(mapStateToProps)(RichTextEditor);

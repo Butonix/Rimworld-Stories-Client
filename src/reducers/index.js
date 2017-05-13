@@ -1,15 +1,16 @@
 import {TOGGLE_BURGER, FETCH_USER_SUCCESS, SET_MESSAGE, FETCH_PROFILE_SUCCESS, DISPLAY_LOADING, TICK_DOWN_TIMER,
     CHANGE_USERNAME_SUCCESS, UPLOAD_IMAGE_SUCCESS, RESET_PROFILE, RESET_USER, TOGGLE_AUTO_SAVE, GET_DRAFT_SUCCESS,
     SAVE_DRAFT_SUCCESS, SAVE_DRAFT_FIELDS_IN_STATE, FETCH_LANDING_STORIES_SUCCESS, RESET_CURRENT_STORY, FETCH_STORY_SUCCESS,
-    RESET_CURRENT_DRAFT, NEW_COMMENT_SUCCESS, RESET_STORY_LANDING_LIST, STAR_STORY_SUCCESS} from '../actions/';
+    RESET_CURRENT_DRAFT, NEW_COMMENT_SUCCESS, RESET_STORY_LANDING_LIST, STAR_STORY_SUCCESS, TOGGLE_DISPLAY_LOGIN} from '../actions/';
 
 // INITIALIZATION / DEFAULT STATE
 export const initialState = Object.assign({}, {
     burgerOpen: false,
     loading: false,
-    autoSave: true,
+    autoSave: false,
     autoSaveTime: 10 * 1000,
     storyCurrentlyEdited: null,
+    loginShow: true,
     landingList: {
         list: [],
         page: 1,
@@ -93,6 +94,12 @@ export const appReducer = (state=initialState, action, init=initialState) => {
     else if(action.type === RESET_STORY_LANDING_LIST) {
         return Object.assign({}, state, {
             landingList: init.landingList
+        });
+    }
+
+    else if(action.type === TOGGLE_DISPLAY_LOGIN) {
+        return Object.assign({}, state, {
+            loginShow: !state.loginShow
         });
     }
 
