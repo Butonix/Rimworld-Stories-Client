@@ -10,6 +10,16 @@ export class Profile extends React.Component {
         this.props.dispatch(fetchUser());
     }
 
+    componentDidUpdate() {
+        /*
+        if (document.loginform) {
+            document.loginform.reset();
+        }
+        if (document.signupform) {
+            document.signupform.reset();
+        }*/
+    }
+
     submitLogin(e) {
         e.preventDefault();
         let data = new FormData();
@@ -34,8 +44,8 @@ export class Profile extends React.Component {
                 <div className="container col1">
         			<div className="inside-cont">
                     <h3>Log in</h3>
-                        <form id="login-form" className="log-in" onSubmit={(e) => {if (!this.props.loading) {this.submitLogin(e)}}}>
-                            <p><input required="true" id="loginemail" placeholder="E-mail" type="text" className="form-element" /></p>
+                        <form name="loginform" className="log-in" onSubmit={(e) => {if (!this.props.loading) {this.submitLogin(e)}}}>
+                            <p><input required="true" id="loginemail" placeholder="E-mail" type="email" className="form-element" /></p>
                             <p><input required="true" id="loginpw" placeholder="Password" type="password" className="form-element" /></p>
                             <p>
                                 <button type="submit" className={'submit button ' + buttonDisableOnLoading(this.props.loading)}>
@@ -56,9 +66,9 @@ export class Profile extends React.Component {
                 <div className="container col1">
         			<div className="inside-cont">
                     <h3>Create a new account</h3>
-                        <form id="signup-form" className="log-in" onSubmit={(e) => {if (!this.props.loading) {this.submitSignUp(e)}}}>
+                        <form name="signupform" className="log-in" onSubmit={(e) => {if (!this.props.loading) {this.submitSignUp(e)}}}>
                             <p><input required="true" id="signupusername" placeholder="Username" type="text" className="form-element" /></p>
-                            <p><input required="true" id="signupemail" placeholder="E-mail" type="text" className="form-element" /></p>
+                            <p><input required="true" id="signupemail" placeholder="E-mail" type="email" className="form-element" /></p>
                             <p><input required="true" id="signuppw" placeholder="Password" type="password" className="form-element" /></p>
                             <p>
                                 <button type="submit" className={'submit button ' + buttonDisableOnLoading(this.props.loading)}>

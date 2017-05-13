@@ -25,24 +25,12 @@ export const toggleDisplayLogin = () => ({
     type: TOGGLE_DISPLAY_LOGIN
 });
 
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const logginSuccess = (response) => ({
-    type: LOGIN_SUCCESS,
-    response
-});
-
 export const logIn = (data) => dispatch => {
-    SARequestAPI('post', '/auth/login', data, logginSuccess, dispatch);
+    SARequestAPI('post', '/auth/login', data, null, dispatch);
 };
 
-export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
-export const signUpSuccess = (response) => ({
-    type: SIGNUP_SUCCESS,
-    response
-});
-
 export const signUp = (data) => dispatch => {
-    SARequestAPI('post', '/auth/signup', data, signUpSuccess, dispatch);
+    SARequestAPI('post', '/auth/signup', data, toggleDisplayLogin, dispatch);
 };
 
 export const SET_MESSAGE = 'SET_MESSAGE';
@@ -226,7 +214,7 @@ function SARequestAPI(type, url, data, actionCreator, dispatch) {
       .end(function(err, resp) {
         dispatch(displayLoading(false));
         if (err) {
-            dispatch(setMessage('Error: ' + err, 'error-message'));
+            dispatch(setMessage(String(err), 'error-message'));
         } else {
             const apiResp = JSON.parse(resp.text);
             if (apiResp.redirect) {
