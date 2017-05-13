@@ -6,8 +6,9 @@ import {deleteComment} from '../actions';
 export class CommentConfirmDelete extends React.Component {
     render() {
         return (
-            <div className="container col1 confirm-delete">
-                <p>Are you sure? Comment deletion is permanent.</p>
+            <div className="inside-cont col1 confirm-delete">
+                <p><strong>Are you sure?</strong></p>
+                <p>Comment deletion is permanent.</p>
                 <div className={'button close' + this.props.id + ' ' + buttonDisableOnLoading(this.props.loading)}>
                     {buttonContent('Cancel', this.props.loading)}
                 </div>

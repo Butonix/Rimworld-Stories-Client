@@ -5,6 +5,18 @@ import StoryAuthorInfo from './story-author-info.js';
 import {defaultScreenshot} from '../utils.js';
 
 export class StoryThumb extends React.Component {
+
+    storyPreview() {
+        if (this.props.story.story.length > 250) {
+            return (
+                <div>
+                    {this.props.story.story.slice(0, 250)}
+                    <Link to={"/story/" + this.props.story._id}> ...Read more</Link>
+                </div>
+            )
+        }
+        return this.props.story.story
+    }
     render() {
         return (
             <div className="container col1">
@@ -15,7 +27,7 @@ export class StoryThumb extends React.Component {
                             <img className="story-thumbnail" src={this.props.story.screenshot || defaultScreenshot} alt="" width="100%" />
                         </Link>
                     </div>
-                    <p className="story-preview">{this.props.story.story}</p>
+                    <div className="par story-preview">{this.storyPreview()}</div>
                     <StoryAuthorInfo
                         author={this.props.story.author}
                         datePosted={this.props.story.datePosted}

@@ -56,7 +56,7 @@ export class NewStory extends React.Component {
             const autoSaveToggleButtonText = this.props.autoSave ? 'Disable auto save' : 'Enable auto save';
 
             const draftOptions = this.props.currentDraft.status === 'draft' ?
-                <div className="container col1">
+                <div className='par'>
                     <div
                         className={'button create-new-story ' + buttonDisableOnLoading(this.props.loading)}
                         onClick={ () => { if (!this.props.loading) {this.props.dispatch(getDraft('forceNew')); this.startAutoSaveTimer()} } }>
@@ -75,14 +75,13 @@ export class NewStory extends React.Component {
                 </div>
                 : '';
 
-            return (<div>
+            return (<div className="inside-cont">
                 <NewStoryForm
                     draftTitle={this.props.currentDraft.title}
                     draftStory={this.props.currentDraft.story}
                     autoSave={this.props.autoSave}
                     autoSaveTime={this.props.autoSaveTime}
                 />
-                <br />
                 {draftOptions}
                 <UploadImage image={this.props.currentDraft.screenshot || defaultScreenshot} folder='screenshots' />
                 </div>
@@ -92,7 +91,7 @@ export class NewStory extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="container col1">
                 {this.showStoryForm()}
             </div>
         );

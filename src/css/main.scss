@@ -1,10 +1,19 @@
-$header-height: 64px;
-$site-width: 800px;
+$header-height: 72px;
+$site-width: 900px;
 $smallest-site-width: 300px;
 $min-container-height: 300px;
 $text-color: #222;
 $link-text-color: #5654bf;
-$burger-buttons-bk: #666666;
+$burger-buttons-bk: #111;
+$burger-menu-width: 300px;
+
+$main-bk-clr: rgba(0, 0, 0, .3);
+$container-bk-clr: #eee;
+$inside-cont-bk-clr: #fff;
+$inside-cont-border-clr: #ccc;
+
+$header-bg-clor: rgba(0, 0, 0, .3);
+$header-txt-color: #ddd;
 
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
@@ -51,10 +60,18 @@ p {
     margin: 0;
 }
 
+.par {
+    padding: 8px;
+    margin: 0;
+}
+
 body {
     margin: 0;
     padding: 0;
     text-align: center;
+    background-color: #000;
+    background: url('../images/bg.jpg') no-repeat center center fixed;
+    background-size: cover;
 }
 
 main {
@@ -62,7 +79,7 @@ main {
     max-width: $site-width;
     margin: 0px auto 0 auto;
     padding: 8px;
-    background-color: #dbdbdb;
+    background-color: $main-bk-clr;
 }
 
 .filter {
@@ -83,7 +100,7 @@ main {
     float: left;
 }
 
-.fake-link {
+.fake-link, a {
     color: $link-text-color;
     cursor: pointer;
     text-decoration: none;
@@ -97,20 +114,21 @@ main {
     font-size: 16px;
     line-height: 24px;
     display: inline-block;
-    background-color: #e9e9e9;
+    background-color: $container-bk-clr;
     padding: 8px;
     &.col1 {
         width: 100%;
     }
     &.col2 {
-        width: 50%;
+        width: 100%;
+        vertical-align: top;
     }
 }
 
 .inside-cont {
-    border: 1px solid #dbdbdb;
+    border: 1px solid $inside-cont-border-clr;
     padding: 8px;
-    background-color: #f6f6f6;
+    background-color: $inside-cont-bk-clr;
 }
 
 // HEADER
@@ -119,14 +137,17 @@ h1 {
     padding: 0;
     line-height: $header-height;
     font-size: 1.5em;
+    text-align: left;
+    padding-left: 80px;
 }
 
 header {
     max-width: $site-width;
     margin: 0 auto 0 auto;
     line-height: $header-height;
-    background-color: #cdcdcd;
+    color: $header-txt-color;
     vertical-align: center;
+    background-color: $header-bg-clor;
 }
 
 .burger-container {
@@ -141,10 +162,17 @@ header {
 .burger-menu {
     position: absolute;
     top: $header-height;
-    width: 250px;
+    overflow: hidden;
+    width: $burger-menu-width;
     max-width: 800px;
+    transition: width .2s;
     a {
         text-decoration: none;
+    }
+    &.closed {
+        width: 0px;
+        transition: width .2s;
+        overflow: hidden;
     }
 }
 
@@ -152,8 +180,11 @@ header {
     background-color: $burger-buttons-bk;
     color: white;
     cursor: pointer;
+    width: $burger-menu-width;
+    transition: background-color .3s;
     &:hover {
-        background-color: darken($burger-buttons-bk, 5%)
+        background-color: lighten($burger-buttons-bk, 5%);
+        transition: background-color .3s;
     }
 }
 
@@ -169,6 +200,7 @@ header {
 
 // STORIES PREVIEW ON FRONT PAGE
 .story-preview {
+    text-align: left;
 }
 
 .story-preview-title {
@@ -183,6 +215,11 @@ header {
     display: block;
 }
 
+.story-content {
+    text-align: left;
+    padding: 32px 8px 16px 8px;
+}
+
 // BUTTON
 
 .button {
@@ -191,7 +228,7 @@ header {
     color: white;
     cursor: pointer;
     padding: 8px;
-    margin: 0 8px 0 8px;
+    margin: 8px;
     border-radius: 3px;
     border: none;
     min-width: 104px;
@@ -301,7 +338,6 @@ select, input, button {
 .dropzone {
     display: inline-block;
     border: 1px solid #b8b8b8;
-    background-color: #dddddd;
     max-width: 300px;
     padding: 16px 16px 8px 16px;
     cursor: pointer;
@@ -397,8 +433,6 @@ select, input, button {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
 }
 
 /* Add Animation */
@@ -409,7 +443,7 @@ select, input, button {
 
 /* Modal Content/Box */
 .modal-content {
-    background-color: #fefefe;
+    background-color: rgba(255,255,255,.7);
     margin: 15% auto;
     padding: 20px;
     width: 80%;

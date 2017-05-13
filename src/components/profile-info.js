@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {buttonDisableOnLoading, buttonContent} from '../utils';
 
 export class ProfileInfo extends React.Component {
     render() {
@@ -9,6 +10,9 @@ export class ProfileInfo extends React.Component {
                     <h4>User info</h4>
                     <p>User name: {this.props.info.username}</p>
                     <p>Email: {this.props.info.email}</p>
+                    <div className={'button ' + buttonDisableOnLoading(this.props.loading)} onClick={e => this.logOut()}>
+                        {buttonContent('Log out', this.props.loading)}
+                    </div>
                 </div>
             </div>
         );

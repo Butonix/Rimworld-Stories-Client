@@ -17,14 +17,16 @@ export class StoryStar extends React.Component {
         }
 
         return (
-            <div className="container col1">
+            <div className="container col2">
                 <div className="inside-cont">
-                    <h4>{text}</h4>
-                    <i
-                        onClick={(e) => this.props.dispatch(starStory(this.props.currentStory._id, action))}
-                        className={"fa fa-3x " + className}
-                        aria-hidden="true"
-                    />
+                    <div className="par">{text}</div>
+                    <div className="par">
+                        <i
+                            onClick={(e) => this.props.dispatch(starStory(this.props.currentStory._id, action))}
+                            className={"fa fa-3x " + className}
+                            aria-hidden="true"
+                        />
+                    </div>
                 </div>
             </div>
         );

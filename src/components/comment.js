@@ -15,6 +15,12 @@ export class Comment extends React.Component {
 
     }
 
+    comment() {
+        return this.props.comm.comment.split('\n').map((item, key) => {
+          return <span key={key}>{item}<br/></span>
+        })
+    }
+
     render () {
         return (
             <div className="container col1">
@@ -28,7 +34,7 @@ export class Comment extends React.Component {
                         <span className="date right">{displayDate(this.props.comm.datePosted)}</span>
                     </div>
                     <div className="comment-right-box">
-                        {this.props.comm.comment}
+                        {this.comment()}
                     </div>
                     <div className="comment-options">
                         {this.commentOptions()}

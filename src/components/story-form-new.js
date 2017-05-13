@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {updateStory} from '../actions';
 import {buttonDisableOnLoading, buttonContent} from '../utils';
-import RichTextEditor from './story-rich-text-editor.js';
 
 export class NewStoryForm extends React.Component {
 
@@ -20,30 +19,23 @@ export class NewStoryForm extends React.Component {
 
     render() {
         return (<div>
-                <div className="container col1">
                     <h3>Write a Story</h3>
-                </div>
                     <form key={this.props.currentDraft._id} name="newstoryform" onSubmit={(e) => {if (!this.props.loading) {this.submitStory(e)}}}>
-                        <div className="container col1">
+                        <p>
                             <input className="form-element title-input" autoComplete='off' type="text" id="title" defaultValue={this.props.draftTitle} placeholder="Title" />
-                        </div>
+                        </p>
 
-                        <div className="container col1">
+                        <p>
                             <textarea className='form-element story-textarea' id="story" defaultValue={this.props.draftStory} placeholder="Type your story here..." />
-                        </div>
+                        </p>
 
-
-                        <div className="container col1 story-editor">
-                            <RichTextEditor />
-                        </div>
-
-                        <div className="container col1">
+                        <p>
                             <button type="submit" className={'submit button ' + buttonDisableOnLoading(this.props.loading)}>
                                 {buttonContent('Publish', this.props.loading)}
                             </button>
-                        </div>
-                </form>
-            </div>
+                        </p>
+                    </form>
+                </div>
         );
     }
 }

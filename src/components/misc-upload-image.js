@@ -37,7 +37,7 @@ export class UploadImage extends React.Component {
 
     render() {
         return (
-            <div className="container col1">
+            <div className="par">
                     <Dropzone
                         className="dropzone"
                         onDrop={(a, r) => this.onDrop(a, r)}

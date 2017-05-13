@@ -17,6 +17,13 @@ export class Burger extends React.Component {
         }
     }
 
+    burgerMenu() {
+        if (this.props.burgerOpen) {
+            return ''
+        }
+        return 'closed'
+    }
+
     render() {
         const links = this.props.currentUser.id ?
         <div>
@@ -34,7 +41,7 @@ export class Burger extends React.Component {
 
         return (
             <div className="burger">
-                  <div className="burger-menu" onClick={(e) => {this.props.dispatch(toggleBurger('close')); this.props.dispatch(setMessage(null, null));}}>
+                  <div className={"burger-menu " + this.burgerMenu()} onClick={(e) => {this.props.dispatch(toggleBurger('close')); this.props.dispatch(setMessage(null, null));}}>
                         {links}
                   </div>
             </div>

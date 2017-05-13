@@ -11,7 +11,7 @@ export class StoryOptions extends React.Component {
 
     render() {
         return (
-            <div className="container col1">
+            <div className="container col2">
                 <div className="inside-cont">
                     <Link to={'/write-story/' + this.props.currentStory._id}><div className={'button ' + buttonDisableOnLoading(this.props.loading)}>
                         {buttonContent('Edit', this.props.loading)}

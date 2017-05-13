@@ -30,13 +30,11 @@ function StoryAuthorInfo(props) {
                 <img alt='' src={props.author.avatarUrl} className='profile-avatar small-thumb'/>
                 <span className="info-separator"> </span>
                 <Link to={'/profile/' + props.author._id} className="fake-link">{props.author.username}</Link>
-                <span className="info-separator"> | </span>
-                <i className="fa fa-clock-o" aria-hidden="true"></i>
                 <span className="info-separator"> </span>
-                {displayDate(props.datePosted)}
                 {nbComments(props.nbComments)}
                 {nbViews(props.nbViews)}
                 {nbStars(props.nbStars)}
+                <span className="date right">{displayDate(props.datePosted)}</span>
             </div>
     );
 }
