@@ -51,9 +51,9 @@ export class Story extends React.Component {
         if (this.props.currentStory._id) {
             function countText(nb) {
                 if (nb === 0) {
-                    return 'No comment posted yet'
+                    return (<span>No comment posted yet</span>)
                 } else {
-                    return 'Comments (' + nb + ')'
+                    return (<span><i className="fa fa-comments" aria-hidden="true"></i> Comments ({nb})</span>)
                 }
             }
             return (
@@ -80,7 +80,9 @@ export class Story extends React.Component {
     }
 
     displayStarStory() {
-        if (this.props.currentUser.id && this.props.currentStory._id) {
+        if (this.props.currentUser.id
+            && this.props.currentStory._id
+            && this.props.currentStory.author._id !== this.props.currentUser.id) {
             return (<StoryStar />)
         }
         return ''

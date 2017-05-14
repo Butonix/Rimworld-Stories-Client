@@ -14,14 +14,16 @@ import {history} from './store';
 import { ConnectedRouter } from 'react-router-redux';
 
   function App(props) {
-    const message = props.alert.message ? <Alert /> : '';
+    const alert = props.alert.message ? <Alert /> : '';
     const loading = props.loading ? <Loading /> : '';
     return (
     <ConnectedRouter history={history}>
           <div className="App">
             <Header />
-            {message}
-            {loading}
+            <div className="fixed-ui">
+                {alert}
+                {loading}
+            </div>
             <main>
                 <Route exact path="/" component={StoriesList} />
                 <Route exact path="/story/:id" component={Story} />

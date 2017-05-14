@@ -6,24 +6,23 @@ function StoryAuthorInfo(props) {
     function nbViews(nb) {
         if (nb) {
             return  (
-                <span className="info-separator"><i className="fa fa-eye" aria-hidden="true"></i> {nb}</span>
+                <span><i className="fa fa-eye" aria-hidden="true"></i> {nb}</span>
             )
         }
     }
     function nbStars(nb) {
         if (nb) {
             return  (
-                <span className="info-separator"> | <i className="fa fa-star" aria-hidden="true"></i> {nb}</span>
+                <span><span className="info-separator"> | <i className="fa fa-star" aria-hidden="true"></i></span> {nb}</span>
             )
         }
     }
-    //<Link to={'/profile/' + props.author._id} className="fake-link">{props.author.username}</Link>
     return (
             <div className="story-preview-info">
                 <div className="comment-author comment">
-                    <p>
+                    <div>
                         <img alt='' src={props.author.avatarUrl} className='profile-avatar story-avatar'/>
-                    </p>
+                    </div>
 
                 </div>
 

@@ -11,7 +11,7 @@ export class Header extends React.Component {
             <div className="header-login"><img alt='' className="profile-avatar header-pic" src={this.props.currentUser.avatarUrl} /></div>
         </Link>
         :
-        <Link to='/login'><div className="header-login"><span className='button'>Log in</span></div></Link>
+        <Link to='/login'><div className="header-login"><span className='button button-header-login'>Log in</span></div></Link>
         ;
 
         return (
@@ -19,9 +19,9 @@ export class Header extends React.Component {
               <div onClick={e => this.props.dispatch(toggleBurger())} className="burger-container">
                   <i className="fa fa-bars fa-lg"></i>
               </div>
-                <Burger />
+              <h1>Rimworld stories</h1>
                 {headerLogin}
-                <h1>Rimworld stories</h1>
+                  <Burger />
           	</header>
         );
     }

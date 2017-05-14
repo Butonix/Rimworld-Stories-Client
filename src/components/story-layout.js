@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {defaultScreenshot} from '../utils.js';
 import StoryAuthorInfoBig from './story-author-info-big.js';
+import {Link} from 'react-router-dom';
 
 function StoryLayout(props) {
 
@@ -16,7 +17,7 @@ function StoryLayout(props) {
             <h2 className="story-preview-title">{props.story.title}</h2>
             <div><img className='story-screenshot' alt='' src={props.story.screenshot || defaultScreenshot} /></div>
             <p className="story-content">{story()}</p>
-            <p><strong>{props.story.author.username}</strong></p>
+            <p className="story-author-name">By <strong><Link to={'/profile/' + props.story.author._id} className="fake-link">{props.story.author.username}</Link></strong></p>
             <StoryAuthorInfoBig
                 author={props.story.author}
                 datePosted={props.story.datePosted}

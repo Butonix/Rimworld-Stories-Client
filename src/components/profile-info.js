@@ -1,8 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {buttonDisableOnLoading, buttonContent} from '../utils';
+import {logOut} from '../actions';
 
 export class ProfileInfo extends React.Component {
+
+    logOut() {
+        if (!this.props.loading) {
+            this.props.dispatch(logOut())
+        }
+    }
+    
     render() {
         return (
             <div className="container col1">

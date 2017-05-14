@@ -51,10 +51,15 @@ export class NewStory extends React.Component {
         document.newstoryform.reset()
     }
 
+    toggleASText() {
+        if (this.props.autoSave) {
+            return (<i className="fa fa-check-square" aria-hidden="true" />)
+        }
+        return (<i className="fa fa-square" aria-hidden="true" />)
+    }
+
     showStoryForm() {
         if (this.props.currentDraft._id) {
-            const autoSaveToggleButtonText = this.props.autoSave ? 'Disable auto save' : 'Enable auto save';
-
             const draftOptions = this.props.currentDraft.status === 'draft' ?
                 <div className='par'>
                     <div
@@ -67,11 +72,17 @@ export class NewStory extends React.Component {
                         onClick={ () => { if (!this.props.loading) {this.saveDraft()} } }>
                         {buttonContent('Save draft', this.props.loading)}
                     </div>
-                    <div
-                        className='button toggle-auto-save'
-                        onClick={ () => { this.props.dispatch(toggleAutoSave());  this.toggleAS(); } }>
-                        {autoSaveToggleButtonText}
-                    </div>
+                    <p>
+                        <span
+                            className='button toggle-auto-save'
+                            onClick={ () => { this.props.dispatch(toggleAutoSave());  this.toggleAS(); } }>
+                            {this.toggleASText()} Auto save
+                        </span>
+                        <br />
+                        <span className='small'>
+                            Automatically saves your draft every {this.props.autoSaveTime/1000} seconds
+                        </span>
+                    </p>
                 </div>
                 : '';
 

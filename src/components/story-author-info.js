@@ -7,25 +7,25 @@ function StoryAuthorInfo(props) {
     function nbComments(nb) {
         if (nb && nb > 0) {
             return  (
-                <span className="info-separator"> | {nb} comments</span>
+                <span><span className="info-separator"> | </span><i className="fa fa-comments" aria-hidden="true"></i> {nb}</span>
             )
         }
     }
     function nbViews(nb) {
         if (nb) {
             return  (
-                <span className="info-separator"> | <i className="fa fa-eye" aria-hidden="true"></i> {nb}</span>
+                <span><span className="info-separator"> | </span><i className="fa fa-eye" aria-hidden="true"></i> {nb}</span>
             )
         }
     }
     function nbStars(nb) {
         if (nb) {
             return  (
-                <span className="info-separator"> | <i className="fa fa-star" aria-hidden="true"></i> {nb}</span>
+                <span><span className="info-separator"> | </span><i className="fa fa-star" aria-hidden="true"></i> {nb}</span>
             )
         }
     }
-    return (
+    return (<div>
             <div className="story-preview-info">
                 <img alt='' src={props.author.avatarUrl} className='profile-avatar small-thumb'/>
                 <span className="info-separator"> </span>
@@ -34,7 +34,8 @@ function StoryAuthorInfo(props) {
                 {nbComments(props.nbComments)}
                 {nbViews(props.nbViews)}
                 {nbStars(props.nbStars)}
-                <span className="date right">{displayDate(props.datePosted)}</span>
+                <div className="date right date-right">{displayDate(props.datePosted)}</div>
+            </div>
             </div>
     );
 }

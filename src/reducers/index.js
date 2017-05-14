@@ -7,8 +7,8 @@ import {TOGGLE_BURGER, FETCH_USER_SUCCESS, SET_MESSAGE, FETCH_PROFILE_SUCCESS, D
 export const initialState = Object.assign({}, {
     burgerOpen: false,
     loading: false,
-    autoSave: false,
-    autoSaveTime: 10 * 1000,
+    autoSave: true,
+    autoSaveTime: 30 * 1000,
     storyCurrentlyEdited: null,
     loginShow: true,
     landingList: {

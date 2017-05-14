@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchProfile, logOut, resetProfile, fetchUser} from '../actions';
+import {fetchProfile, resetProfile, fetchUser} from '../actions';
 import ProfileInfo from './profile-info';
 import MyPublishedStores from './story-my-published';
 import UpdateUsername from './profile-update-username';
@@ -16,12 +16,6 @@ export class Profile extends React.Component {
     componentDidMount() {
         this.props.dispatch(fetchProfile(this.props.match.params.id));
         this.props.dispatch(fetchUser());
-    }
-
-    logOut() {
-        if (!this.props.loading) {
-            this.props.dispatch(logOut())
-        }
     }
 
     render() {

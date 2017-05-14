@@ -9,6 +9,7 @@ export class UpdateUsername extends React.Component {
         e.preventDefault();
         if (e.target.newUsername.value && !this.props.loading) {
             this.props.dispatch(submitNewUsername(e.target.newUsername.value));
+            e.target.newUsername.value = '';
         }
     }
 
@@ -19,7 +20,7 @@ export class UpdateUsername extends React.Component {
                     <h4>Modify username</h4>
                     <form onSubmit={e => this.submitEvent(e)}>
                         <p>
-                            <input className="form-element change-username" type="text" id="newUsername" /><br />
+                            <input className="form-element change-username" autoComplete="off" type="text" id="newUsername" /><br />
                         </p>
                         <p>
                             <button type="submit" className={'button ' + buttonDisableOnLoading(this.props.loading)}>
