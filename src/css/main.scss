@@ -4,18 +4,25 @@ $smallest-site-width: 300px;
 $min-container-height: 300px;
 $text-color: #222;
 $link-text-color: #5654bf;
-$burger-buttons-bk: #111;
+$burger-buttons-bk: #2a2c36;
 $burger-menu-width: 300px;
 
 $main-bk-clr: rgba(0, 0, 0, .3);
-$container-bk-clr: #fafafa;
+$container-bk-clr: #f3f3f3;
 $inside-cont-bk-clr: #fff;
 $inside-cont-border-clr: #ddd;
 
 $header-bg-clor: rgba(0, 0, 0, .3);
 $header-txt-color: #ddd;
 
-$filter-bg-color: #c29e62;
+$filter-bg-color: #2a2c36;
+
+@font-face {
+  font-family: 'RimWorld';
+  src: url('rw.woff2') format('woff2'),
+       url('rw.woff') format('woff'),
+       url('rw.ttf') format('truetype');
+}
 
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
@@ -85,7 +92,7 @@ main {
     font-size: 0;
     max-width: $site-width;
     margin: 0px auto 0 auto;
-    padding: 8px;
+    padding: 0 8px 8px 8px;
     background-color: $main-bk-clr;
 }
 
@@ -156,6 +163,9 @@ main {
 
 // HEADER
 h1 {
+    font-size: 1.6em;
+    color: #fafafa;
+    font-family: 'RimWorld', Fallback, sans-serif;
     margin: 0;
     padding: 0;
     line-height: $header-height;
@@ -163,6 +173,11 @@ h1 {
     text-align: left;
     display: inline-block;
     vertical-align: middle;
+}
+
+h2 {
+    font-family: 'RimWorld', Fallback, sans-serif;
+    font-size: 1.3em;
 }
 
 header {
@@ -185,6 +200,7 @@ header {
 }
 
 .burger-menu {
+    box-shadow: 3px 3px 7px 2px rgba(0, 0, 0, 0.43);
     position: absolute;
     top: $header-height;
     overflow: hidden;
@@ -202,9 +218,11 @@ header {
 }
 
 .burger-button {
+    font-family: 'RimWorld', Fallback, sans-serif;
+    font-size: .9em;
     text-align: center;
     background-color: $burger-buttons-bk;
-    color: white;
+    color: #fafafa;
     cursor: pointer;
     width: $burger-menu-width;
     transition: background-color .3s;
@@ -216,7 +234,7 @@ header {
 
 .fa-bars {
     height: $header-height/4;
-    color: #7a7a7a;
+    color: #fafafa;
 }
 
 .header-login {
@@ -345,7 +363,7 @@ select, input, button {
     bottom: 16px;
     right: 16px;
     &.alert-message {
-        background-color: rgba(#2a7e1c, 0.9);
+        background-color: #626b80;
     }
     &.error-message {
         background-color: rgba(#de3e3e, 0.9);
@@ -387,7 +405,7 @@ select, input, button {
 
 .dropzone {
     display: inline-block;
-    border: 1px solid #b8b8b8;
+    border: 1px dotted #b8b8b8;
     max-width: 300px;
     padding: 16px 16px 8px 16px;
     cursor: pointer;
@@ -509,6 +527,10 @@ select, input, button {
 /* mobile */
 @media only screen and (max-width: 550px) {
 
+    h1 {
+        font-size: .8em;
+    }
+
     .button-header-login {
         display: none;
     }
@@ -517,10 +539,6 @@ select, input, button {
         display: block;
         float: none;
         text-align: left;
-    }
-
-    h1 {
-        font-size: 1.6em;
     }
 
     .comment-top-bar {

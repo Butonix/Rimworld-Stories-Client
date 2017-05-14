@@ -19,18 +19,16 @@ export class Profile extends React.Component {
     }
 
     render() {
-        let profileInfo = '', profileTitle = '', updateUsername = '', myPublishedStories = '',
+        let profileInfo = '', updateUsername = '', myPublishedStories = '',
         uploadProfilePicture = '', avatar = '', myDrafts = '';
         // when profile fetched
         if (this.props.visitedProfile) {
             avatar = <div className="container col1"><img alt='' className="profile-avatar" id="profile-avatar" src={this.props.visitedProfile.avatarUrl} /></div>
-            profileTitle = <div className="container col1"><h3>{this.props.visitedProfile.username}</h3></div>;
             myPublishedStories = <MyPublishedStores stories={this.props.visitedProfile.stories || []} />;
         }
         // when profile fetched AND if profile is mine
         if (this.props.visitedProfile && this.props.match.params.id === this.props.currentUser.id) {
             avatar = <div className="container col1"><div className="inside-cont"><UploadImage image={this.props.currentUser.avatarUrl} folder='avatars' /></div></div>;
-            profileTitle = <div className="container col1"><div className="inside-cont"><h3>{this.props.currentUser.username}</h3></div></div>;
             profileInfo = <ProfileInfo info={this.props.currentUser} />;
             updateUsername = <UpdateUsername />;
             myDrafts = <MyDrafts stories={this.props.currentUser.stories} />;
@@ -38,9 +36,8 @@ export class Profile extends React.Component {
 
         return (
             <div>
-                {profileTitle}
-                {avatar}
                 {profileInfo}
+                {avatar}
                 {updateUsername}
                 {uploadProfilePicture}
                 {myDrafts}

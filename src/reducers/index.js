@@ -17,7 +17,7 @@ export const initialState = Object.assign({}, {
     filters: {
         type: 'Most recent',
         page: 1,
-        perPage: 2,
+        perPage: 3,
         total: 0
     },
     currentDraft: {

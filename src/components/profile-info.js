@@ -10,14 +10,13 @@ export class ProfileInfo extends React.Component {
             this.props.dispatch(logOut())
         }
     }
-    
+
     render() {
         return (
             <div className="container col1">
                 <div className="inside-cont">
-                    <h4>User info</h4>
-                    <p>User name: {this.props.info.username}</p>
-                    <p>Email: {this.props.info.email}</p>
+                    <h2>{this.props.info.username}</h2>
+                    <p><strong>{this.props.info.email}</strong></p>
                     <div className={'button ' + buttonDisableOnLoading(this.props.loading)} onClick={e => this.logOut()}>
                         {buttonContent('Log out', this.props.loading)}
                     </div>

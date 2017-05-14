@@ -19,7 +19,7 @@ export class Header extends React.Component {
               <div onClick={e => this.props.dispatch(toggleBurger())} className="burger-container">
                   <i className="fa fa-bars fa-lg"></i>
               </div>
-              <h1>Rimworld stories</h1>
+              <Link to={'/'}><h1>Rimworld stories</h1></Link>
                 {headerLogin}
                   <Burger />
           	</header>

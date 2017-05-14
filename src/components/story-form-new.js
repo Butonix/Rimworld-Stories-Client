@@ -19,7 +19,7 @@ export class NewStoryForm extends React.Component {
 
     render() {
         return (<div>
-                    <h3>Write a Story</h3>
+                    <h2>Write a Story</h2>
                     <form key={this.props.currentDraft._id} name="newstoryform" onSubmit={(e) => {if (!this.props.loading) {this.submitStory(e)}}}>
                         <p>
                             <input className="form-element title-input" autoComplete='off' type="text" id="title" defaultValue={this.props.draftTitle} placeholder="Title" />
