@@ -25,17 +25,25 @@ export class Filters extends React.Component {
         return ''
     }
 
+    requestObject(string) {
+        return {
+            type: string,
+            perPage: this.props.filters.perPage,
+            page: 0,
+        }
+    }
+
     render() {
         return (
             <div className="container col1">
     			<div className="inside-cont filters-cont">
-                    <div className={"filter " + this.filterBgMostRecent()} onClick={(e) => this.props.dispatch(fetchLandingStories({type: 'Most recent'}))}>
+                    <div className={"filter " + this.filterBgMostRecent()} onClick={(e) => this.props.dispatch(fetchLandingStories(this.requestObject('Most recent')))}>
                         Most recent
                     </div>
-                    <div className={"filter " + this.filterBgMostViewed()} onClick={(e) => this.props.dispatch(fetchLandingStories({type: 'Most viewed'}))}>
+                    <div className={"filter " + this.filterBgMostViewed()} onClick={(e) => this.props.dispatch(fetchLandingStories(this.requestObject('Most viewed')))}>
                         Most viewed
                     </div>
-                    <div className={"filter " + this.filterBgMostStarred()} onClick={(e) => this.props.dispatch(fetchLandingStories({type: 'Most starred'}))}>
+                    <div className={"filter " + this.filterBgMostStarred()} onClick={(e) => this.props.dispatch(fetchLandingStories(this.requestObject('Most starred')))}>
                         Most starred
                     </div>
                 </div>

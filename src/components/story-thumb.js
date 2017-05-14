@@ -22,9 +22,9 @@ export class StoryThumb extends React.Component {
             <div className="container col1">
     			<div className="story-preview inside-cont">
                 <h2 className="story-preview-title">{this.props.story.title}</h2>
-                    <div className="story-thumbnail-container">
+                    <div className="story-thumbnail-container screenshot-thumb-container">
                         <Link to={'/story/' + this.props.story._id}>
-                            <img className="story-thumbnail" src={this.props.story.screenshot || defaultScreenshot} alt="" width="100%" />
+                            <img className="story-thumbnail" src={this.props.story.screenshot || defaultScreenshot} alt="" />
                         </Link>
                     </div>
                     <div className="par story-preview">{this.storyPreview()}</div>

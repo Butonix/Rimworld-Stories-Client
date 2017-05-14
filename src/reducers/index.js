@@ -17,7 +17,10 @@ export const initialState = Object.assign({}, {
         perPage: 5
     },
     filters: {
-        type: 'Most recent'
+        type: 'Most recent',
+        page: 0,
+        perPage: 2,
+        total: 0
     },
     currentDraft: {
         _id: null,
@@ -235,10 +238,7 @@ export const appReducer = (state=initialState, action, init=initialState) => {
                 ...state.landingList,
                 list: action.response.stories
             },
-            filters: {
-                ...state.filters,
-                type: action.response.filters.type
-            }
+            filters: action.response.filters
         });
     }
 
