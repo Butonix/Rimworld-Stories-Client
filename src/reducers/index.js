@@ -12,13 +12,11 @@ export const initialState = Object.assign({}, {
     storyCurrentlyEdited: null,
     loginShow: true,
     landingList: {
-        list: [],
-        page: 1,
-        perPage: 5
+        list: []
     },
     filters: {
         type: 'Most recent',
-        page: 0,
+        page: 1,
         perPage: 2,
         total: 0
     },
