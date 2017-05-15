@@ -27,14 +27,12 @@ export class Burger extends React.Component {
     render() {
         const links = this.props.currentUser.id ?
         <div>
-            <Link to="/"><div className="burger-button">Home</div></Link>
             <Link to={'/profile/' + this.props.currentUser.id} ><div className="burger-button">Profile</div></Link>
             <Link to="/write-story/new"><div className="burger-button">New Story</div></Link>
             <div className="burger-button" onClick={e => this.props.dispatch(logOut())}>Log out</div>
         </div>
         :
         <div>
-            <Link to="/"><div className="burger-button">Home</div></Link>
             <Link to="/login"><div className="burger-button">Log in</div></Link>
         </div>
         ;
@@ -42,7 +40,9 @@ export class Burger extends React.Component {
         return (
             <div className="burger">
                   <div className={"burger-menu " + this.burgerMenu()} onClick={(e) => {this.props.dispatch(toggleBurger('close')); this.props.dispatch(setMessage(null, null));}}>
-                        {links}
+                      <Link to="/"><div className="burger-button">Home</div></Link>
+                      {links}
+                      <a href="https://rimworldgame.com/" target="_blank"><div className="burger-button">Get Rimworld</div></a>
                   </div>
             </div>
         );
