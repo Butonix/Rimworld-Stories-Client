@@ -7,6 +7,7 @@ import NewStory from './components/story-new-story.js';
 import Login from './components/misc-login.js';
 import Alert from './components/ui-alert.js';
 import Loading from './components/ui-loading.js';
+import Landing from './components/misc-landing.js';
 import { Route } from 'react-router';
 import {connect} from 'react-redux';
 import {history} from './store';
@@ -30,6 +31,7 @@ import { ConnectedRouter } from 'react-router-redux';
                 <Route exact path="/profile/:id" component={Profile} />
                 <Route exact path="/write-story/:id" component={NewStory} />
                 <Route exact path="/login" component={Login} />
+                <Route exact path="/landing" component={Landing} />
             </main>
           </div>
     </ConnectedRouter>

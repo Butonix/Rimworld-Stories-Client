@@ -149,8 +149,10 @@ main {
     display: inline-block;
     text-align: center;
     line-height: 32px;
+    transition: background-color 500ms;
     &.active {
-        background-color: darken($filter-bg-color, 10%);
+    transition: background-color 500ms;
+        background-color: lighten($filter-bg-color, 10%);
     }
 }
 
@@ -187,6 +189,10 @@ header {
     color: $header-txt-color;
     vertical-align: center;
     background-color: $header-bg-clor;
+    text-align: left;
+}
+
+.landing-text {
     text-align: left;
 }
 
