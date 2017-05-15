@@ -94,6 +94,7 @@ export class NewStory extends React.Component {
                     autoSaveTime={this.props.autoSaveTime}
                 />
                 {draftOptions}
+                <h2>Add a screenshot</h2>
                 <UploadImage image={this.props.currentDraft.screenshot || defaultScreenshot} folder='screenshots' />
                 </div>
             )}

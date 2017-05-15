@@ -10,7 +10,7 @@ function displayDate(date) {
 	const hour = ('0' + d.getHours()).slice(-2);
 	const minute = ('0' + d.getMinutes()).slice(-2);
 
-	return day + '/' + month + '/' + d.getFullYear() + ' at ' + hour + ':' + minute;
+	return day + '/' + month + '/' + d.getFullYear() + ' - ' + hour + ':' + minute;
 }
 
 function buttonContent(text, loading) {
@@ -56,6 +56,6 @@ function setupModalBox(id) {
     }
 }
 
-const defaultScreenshot = 'https://res.cloudinary.com/zeropointtwo/image/upload/v1494774084/default-screenshot_vpwq6g.jpg';
+const defaultScreenshot = 'http://res.cloudinary.com/zeropointtwo/image/upload/v1494842326/default-screenshot_a6tl0o.jpg';
 
 export {displayDate, buttonContent, buttonDisableOnLoading, defaultScreenshot, setupModalBox};

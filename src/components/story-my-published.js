@@ -1,26 +1,38 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import {displayDate} from '../utils.js';
 
 export class MyPublishedStores extends React.Component {
-    render() {
-        let stories = this.props.stories.map((story) => {
+
+    returnStories() {
+        let stories = [];
+        this.props.stories.forEach((story) => {
             if (story.status === 'published') {
-                return (<div key={story._id} className="list-item">
-                    <Link to={'/story/' + story._id} className="fake-link">{story.title}</Link>
-                    </div>
+                stories.push(
+                    <Link to={'/story/' + story._id} key={story._id} className="fake-link">
+                        <div className="list-item">
+                            <div className='story-list-title'>{story.title || 'No title'}</div>
+                            <div className='list-stories-date'>{displayDate(story.datePosted)}</div>
+                        </div>
+                    </Link>
                 )
-             }
-             return ''
+            } else {
+                return false
+            }
         });
         if (stories.length === 0) {
-            stories = 'No stories published'
+            return (<p>No story published</p>)
         }
+        return (<div className='list-stories-profile'>{stories}</div>)
+    }
+
+    render() {
         return (
             <div className="container col1">
                 <div className="inside-cont">
                     <h4>Published stories</h4>
-                    {stories}
+                    {this.returnStories()}
                 </div>
             </div>
         );

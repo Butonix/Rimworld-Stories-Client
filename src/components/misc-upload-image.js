@@ -12,8 +12,7 @@ export class UploadImage extends React.Component {
             data.append('file', acceptedFiles[0]);
             if (this.props.folder === 'avatars') {
                 data.append('transformation', JSON.stringify([
-                    {width: 400, height: 400, gravity: "face", crop: "crop"},
-                    {width: 200, crop: "scale"}
+                    {width: 300, height: 300, crop: "fill"}
                 ]));
             } else if (this.props.folder === 'screenshots') {
                 data.append('transformation', JSON.stringify([

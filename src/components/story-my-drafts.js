@@ -1,27 +1,38 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import {displayDate} from '../utils.js';
 
 export class MyDrafts extends React.Component {
 
-    render() {
-        let stories = this.props.stories.map((story) => {
+    returnStories() {
+        let stories = [];
+        this.props.stories.forEach((story) => {
             if (story.status === 'draft') {
-                return (<div key={story._id} className="list-item">
-                    <Link to={'/write-story/' + story._id} className="fake-link"><span>{story.title || story._id}</span></Link>
-                    </div>
+                stories.push(
+                    <Link to={'/write-story/' + story._id} key={story._id} className="fake-link">
+                        <div className="list-item">
+                            <div className='story-list-title'>{story.title || 'No title'}</div>
+                            <div className='list-stories-date'>{displayDate(story.datePosted)}</div>
+                        </div>
+                    </Link>
                 )
-             }
-             return ''
+            } else {
+                return false
+            }
         });
         if (stories.length === 0) {
-            stories = 'No draft currently saved'
+            return (<p>No draft currently saved</p>)
         }
+        return (<div className='list-stories-profile'>{stories}</div>)
+    }
+
+    render() {
         return (
             <div className="container col1">
                 <div className="inside-cont">
                     <h4>My drafts</h4>
-                    {stories}
+                    {this.returnStories()}
                 </div>
             </div>
         );

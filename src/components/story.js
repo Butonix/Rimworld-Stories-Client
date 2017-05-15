@@ -7,6 +7,7 @@ import StoryOptions from './story-options.js';
 import StoryConfirmDelete from './story-confirm-delete.js';
 import {resetCurrentStory, fetchUser, fetchStory} from '../actions';
 import StoryStar from './story-star.js';
+import {Link} from 'react-router-dom';
 
 export class Story extends React.Component {
 
@@ -22,6 +23,17 @@ export class Story extends React.Component {
     newCommentBlock() {
         if (this.props.currentUser.id && this.props.currentStory._id) {
             return (<NewComment />)
+        }
+        if (!this.props.currentUser.id && this.props.currentStory._id) {
+            return (
+                <div className="container col1">
+                    <div className="inside-cont">
+                        <h3>Post a new comment</h3>
+                        <p>You must be <strong><Link to='/login'>logged in</Link></strong> to
+                        post a new comment</p>
+                    </div>
+                </div>
+            )
         }
         return ''
     }

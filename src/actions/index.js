@@ -206,7 +206,7 @@ export const uploadImage = (data) => dispatch => {
 
 // blueprint superagent function to request data from the API
 function SARequestAPI(type, url, data, actionCreator, dispatch) {
-    console.log('SA request to: ' + API_URL + url);
+    //console.log('SA request to: ' + API_URL + url);
     dispatch(displayLoading(true));
     request(type, API_URL + url)
       .withCredentials()

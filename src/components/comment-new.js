@@ -11,6 +11,7 @@ export class NewComment extends React.Component {
         data.append('comment', e.target.content.value);
         data.append('story', this.props.currentStory._id);
         this.props.dispatch(postNewComment(data));
+        e.target.content.value = '';
     }
 
     render() {
@@ -19,7 +20,7 @@ export class NewComment extends React.Component {
                 <div className="inside-cont">
                     <form onSubmit={(e) => {if (!this.props.loading) {this.submitNewComment(e)}}}>
                         <h4>Post a new comment</h4>
-                        <textarea name="content" className="new-comment-textarea form-element" placeholder="Post a comment"></textarea>
+                        <textarea name="content" className="new-comment-textarea form-element" placeholder="Post a comment..."></textarea>
                         <p>
                             <button type="submit" className={'submit button ' + buttonDisableOnLoading(this.props.loading)}>
                                 {buttonContent('Submit', this.props.loading)}

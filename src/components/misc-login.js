@@ -45,6 +45,7 @@ export class Profile extends React.Component {
         			<div className="inside-cont">
                     <h3>Log in</h3>
                         <form name="loginform" className="log-in" onSubmit={(e) => {if (!this.props.loading) {this.submitLogin(e)}}}>
+                            <input hidden />
                             <p><input required="true" id="loginemail" placeholder="E-mail" type="email" className="form-element" /></p>
                             <p><input required="true" id="loginpw" placeholder="Password" type="password" className="form-element" /></p>
                             <p>
