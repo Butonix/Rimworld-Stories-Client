@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import NewStoryForm from './story-form-new';
 import {getDraft, resetCurrentDraft, toggleAutoSave, saveDraft, saveDraftFieldsInState} from '../actions';
 import UploadImage from './misc-upload-image.js';
-import {defaultScreenshot, buttonContent, buttonDisableOnLoading} from '../utils';
+import {defaultScreenshot, buttonContent, buttonDisableOnLoading,setupModalBox} from '../utils';
+import StoryConfirmDelete from './story-confirm-delete.js';
 
 export class NewStory extends React.Component {
 
@@ -58,6 +59,10 @@ export class NewStory extends React.Component {
         return (<i className="fa fa-square" aria-hidden="true" />)
     }
 
+    componentDidUpdate() {
+        setupModalBox(this.props.currentDraft._id);
+    }
+
     showStoryForm() {
         if (this.props.currentDraft._id) {
             const draftOptions = this.props.currentDraft.status === 'draft' ?
@@ -72,17 +77,27 @@ export class NewStory extends React.Component {
                         onClick={ () => { if (!this.props.loading) {this.saveDraft()} } }>
                         {buttonContent('Save draft', this.props.loading)}
                     </div>
-                    <p>
+                    <div className="par">
                         <span
                             className='button toggle-auto-save'
                             onClick={ () => { this.props.dispatch(toggleAutoSave());  this.toggleAS(); } }>
                             {this.toggleASText()} Auto save
                         </span>
-                        <br />
-                        <span className='small'>
-                            Automatically saves your draft every {this.props.autoSaveTime/1000} seconds
+
+                        <span
+                            className='button delete' id={"myBtn" + this.props.currentDraft._id}>
+                            {buttonContent('Delete', this.props.loading)}
                         </span>
-                    </p>
+
+                        <div id={"myModal" + this.props.currentDraft._id} className={"modal modal" + this.props.currentDraft._id}>
+                            <div className={"modal-content modal-content" + this.props.currentDraft._id}>
+                                <StoryConfirmDelete id={this.props.currentDraft._id} />
+                            </div>
+                        </div>
+                        <p><span className='small'>
+                            Activate auto save to automatically save your draft every {this.props.autoSaveTime/1000} seconds
+                        </span></p>
+                    </div>
                 </div>
                 : '';
 
@@ -96,6 +111,7 @@ export class NewStory extends React.Component {
                 {draftOptions}
                 <h2>Add a screenshot</h2>
                 <UploadImage image={this.props.currentDraft.screenshot || defaultScreenshot} folder='screenshots' />
+                <p className="small">Adding a screenshot is optional. Minimum 800 pixels wide recommended.</p>
                 </div>
             )}
         return ''

@@ -12,7 +12,7 @@ export class StoryConfirmDelete extends React.Component {
                 <div className={'button close' + this.props.id + ' ' + buttonDisableOnLoading(this.props.loading)}>
                     {buttonContent('Cancel', this.props.loading)}
                 </div>
-                <div onClick={() => { if (!this.props.loading) {this.props.dispatch(deleteStory(this.props.currentStory._id))} }}
+                <div onClick={() => { if (!this.props.loading) {this.props.dispatch(deleteStory(this.props.id))} }}
                     className={'delete button ' + buttonDisableOnLoading(this.props.loading)}>
                     {buttonContent('Delete', this.props.loading)}
                 </div>

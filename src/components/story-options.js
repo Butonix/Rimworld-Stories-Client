@@ -17,6 +17,7 @@ export class StoryOptions extends React.Component {
                         {buttonContent('Edit', this.props.loading)}
                     </div></Link>
 
+
                     <button className={'delete button ' + buttonDisableOnLoading(this.props.loading)} id={"myBtn" + this.props.currentStory._id}>
                         {buttonContent('Delete', this.props.loading)}
                     </button>

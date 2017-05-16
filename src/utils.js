@@ -43,12 +43,16 @@ function setupModalBox(id) {
     const modal = document.getElementById('myModal' + id);
     const btn = document.getElementById("myBtn" + id);
     const span = document.getElementsByClassName("close" + id)[0];
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
+	if (btn) {
+	    btn.onclick = function() {
+	        modal.style.display = "block";
+	    }
+	}
+	if (span) {
+	    span.onclick = function() {
+	        modal.style.display = "none";
+	    }
+	}
     window.onclick = function(event) {
         if (event.target === modal) {
             modal.style.display = "none";
