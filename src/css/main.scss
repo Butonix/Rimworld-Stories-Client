@@ -218,6 +218,7 @@ header {
     }
     &.closed {
         width: 0px;
+        height: 0px;
         transition: width .2s;
         overflow: hidden;
     }

@@ -23,7 +23,10 @@ export class Profile extends React.Component {
         uploadProfilePicture = '', avatar = '', myDrafts = '';
         // when profile fetched
         if (this.props.visitedProfile) {
-            avatar = <div className="container col1"><img alt='' className="profile-avatar" id="profile-avatar" src={this.props.visitedProfile.avatarUrl} /></div>
+            avatar = <div className="container col1">
+                <h2>{this.props.visitedProfile.username}</h2>
+                <img alt='' className="profile-avatar" id="profile-avatar" src={this.props.visitedProfile.avatarUrl} />
+            </div>;
             myPublishedStories = <MyPublishedStores stories={this.props.visitedProfile.stories || []} />;
         }
         // when profile fetched AND if profile is mine

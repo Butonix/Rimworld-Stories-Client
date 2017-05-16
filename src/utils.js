@@ -56,6 +56,6 @@ function setupModalBox(id) {
     }
 }
 
-const defaultScreenshot = 'http://res.cloudinary.com/zeropointtwo/image/upload/v1494842326/default-screenshot_a6tl0o.jpg';
+const defaultScreenshot = 'https://res.cloudinary.com/zeropointtwo/image/upload/v1494842326/default-screenshot_a6tl0o.jpg';
 
 export {displayDate, buttonContent, buttonDisableOnLoading, defaultScreenshot, setupModalBox};
