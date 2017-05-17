@@ -1,1 +1,1 @@
-export const API_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : 'https://fathomless-chamber-86254.herokuapp.com';
+export const API_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : 'https://rimworld-stories.herokuapp.com';
