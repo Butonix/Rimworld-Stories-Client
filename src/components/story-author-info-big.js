@@ -1,5 +1,4 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import {displayDate} from '../utils.js';
 
 function StoryAuthorInfo(props) {
@@ -39,5 +38,4 @@ function StoryAuthorInfo(props) {
     );
 }
 
-export const mapStateToProps = state => (state.app);
-export default connect(mapStateToProps)(StoryAuthorInfo);
+export default StoryAuthorInfo;

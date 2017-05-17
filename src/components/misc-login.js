@@ -4,7 +4,7 @@ import {API_URL} from '../config.js';
 import {fetchUser, toggleDisplayLogin, logIn, signUp} from '../actions';
 import {buttonDisableOnLoading, buttonContent} from '../utils';
 
-export class Profile extends React.Component {
+export class Login extends React.Component {
 
     componentWillMount() {
         this.props.dispatch(fetchUser());
@@ -98,4 +98,4 @@ export class Profile extends React.Component {
 }
 
 export const mapStateToProps = state => (state.app);
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps)(Login);

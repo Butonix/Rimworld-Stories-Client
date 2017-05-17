@@ -1,5 +1,4 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import {defaultScreenshot} from '../utils.js';
 import StoryAuthorInfoBig from './story-author-info-big.js';
 import {Link} from 'react-router-dom';
@@ -29,5 +28,4 @@ function StoryLayout(props) {
     );
 }
 
-export const mapStateToProps = state => (state.app);
-export default connect(mapStateToProps)(StoryLayout);
+export default StoryLayout;

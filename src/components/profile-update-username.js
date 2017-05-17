@@ -17,7 +17,7 @@ export class UpdateUsername extends React.Component {
         return (
             <div className="container col1">
                 <div className="inside-cont">
-                    <h4>Modify username</h4>
+                    <h4>Change username</h4>
                     <form onSubmit={e => this.submitEvent(e)}>
                         <p>
                             <input className="form-element change-username" autoComplete="off" type="text" id="newUsername" /><br />
