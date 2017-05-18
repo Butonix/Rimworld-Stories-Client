@@ -11,6 +11,7 @@ import Landing from './components/misc-landing.js';
 import { Route } from 'react-router';
 import {connect} from 'react-redux';
 import {history} from './store';
+import Favicon from 'react-favicon';
 
 import { ConnectedRouter } from 'react-router-redux';
 
@@ -21,6 +22,7 @@ import { ConnectedRouter } from 'react-router-redux';
     <ConnectedRouter history={history}>
           <div className="App">
             <Header />
+            <Favicon url={[require('./favicon.ico')]}/>
             <div className="fixed-ui">
                 {alert}
                 {loading}
