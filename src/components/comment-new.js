@@ -10,6 +10,7 @@ export class NewComment extends React.Component {
         let data = new FormData();
         data.append('comment', e.target.content.value);
         data.append('story', this.props.currentStory._id);
+        data.append('storyAuthor', this.props.currentStory.author._id);
         this.props.dispatch(postNewComment(data));
         e.target.content.value = '';
     }

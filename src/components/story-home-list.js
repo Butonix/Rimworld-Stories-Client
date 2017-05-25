@@ -23,7 +23,11 @@ export class StoriesList extends React.Component {
     listStories() {
         if (this.props.landingList.list[0] !== 'none') {
             const stories = this.props.landingList.list.map((story) => {
-                return (<StoryThumb story={story} key={story._id} />)
+                // if story from test user
+                if (story.author._id !== '591982ed367e8e27383d392f' || this.props.currentUser.id === '591982ed367e8e27383d392f') {
+                  return (<StoryThumb story={story} key={story._id} />)
+                }
+                return ''
             });
             return stories
         }

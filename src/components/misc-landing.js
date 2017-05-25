@@ -31,7 +31,7 @@ export class Landing extends React.Component {
                             But here is the thing: there is no central place for them to be gathered. This is why I have created <strong>Rimworld Stories</strong>,
                             a website for all Rimworld players to post their stories on.</p>
                             <p>A test account has been automatically selected for you below, just click Sign in. Feel free
-                            to try all the features.</p>
+                            to try all the features and don't worry, only you will be able to see what is posted, when using the Test account!</p>
                         </div>
                     </div>
                 </div>

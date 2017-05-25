@@ -41,7 +41,10 @@ export class Story extends React.Component {
     comments() {
         if (this.props.currentStory._id) {
             const comments = this.props.currentStory.comments.map((comment) => {
+              if (comment.author._id !== '591982ed367e8e27383d392f' || this.props.currentUser.id === '591982ed367e8e27383d392f') {
                 return (<Comment key={comment._id} comm={comment} />)
+              }
+              return ''
             })
             return comments
         }
