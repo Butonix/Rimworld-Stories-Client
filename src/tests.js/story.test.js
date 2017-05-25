@@ -15,17 +15,20 @@ describe('<Story />', () => {
     });
 
     it('Renders the right divs initially', () => {
-        const wrapper = shallow(<Story dispatch={() => {}} currentStory={{
-            _id: '132456',
-            comments: [{_id: 123456}, {_id: 456789}],
-            stars: [{}, {}],
-            author: {
-                _id: '123456'
-            },
-            confirmDelete: true
-        }} currentUser={{
-            id: '123456'
-        }} />);
+        const wrapper = shallow(<Story
+        dispatch={() => {}}
+        currentStory={{
+              _id: '132456',
+              comments: [{_id: 123456, author:{_id: '591982ed367e8e27383d392f'}}, {_id: 456789, author:{_id: '591982ed367e8e27383d392f'}}],
+              stars: [{}, {}],
+              author: {
+                  _id: '591982ed367e8e27383d392f'
+              },
+              confirmDelete: true
+          }} currentUser={{
+              _id: '591982ed367e8e27383d392f',
+              id: '591982ed367e8e27383d392f',
+          }} />);
         expect(wrapper.find(StoryLayout).exists()).toBe(true);
         expect(wrapper.find(StoryOptions).exists()).toBe(true);
         expect(wrapper.find(StoryConfirmDelete).exists()).toBe(true);
